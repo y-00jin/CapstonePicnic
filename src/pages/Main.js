@@ -22,7 +22,7 @@ function Main(){
 
             <p>' 너, 나들이 '<hr className="Main-hr"/><hr className="Main-hr"/></p>
             <img src={logo} className="Main-bodyLogo" alt="bodyLogo" />
-            <Link to="/Canlendar">
+            <Link to="/Calendar">
                 <button className="Main-btn Main-btn-color">다음</button>
             </Link>
 
