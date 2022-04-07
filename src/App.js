@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import Main from "./pages/Main";
-import Canlendar from "./pages/Canlendar";
+import Calendar from "./pages/Calendar";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Main/>}/>
-        <Route path= "Canlendar" element={<Canlendar/>}/>
+        <Route path= "Calendar" element={<Calendar/>}/>
       </Routes>
     </div>
     
