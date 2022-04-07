@@ -1,6 +1,6 @@
 import React from "react";
 import logo from '../resoure/image/Logo.png';
-import headerLogo from '../resoure/image/spring.png';
+import headerLogo from '../resoure/image/spring1.png';
 import '../resoure/css/Main.css';
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,10 @@ function Main(){
             <div className="App">
 
             <header className="Main-header">
-                <img src={headerLogo} className="Main-headerLogo" alt="headerLogo" />
+                <p>
+                <img src={headerLogo} className="Main-headerLogo" alt="headerLogo" />    
+                    </p>
+                
             </header>
 
             <body className="Main-body">
