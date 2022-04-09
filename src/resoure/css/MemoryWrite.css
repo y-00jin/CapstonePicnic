@@ -1,0 +1,25 @@
+
+
+/* 여행 기록 */
+.container{
+    width: 50%;
+    flex: 1;
+    justify-content: "center";
+}
+
+/* 글씨체 적용 */  
+.Memory-record-font{
+    font-family: 'Nanum Pen Script';
+}
+
+/* 탭 버튼 */
+.Memory-button{
+    font-family: 'Nanum Pen Script';
+    font-size: 25px;
+    
+}
+/* 나눔손글씨펜 폰트*/
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.nanumpenscript * {
+    font-family: 'Nanum Pen Script', cursive;
+}

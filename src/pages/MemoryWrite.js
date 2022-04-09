@@ -1,25 +1,55 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../resoure/css/MemoryWrite.css';
 
 function MemoryWrite(){
     return(
-            <div>
+        <>
+
+        {/* 여행 기록 부분 */}
+        <div class="container">
+            <div class="Memory-record-font">
                 <p></p>
-                <div class="input-group mb-3">
+                <div class="input-group input-group-lg">
                     <span class="input-group-text" id="basic-addon1">여행 날짜</span>
-                    <input type="text" class="form-control" placeholder=" " aria-label="Username" aria-describedby="basic-addon1"/>
+                    <input type="text" readonly class="form-control" id="date" value="2022-04-09"/>
                 </div>
-      
-                <div class="input-group mb-3">
+                <p></p>
+                <div class="input-group input-group-lg">
                     <span class="input-group-text" id="basic-addon1">여행 장소</span>
-                    <input type="text" class="form-control" placeholder=" " aria-label="Username" aria-describedby="basic-addon1"/>
+                    <input type="text" className="form-control" placeholder=" " aria-label="place" aria-describedby="basic-addon1"/>
                 </div>
-      
-                <div class="input-group">
+                <p></p>
+                <div class="input-group input-group-lg">
                     <span class="input-group-text">여행 기록</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" aria-label="record"></textarea>
                 </div>
             </div>
+        </div>
+        <p></p>
+
+        {/* 탭 버튼 */}
+        <div class="Memory-button">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#post">게시물</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#picture">사진</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#video">동영상</a>
+            </li>
+        </ul>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane container active" id="post">게시물</div>
+            <div class="tab-pane container" id="picture">사진</div>
+            <div class="tab-pane container" id="video">동영상</div>
+        </div>
+
+        </>
     );
 }
 
