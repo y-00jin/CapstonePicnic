@@ -7,26 +7,20 @@ function PhotoAlbum() {
 
     return (
 
-        <div className="PhotoAlbum">
-
-        
+        <div className="container">
+            <p />
             <hr className="hr" />
-            <div className="header-title">
-
+            <div className="title">
                 <Link to="/Calendar">
-                    <button>＜</button>
+                    <button className="title-btn">＜</button>
                 </Link>
-
-
-                <h2>사진첩</h2>
-                <h2></h2>
-
+                <h3>사진첩</h3>
+                <h3></h3>
 
             </div>
 
 
             <hr className="hr" />
-
 
         </div>
 
