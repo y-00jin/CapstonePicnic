@@ -1,10 +1,9 @@
-
-
-/* 여행 기록 */
-.container{
-    width: 50%;
+/* 전체 영역 사이즈 조정*/
+.container {
+    width: 60%;
     flex: 1;
     justify-content: "center";
+    font-family: 'Nanum Pen Script';
 }
 
 /* 글씨체 적용 */  

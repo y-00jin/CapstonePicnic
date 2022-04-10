@@ -1,0 +1,23 @@
+/* 뒤로가기 버튼, 타이틀 위치 조정*/
+.title {
+    display: flex;
+    flex-direction: row;   
+    align-items: center;    /* 가운데 정렬*/
+    justify-content: space-between; /* 요소 사이에 공백*/
+}
+
+.title-btn{
+    background-color:transparent;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 메인_hr태그*/
+.hr {
+    border-color: #000000;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    width: 100%;
+
+}

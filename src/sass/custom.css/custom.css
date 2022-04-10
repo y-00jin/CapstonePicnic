@@ -498,7 +498,7 @@ progress {
   font-size: 0.875em;
   color: #6c757d; }
 
-.container,
+/* .container,
 .container-fluid,
 .container-sm,
 .container-md,
@@ -509,7 +509,7 @@ progress {
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
-  margin-left: auto; }
+  margin-left: auto; } */
 
 @media (min-width: 576px) {
   .container, .container-sm {
@@ -1554,7 +1554,7 @@ progress {
     background-color: #fff;
     border-color: #86b7fe;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
+    box-shadow: 0 0 0 0.25rem rgba(127, 111, 99, 0.30); }
   .form-control::-webkit-date-and-time-value {
     height: 1.5em; }
   .form-control::placeholder {
