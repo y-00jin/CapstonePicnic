@@ -8,7 +8,6 @@ import '../resoure/css/MemoryWrite.css';
 function MemoryWrite(){
     return(
         <div class="container">
-        
             {/* 타이틀 바 */}
             <p/>
             <hr className="hr" />
@@ -42,26 +41,44 @@ function MemoryWrite(){
             <p>　</p>
 
             {/* 탭 버튼 */}
-            <div class="Memory-button">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#post">게시물</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#picture">사진</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#video">동영상</a>
-                    </li>
-                </ul>
-            </div>
+            <nav>
+                <div class="nav nav-tabs" id="myTab" role="tablist">
+                    　　　　　　　　　　　　　　　　
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-post" type="button" role="tab" aria-controls="nav-post" aria-selected="true">게시물</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-picture" type="button" role="tab" aria-controls="nav-picture" aria-selected="false">사진</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-video" type="button" role="tab" aria-controls="nav-video" aria-selected="false">동영상</button>
+                    　　　　　　　　　　　　　　　　
+                </div>
+            </nav>
 
             {/* 탭 내용 */}
-            <div class="tab-content">
-                <div class="tab-pane container active" id="post">게시물</div>
-                <div class="tab-pane container" id="picture">사진</div>
-                <div class="tab-pane container" id="video">동영상</div>
+            <div class="tab-content" id="myTab-content">
+                <div class="tab-pane fade show active" id="nav-post" role="tabpanel" aria-labelledby="nav-post-tab">게시물</div>
+                <div class="tab-pane fade" id="nav-picture" role="tabpanel" aria-labelledby="nav-picture-tab">사진</div>
+                <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">동영상</div>
             </div>
+
+            {/* 탭 활성화 */}
+            {/* <script>
+                var triggerEl = document.querySelector('#myTab button[data-bs-target="#nav-post"]')
+                bootstrap.Tab.getInstance(triggerEl).show()
+
+                var triggerEl = document.querySelector('#myTab button[data-bs-target="#nav-picture"]')
+                bootstrap.Tab.getInstance(triggerEl).show()
+
+                var triggerEl = document.querySelector('#myTab button[data-bs-target="#nav-video"]')
+                bootstrap.Tab.getInstance(triggerEl).show()
+
+                var triggerTabList = [].slice.call(document.querySelectorAll('#myTab button'))
+                triggerTabList.forEach(function (triggerEl) {
+                    var tabTrigger =new bootstrap.Tab(triggerEl)
+
+                    triggerEl.addEventListener('click', function (event) {
+                        Event.preventDefault(),
+                        tabTrigger.show()
+                    })
+                })
+            </script> */}
         </div>
     );
 }
