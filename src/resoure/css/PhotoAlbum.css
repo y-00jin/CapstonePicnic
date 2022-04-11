@@ -6,6 +6,123 @@
     font-family: 'Nanum Pen Script';
 }
 
+/* 데이터피커 스타일*/
+.datepicker-st {
+
+    display: flex;
+    font-size: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 15px;
+    border-radius: 0.3rem;
+    border-color: lightGray;
+    border: 1px solid lightGray;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -6px;
+}
+
+/* 날짜 필터 레이아웃*/
+.date-pilter {
+    padding-left: 3%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    width: 70%;
+    justify-content: center;
+}
+
+/* 날짜 필터의 div-item 각 요소 크기 지정*/
+.item:nth-child(1) {
+    flex-grow: 0;
+}
+.item:nth-child(2) {
+    flex-grow: 2;
+}
+
+/* 날짜 필터 텍스트 스타일 지정*/
+.pilter-text {
+    align-items: center;
+
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-gray-800);
+    text-align: center;
+    white-space: nowrap;
+    background-color: #FFF6BD;
+    border: 1px solid lightgray;
+    border-radius: 0.25rem;
+
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+/* 장소 필터 레이아웃*/
+.place-pilter {
+    padding-left: 3%;
+    padding-bottom: 20px;
+    display: flex;
+    width: 70%;
+    justify-content: left;
+
+}
+
+/* 장소 필터 input-text 스타일*/
+.place-text {
+    width: 69%;
+    padding: 0.375rem 0.75rem;
+    font-size:  1.25rem;;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}
+
+.place-text:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(127, 111, 99, 0.30);
+}
+
+
+/* 검색 버튼 스타일*/
+.btn-search{
+    margin-left: 10px;
+    border: none;
+    display: inline-block;
+    padding: 1.5px 30px;
+    border-radius: 0.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.btn-search-color {
+  background-color: #958477;
+  color: #e3dede;
+}
+.btn-search:hover {
+  letter-spacing: 2px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
