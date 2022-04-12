@@ -6,9 +6,24 @@ import '../resoure/css/Calendar.css'
 function Calendar() {
 
     return (
-        <Link to="/PhotoAlbum">
-            <button>사진첩</button>
-        </Link>
+        <div className="container">
+            <p>
+                <Link to="/PhotoAlbum">
+                    <br/>
+                    <button className="Main-btn Main-btn-color">사진첩</button>
+                </Link>
+
+            </p>
+            <p>
+                <Link to="/MemoryWrite">
+                    <button className="Main-btn Main-btn-color">추억보기</button>
+                </Link>
+
+
+            </p>
+
+        </div>
+
     );
 }
 

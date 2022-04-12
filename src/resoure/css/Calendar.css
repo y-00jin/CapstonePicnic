@@ -1,0 +1,32 @@
+/* 전체 영역 사이즈 조정*/
+.container {
+    width: 60%;
+    flex: 1;
+    justify-content: "center";
+    font-family: 'Nanum Pen Script';
+}
+
+
+/* 버튼 스타일*/
+.Main-btn{
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: 'Nanum Pen Script';
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.Main-btn-color {
+  background-color: #958477;
+  color: #ffffff;
+}
+.Main-btn:hover {
+  letter-spacing: 2px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
