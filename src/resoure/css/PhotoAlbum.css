@@ -4,12 +4,31 @@
     flex: 1;
     justify-content: "center";
     font-family: 'Nanum Pen Script';
+    /* background-color: chartreuse; */
+}
+
+/* 날짜 필터 레이아웃*/
+.date-pilter {
+    margin: 0 auto;         /* 가운데 정렬 */
+    padding-left: 3%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    width: 70%;
+    justify-content: center;    /* 가로축을 기준으로 좌우 정렬 */
+}
+
+/* 날짜 필터의 div-item 각 요소 크기 지정*/
+.item:nth-child(1) {
+    flex-grow: 0;
+}
+.item:nth-child(2) {
+    flex-grow: 2;
 }
 
 /* 데이터피커 스타일*/
 .datepicker-st {
-
-    display: flex;
+    /* display: flex; */
     font-size: 1.25rem;
     width: 100%;
     box-sizing: border-box;
@@ -22,29 +41,12 @@
     margin-left: -6px;
 }
 
-/* 날짜 필터 레이아웃*/
-.date-pilter {
-    padding-left: 3%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    width: 80%;
-    justify-content: center;
-    background-color: #86b7fe;
-}
 
-/* 날짜 필터의 div-item 각 요소 크기 지정*/
-.item:nth-child(1) {
-    flex-grow: 0;
-}
-.item:nth-child(2) {
-    flex-grow: 2;
-}
 
 /* 날짜 필터 텍스트 스타일 지정*/
 .pilter-text {
-    align-items: center;
 
+    align-items: center;
     font-weight: 400;
     line-height: 1.5;
     color: var(--bs-gray-800);
@@ -53,11 +55,9 @@
     background-color: #FFF6BD;
     border: 1px solid lightgray;
     border-radius: 0.25rem;
-
     padding: 0.5rem 1rem;
     font-size: 1.25rem;
     border-radius: 0.3rem;
-
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -65,13 +65,13 @@
 
 /* 장소 필터 레이아웃*/
 .place-pilter {
-    background-color: aqua;
+    margin: 0 auto;
+    /* background-color: aqua; */
     padding-left: 3%;
     padding-bottom: 20px;
     display: flex;
-    width: 80%;
-    justify-content: left;
-
+    width: 70%;
+    /* justify-content: left; */
 }
 
 /* 장소 필터 input-text 스타일*/
@@ -94,14 +94,13 @@
     margin-left: -1px;
 }
 
-.place-text:focus {
+.place-text:focus, .datepicker-st:focus {
     color: #212529;
     background-color: #fff;
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(127, 111, 99, 0.30);
 }
-
 
 /* 검색 버튼 스타일*/
 .btn-search{
@@ -125,6 +124,28 @@
   cursor: pointer;
 }
 
+
+/* 추억여행 타이틀*/
+#memory{
+    padding-top: 10px;
+    margin: 0 auto;
+    width: 80%;
+    padding-bottom: 20px;
+}
+
+.photo-layout{
+    display: grid;
+    height: outo;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.phone-image{
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 70px;
+}
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
