@@ -2930,14 +2930,17 @@ textarea.form-control-lg {
     .nav-link {
       transition: none; } }
   .nav-link:hover, .nav-link:focus {
-    color: var(--bs-gray-800); }
+    color: var(--bs-gray-800);
+    text-decoration: underline;
+    text-decoration-color: #FFF6BD;
+    text-underline-position: under; }
   .nav-link.disabled {
     color: #6c757d;
     pointer-events: none;
     cursor: default; }
 
 .nav-tabs {
-  border-bottom: 0px solid #dee2e6; }
+  border-bottom: 0px solid #dee2e6;}
   .nav-tabs .nav-link {
     width: 10%;
     margin:auto;

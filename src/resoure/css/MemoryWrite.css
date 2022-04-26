@@ -15,8 +15,10 @@
 .Memory-button{
     font-family: 'Nanum Pen Script';
     font-size: 25px;
+    color: var(--bs-gray-800);
     
 }
+
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 .nanumpenscript * {
