@@ -12,10 +12,8 @@
 }
 
 /* 탭 버튼 */
-.Memory-button{
-    font-family: 'Nanum Pen Script';
-    font-size: 25px;
-    color: var(--bs-gray-800);
+.addPost{
+    margin: 30%;
     
 }
 
