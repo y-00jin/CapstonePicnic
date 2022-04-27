@@ -15,7 +15,7 @@ function Calendar() {
 
             </p>
             <p>
-                <Link to="/MemoryWrite">
+                <Link to="/Memory">
                     <button className="Main-btn Main-btn-color">추억보기</button>
                 </Link>
 

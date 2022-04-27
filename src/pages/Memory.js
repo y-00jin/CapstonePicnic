@@ -46,7 +46,7 @@ export default class Memory extends Component {
             <Link to="/Calendar">
                 <button className="title-btn">＜</button>
             </Link>
-            <h3>여행 기록</h3>
+            <h3>추억 보기</h3>
             <h3></h3>
         </div>
         <hr className="hr" />
