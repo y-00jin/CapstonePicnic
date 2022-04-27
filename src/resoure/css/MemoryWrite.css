@@ -19,6 +19,36 @@
     
 }
 
+/* 버튼 */
+.btn{
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: 'Nanum Pen Script';
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-color {
+  background-color: #958477;
+  color: #ffffff;
+}
+
+.btn-background {
+    margin: 0px 0px 30px 0px;
+    display: flex;
+    justify-content: center;  /* 가로 축을 기준으로 정렬*/
+}
+
+.btn:hover {
+    color: #ffffff;
+  }
+
+
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 .nanumpenscript * {
