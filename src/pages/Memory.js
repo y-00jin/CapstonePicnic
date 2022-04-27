@@ -9,6 +9,7 @@ import Post from './TabContents/Post';
 import Photo from './TabContents/Photo';
 import Video from './TabContents/Video';
 
+
 const obj = {
     0: <Post/>,
     1: <Photo />,
@@ -25,7 +26,7 @@ const arr = ["First", "Second", "Third"];
               );
             })}
 
-export default class MemoryWrite extends Component {
+export default class Memory extends Component {
     state = {
       activeId: 0,
     };
@@ -45,7 +46,7 @@ export default class MemoryWrite extends Component {
             <Link to="/Calendar">
                 <button className="title-btn">＜</button>
             </Link>
-            <h3>여행 쓰기</h3>
+            <h3>여행 기록</h3>
             <h3></h3>
         </div>
         <hr className="hr" />
@@ -60,13 +61,15 @@ export default class MemoryWrite extends Component {
 
         <div class="input-group input-group-lg">
             <span class="input-group-text" id="basic-addon1">여행 장소</span>
-            <input type="text" className="form-control" placeholder=" " aria-label="place" aria-describedby="basic-addon1"/>
+            <input type="text" readonly class="form-control" id="place" value="강릉 경포해변"/>
         </div>
         <p/>
 
         <div class="input-group input-group-lg">
             <span class="input-group-text">여행 기록</span>
-            <textarea class="form-control" aria-label="record"></textarea>
+            <textarea readonly class="form-control" aria-label="record" value=
+            "바다가 예뻤다!"
+            ></textarea>
         </div>
         <p>　</p>
 
@@ -84,8 +87,12 @@ export default class MemoryWrite extends Component {
 
         {/* 버튼 */}
         <div className="btn-background">
-        <Link to="/Memory">
-          <button className="btn btn-color">저장</button>
+        <Link to="/MemoryWrite">
+          <button className="btn btn-color">수정</button>
+        </Link>
+        <h1>　</h1>
+        <Link to="/Calendar">
+          <button className="btn btn-color">삭제</button>
         </Link>
         <h1>　</h1>
         <Link to="/Calendar">
