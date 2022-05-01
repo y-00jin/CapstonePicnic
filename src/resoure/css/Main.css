@@ -34,6 +34,18 @@
     color: #958477;
     font-family: 'Nanum Pen Script';
   }
+
+  /* 로그인 */
+  .Main-login {
+    background-color: #FFFCED;
+    min-height: 85vh;
+    display: flex;
+    /* width: 600px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nanum Pen Script';
+  }
   
   /* 메인_hr태그*/
   .Main-hr{

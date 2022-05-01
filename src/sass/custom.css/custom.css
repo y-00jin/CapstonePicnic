@@ -1857,6 +1857,8 @@ textarea.form-control-lg {
       background-color: #adb5bd; }
 
 .form-floating {
+  margin: 30px;
+  width: 600px;
   position: relative; }
   .form-floating > .form-control,
   .form-floating > .form-select {
@@ -1867,7 +1869,9 @@ textarea.form-control-lg {
     top: 0;
     left: 0;
     height: 100%;
-    padding: 1rem 0.75rem;
+    color: var(--bs-gray-800);
+    font-size: 25px;
+    padding: 8px;
     pointer-events: none;
     border: 1px solid transparent;
     transform-origin: 0 0;
@@ -1892,7 +1896,7 @@ textarea.form-control-lg {
   .form-floating > .form-control:not(:placeholder-shown) ~ label,
   .form-floating > .form-select ~ label {
     opacity: 0.65;
-    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
+    transform: scale(0.6) translateY(-0.5rem) translateX(0.15rem); }
   .form-floating > .form-control:-webkit-autofill ~ label {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
