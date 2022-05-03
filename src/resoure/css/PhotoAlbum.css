@@ -118,34 +118,55 @@
   background-color: #958477;
   color: #ffffff;
 }
-.btn-search:hover {
+/* .btn-search:hover {
   letter-spacing: 2px;
   transform: scale(1.2);
   cursor: pointer;
-}
+} */
 
 
 /* 추억여행 타이틀*/
-#memory{
+#memory-title{
     padding-top: 10px;
     margin: 0 auto;
     width: 80%;
     padding-bottom: 20px;
 }
 
+/* 사진 레이아웃 지정(그리드) */
 .photo-layout{
     display: grid;
     height: outo;
+
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }
 
+/* 사진 + 날짜(장소) 버튼 */
+.photo-layout-block{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+/* 이미지 크기 지정 */
 .phone-image{
     margin: 0 auto;
     width: 200px;
     height: 200px;
-    margin-bottom: 70px;
+    /* object-fit: cover; */
+    /* margin-bottom: 20px; */
 }
+
+.photo-btn{
+    background-color:transparent;
+    border: 0;
+    font-size: 25px;
+}
+
+
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 

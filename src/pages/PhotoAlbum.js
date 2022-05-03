@@ -14,22 +14,8 @@ import img4 from '../resoure/image/4.jpg';
 import img5 from '../resoure/image/5.jpg';
 import img6 from '../resoure/image/6.jpg';
 
-function PhotoAlbum() {
 
-    {/* 데이터피커 형식 정의
-    const SDatePicker = styled(DatePicker)`
-    margin-top: 1.5rem;
-    width: 96%;
-    height: 50px;
-    box-sizing: border-box;
-    padding: 8px 20px;
-    border-radius: 4px;
-    border-color: lightGray;
-    border: 0.2em solid#{(props) => props.theme.palette.lightGray};
-    font-size: 20px;
-    
-   `;
-*/ }
+function PhotoAlbum() {
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
@@ -71,24 +57,42 @@ function PhotoAlbum() {
                     />
                 </div>
             </div>
-            
+
             <div class="place-pilter">
                 <span class="pilter-text">여행 장소</span>
-                <input type="text" className="place-text" id="place"/>
+                <input type="text" className="place-text" id="place" />
                 <button className="btn-search btn-search-color" id="btn-search">검색</button>
             </div>
-            
-            <div id="memory"><h4>| 추억여행</h4></div>
+
+            <div id="memory-title"><h4>| 추억여행</h4></div>
+
 
             <div class="photo-layout">
-                
-                <img className="phone-image" alt="iPhone_01" src={img1} />
-                <img className="phone-image" alt="iPhone_02" src={img2} />
-                <img className="phone-image" alt="iPhone_03" src={img3} />
-                <img className="phone-image" alt="iPhone_04" src={img4} />
-                <img className="phone-image" alt="iPhone_05" src={img5} />
-                <img className="phone-image" alt="iPhone_06" src={img6} />
-                
+
+
+
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_01" src={img1} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+                </div>
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_02" src={img2} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-2">2022.01.25 여수</button></Link>
+                </div>
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_03" src={img3} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-3">2022.02.07 남산타워</button></Link>
+                </div>
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_04" src={img4} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-4">2022.03.17 제주도</button></Link></div>
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_05" src={img5} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-5">2022.04.20 속초</button></Link></div>
+                <div class="photo-layout-block">
+                    <img className="phone-image" alt="iPhone_06" src={img6} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-6">2022.05.03 뉴욕</button></Link></div>
+
             </div>
 
 
@@ -96,5 +100,6 @@ function PhotoAlbum() {
 
     );
 }
+
 
 export default PhotoAlbum;
