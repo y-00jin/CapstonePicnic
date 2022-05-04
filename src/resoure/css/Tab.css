@@ -1,0 +1,13 @@
+.tab-photo-layout{
+    display: grid;
+    height: outo;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tab-phone-image{
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 70px;
+}
