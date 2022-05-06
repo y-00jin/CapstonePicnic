@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'C:/Capstone/picnic-front/src/sass/custom.css/custom.css';
 import '../resoure/css/Header.css'
 import '../resoure/css/MemoryWrite.css';
+import '../resoure/css/Tab.css'
 import Post from './TabContents/Post';
 import Photo from './TabContents/Photo';
 import Video from './TabContents/Video';
@@ -77,9 +78,9 @@ export default class Memory extends Component {
         {/* 탭 버튼 활성화 */}
         <div className="wrapper">
           <ul class="nav justify-content-center">
-            <li class="Memory-button" onClick={() => this.clickHandler(0)}>게시물　　</li>
-            <li class="Memory-button" onClick={() => this.clickHandler(1)}>사진　　</li>
-            <li class="Memory-button" onClick={() => this.clickHandler(2)}>동영상　　</li>
+            <li class="memory-button" onClick={() => this.clickHandler(0)}>게시물　　</li>
+            <li class="memory-button" onClick={() => this.clickHandler(1)}>사진　　</li>
+            <li class="memory-button" onClick={() => this.clickHandler(2)}>동영상</li>
           </ul>
           <p/>
           <div className="contents">{obj[this.state.activeId]}</div>
