@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../resoure/css/Calendar.css'
-import Calendar from './components/Calendar'
+import '../resoure/css/MainCalendar.css'
+// import Calendar from './components/Calendar'
 
 class MainCalendar extends React.Component {
     render() {
