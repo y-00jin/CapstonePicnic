@@ -44,11 +44,11 @@ export default class Memory extends Component {
         <p/>
         <hr className="hr" />
         <div className="title">
-            <Link to="/Calendar">
+            <Link to="/MainCalendar">
                 <button className="title-btn">＜</button>
             </Link>
             <h3>추억 보기</h3>
-            <h3></h3>
+            <h3> </h3>
         </div>
         <hr className="hr" />
 
@@ -92,11 +92,11 @@ export default class Memory extends Component {
           <button className="btn btn-color">수정</button>
         </Link>
         <h1>　</h1>
-        <Link to="/Calendar">
+        <Link to="/MainCalendar">
           <button className="btn btn-color">삭제</button>
         </Link>
         <h1>　</h1>
-        <Link to="/Calendar">
+        <Link to="/MainCalendar">
           <button className="btn btn-color">취소</button>
         </Link>
         </div>

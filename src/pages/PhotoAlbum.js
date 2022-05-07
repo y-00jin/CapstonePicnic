@@ -29,11 +29,11 @@ function PhotoAlbum() {
             <p />
             <hr className="hr" />
             <div className="title">
-                <Link to="/Calendar">
+                <Link to="/MainCalendar">
                     <button className="title-btn">＜</button>
                 </Link>
                 <h3>사진첩</h3>
-                <h3></h3>
+                <h3> </h3>
             </div>
             <hr className="hr" />
 

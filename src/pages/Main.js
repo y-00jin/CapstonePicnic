@@ -45,7 +45,7 @@ function Main() {
                         </div> */}
     
                         <footer className="Main-footer">
-                            <Link to="/Calendar">
+                            <Link to="/MainCalendar">
                                 <button className="Main-btn Main-btn-color">로그인</button>
                             </Link>
                         </footer>
