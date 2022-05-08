@@ -10,6 +10,7 @@ import endOfWeek from "date-fns/endOfWeek";
 import isSameMonth from "date-fns/isSameMonth";
 import isSameDay from "date-fns/isSameDay";
 import toDate from "date-fns/toDate";
+import { Link } from "react-router-dom";
 
 class Calendar extends React.Component {
     state = {
@@ -20,26 +21,31 @@ class Calendar extends React.Component {
     renderHeader() {
         const dateFormat = "yyyy 년 MM 월";
         return (
-            <div className="header row flex-middle">
-                <div className="toDay">
-                    <button onClick={this.today}>오늘</button>
+            <div>
+                <div>
+                    <button className="MC-btn MC-btn-color" onClick={this.today}>오늘</button>
+                    <Link to="/PhotoAlbum">
+                        <br />
+                        <button className="MC-btn MC-btn-color">사진첩</button>
+                    </Link>
                 </div>
-                <div className="col col-start">
+                <div className="header row flex-middle">
 
-                    
-                    <div className="icon" onClick={this.prevMonth}>
-                        chevron_left
+
+                    <div className="col col-start">
+                        <div className="icon" onClick={this.prevMonth}>
+                            chevron_left
+                        </div>
                     </div>
+                    <div className="col col-center">
+                        <span>{format(this.state.currentMonth, dateFormat)}</span>
+                    </div>
+                    <div className="col col-end" onClick={this.nextMonth}>
+                        <div className="icon">chevron_right</div>
+                    </div>
+
                 </div>
-                <div className="col col-center">
-                    <span>{format(this.state.currentMonth, dateFormat)}</span>
-                </div>
-                <div className="col col-end" onClick={this.nextMonth}>
-                    <div className="icon">chevron_right</div>
-                </div>
-                <div className="photo">
-                    <button>사진첩</button>
-                </div>
+
             </div>
         );
     }
@@ -100,7 +106,7 @@ class Calendar extends React.Component {
                 </div>
             );
             days = [];
-            
+
         }
         return <div className="body">{rows}</div>;
 
@@ -112,7 +118,7 @@ class Calendar extends React.Component {
         });
         // console.log(this.state.currentMonth.getFullYear()+"."+(this.state.currentMonth.getMonth()+1)+"."+this.state.selectedDate.getDate());
         //  alert(this.state.selectedDate.getDate());
-        console.log(this.state.currentMonth.getFullYear()+"."+(this.state.currentMonth.getMonth()+1)+"."+this.state.selectedDate.getDate());
+        console.log(this.state.currentMonth.getFullYear() + "." + (this.state.currentMonth.getMonth() + 1) + "." + this.state.selectedDate.getDate());
     };
 
     /* 다음달 */
@@ -139,7 +145,7 @@ class Calendar extends React.Component {
         });
 
     }
-    
+
     render() {
         return (
 
