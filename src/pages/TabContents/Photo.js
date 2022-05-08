@@ -7,9 +7,9 @@ import img3 from 'C:/Capstone/picnic-front/src/resoure/image/3.jpg';
 function Photo() {
     return(
         <div class="tab-photo-layout">
-            <img className="tab-phone-image" alt="iPhone_01" src={img1} />
-            <img className="tab-phone-image" alt="iPhone_02" src={img2} />
-            <img className="tab-phone-image" alt="iPhone_03" src={img3} />
+            <button className="tab-button" type="button"><img className="tab-phone-image" alt="iPhone_01" src={img1} /></button>
+            <button className="tab-button" type="button"><img className="tab-phone-image" alt="iPhone_02" src={img2} /></button>
+            <button className="tab-button" type="button"><img className="tab-phone-image" alt="iPhone_03" src={img3} /></button>
         </div>
     )
 }
