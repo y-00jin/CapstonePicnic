@@ -1,11 +1,21 @@
 /* 전체 영역 사이즈 조정*/
 .container {
+    background-color: #fff;
     width: 60%;
     flex: 1;
     justify-content: "center";
     font-family: 'Nanum Pen Script';
     /* background-color: chartreuse; */
 }
+
+
+/* body {
+
+    color: var(--text-color);
+    background: var(--bg-color);
+
+} */
+
 
 /* 날짜 필터 레이아웃*/
 .date-pilter {
