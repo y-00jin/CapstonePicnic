@@ -1,14 +1,18 @@
 
 .tab-photo-layout{
     display: grid;
-    height: outo;
+    height: auto;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }
 
 .tab-phone-image{
-    margin: 0 auto;
-    width: 300px;
-    height: 300px;
-    /* margin-bottom: 70px; */
+    width: 100%;
+    margin: 1% 2%;
+}
+
+.tab-button{
+    padding: 0%;
+    border: 0ch;
+    background-color: white;
 }
