@@ -1,9 +1,4 @@
-/* .container {
-  width: 60%;
-  flex: 1;
-  justify-content: "center";
-  font-family: 'Nanum Pen Script';
-} */
+
 
 
 /* 전체 영역 사이즈 조정*/
@@ -19,13 +14,15 @@
 }
 
 
-
+.MC-title-header{
+  width: 60em;
+  background-color: #fff;
+  margin: 5px auto
+}
 /* 뒤로가기 버튼, 타이틀 위치 조정*/
 .MC-title {
   border-width: 1px 0px 1px 0px;
-  border-color: #eee;
-  border-style: solid;
-  background-color: #fff;
+  
   font-family: 'Nanum Pen Script';
   width: 60%;
   padding: 10px 0;
@@ -38,6 +35,12 @@
   /* 요소 사이에 공백*/
 }
 
+/* 메인_hr태그*/
+.MC-hr {
+  /* background-color: #fff; */
+  border-color: #000000;
+  margin: 0 auto;
+}
 
 
 /* FONT IMPORTS */
@@ -94,14 +97,15 @@
 
 .MC-header {
   display: block;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   /* background: var(--neutral-color); */
 }
 
 .MC-main {
   display: block;
   margin: 0 auto;
-  max-width: 60%;
+  max-width: 60em;
 }
 
 
@@ -121,6 +125,7 @@
 }
 
 .col {
+  margin: auto;
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
@@ -143,15 +148,14 @@
 
 
 /* Calendar */
-.MC-hader-main{
-  margin: 0 auto;         /* 가운데 정렬 */
-  padding-top: 20px;
+
+.MC-header-btn{
   display: flex;
-  width: 100%;
-  justify-content: center;    /* 가로축을 기준으로 좌우 정렬 */
+  justify-content:center;
 }
-
-
+/* .MC-btn-today{
+  width: 100px;
+} */
 
 .calendar {
   display: block;
@@ -282,12 +286,14 @@
   text-decoration: none;
   font-weight: 600;
   transition: 0.25s;
+  margin: auto 15px;
 }
 
 .MC-btn-color {
   background-color: #958477;
   color: #ffffff;
 }
+
 
 /* 나눔손글씨펜 폰트*/
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
