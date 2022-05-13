@@ -22,31 +22,33 @@ class Calendar extends React.Component {
         const dateFormat = "yyyy 년 MM 월";
         return (
             <div>
-                <div>
-                    <button className="MC-btn MC-btn-color" onClick={this.today}>오늘</button>
-                    <Link to="/PhotoAlbum">
-                        <br />
-                        <button className="MC-btn MC-btn-color">사진첩</button>
-                    </Link>
-                </div>
-                <div className="header row flex-middle">
+                <div className="MC-header-btn header">
+                    <button className="MC-btn MC-btn-color MC-btn-today" onClick={this.today}>오늘</button>
 
-
-                    <div className="col col-start">
+                    <div className="col">
                         <div className="icon" onClick={this.prevMonth}>
                             chevron_left
                         </div>
                     </div>
-                    <div className="col col-center">
+                    <div className="col">
                         <span>{format(this.state.currentMonth, dateFormat)}</span>
                     </div>
-                    <div className="col col-end" onClick={this.nextMonth}>
+                    <div className="col" onClick={this.nextMonth}>
                         <div className="icon">chevron_right</div>
                     </div>
+                    <Link to="/PhotoAlbum">
+                        <br />
+                        <button className="MC-btn MC-btn-color MC-btn-link">사진첩</button>
+                    </Link>
 
                 </div>
+                {/* <div className="header row flex-middle">
 
+                    
+                    
+                </div> */}
             </div>
+
         );
     }
 
