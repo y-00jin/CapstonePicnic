@@ -1,6 +1,7 @@
 import React from "react";
 import '../resoure/css/MainCalendar.css'
 import Calendar from './components/Calendar'
+import { Link } from "react-router-dom";
 
 class MainCalendar extends React.Component {
     render() {
@@ -12,7 +13,9 @@ class MainCalendar extends React.Component {
                 <header className="MC-title-header">
                     <hr className="MC-hr" />
                     <div className="MC-title">
-                        <h3> </h3>
+                        <Link to="/">
+                            <button className="MC-title-btn">＜</button>
+                        </Link>
                         <h3>너, 나들이</h3>
                         <h3> </h3>
                     </div>
