@@ -15,26 +15,28 @@
 
 
 .MC-title-header{
-  width: 60em;
+  /* width: 60em; */
+  max-width: 60em;
   background-color: #fff;
   margin: 5px auto
 }
 /* 뒤로가기 버튼, 타이틀 위치 조정*/
 .MC-title {
-  border-width: 1px 0px 1px 0px;
-  
-  font-family: 'Nanum Pen Script';
-  width: 60%;
-  padding: 10px 0;
-  margin: 10px auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* 가운데 정렬*/
-  justify-content: space-between;
-  /* 요소 사이에 공백*/
-}
 
+  padding: 10px 0;
+  font-family: 'Nanum Pen Script';
+  display: flex;
+  flex-direction: row;   
+  align-items: center;    /* 가운데 정렬*/
+  justify-content: space-between; /* 요소 사이에 공백*/
+
+}
+.MC-title-btn{
+  background-color:transparent;
+  border: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
 /* 메인_hr태그*/
 .MC-hr {
   /* background-color: #fff; */
@@ -279,14 +281,15 @@
   /* position: relative; */
   border: none;
   display: inline-block;
-  padding: 15px 30px;
+  padding: 10px 20px;
   border-radius: 15px;
   font-family: 'Nanum Pen Script';
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: 0.25s;
   margin: auto 15px;
+  
 }
 
 .MC-btn-color {
