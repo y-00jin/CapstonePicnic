@@ -25,9 +25,13 @@ function Main() {
             <body class="text-center">
 
                 <main className="Main-login">
-
+                    <ul class="nav justify-content-center">
+                        <li class="login-tab-btn">로그인　　</li>
+                        <li class="signup-tab-btn" >회원가입　　</li>
+                        <li class="chagnepw-tab-btn">비밀번호 변경</li>
+                    </ul>
                     <form>
-                        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                        {/* <h1 class="h3 mb-3 fw-normal">Please sign in</h1> */}
 
                         <div class="form-floating">
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
