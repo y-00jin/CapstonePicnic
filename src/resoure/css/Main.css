@@ -2,9 +2,8 @@
 
 /* 메인_헤더 로고 (스프링) */
 .Main-headerLogo {
-    width: 100; 
-    height: 4vmin;
-    pointer-events: none;
+    max-width: 45%; 
+    /* pointer-events: none; */
   }
   /* 메인_헤더*/
   .Main-header{
@@ -18,19 +17,22 @@
   
   /* 메인_바디 배경화면 로고(꽃)*/
   .Main-bodyLogo {
-    height: 55vmin;
+    width:35%;
+    /* max-height: 55vmin; */
     pointer-events: none;
   }
   
   /* 메인_바디*/
   .Main-body {
     background-color: #FFFCED;
-    min-height: 85vh;
+    padding-top: 5%;
+    padding-bottom: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(35px + 3vmin);
+    font-size: 250%;
+    font-weight: 500;
     color: #958477;
     font-family: 'Nanum Pen Script';
   }
@@ -73,11 +75,7 @@
     background-color: #958477;
     color: #ffffff;
   }
-  .Main-btn:hover {
-    letter-spacing: 2px;
-    transform: scale(1.2);
-    cursor: pointer;
-  }
+
   
   .Main-footer {
     background-color: #FFFCED;
@@ -87,6 +85,12 @@
     align-items: center;  /* 세로축을 기준으로 정렬*/
     justify-content: center;  /* 가로 축을 기준으로 정렬*/
   }
+
+  .main-tab-btn{
+    padding: 0%;
+    border: 0ch;
+    background-color: white;
+}
   
   /* 나눔손글씨펜 폰트*/
   @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
