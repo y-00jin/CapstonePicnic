@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import 'C:/Capstone/picnic-front/src/resoure/css/Tab.css'
 
 import img1 from 'C:/Capstone/picnic-front/src/resoure/image/1.jpg';
