@@ -11,8 +11,21 @@ import isSameMonth from "date-fns/isSameMonth";
 import isSameDay from "date-fns/isSameDay";
 import toDate from "date-fns/toDate";
 import { Link } from "react-router-dom";
+import img from "../../resoure/image/1.jpg"
 
 class Calendar extends React.Component {
+
+    onDateClick = day => {
+        this.setState({
+            selectedDate: day
+        });
+        <form action="./MemoryWrite" method="post">
+
+
+        </form>
+        console.log(day.getFullYear() + "." + (day.getMonth() + 1) + "." + day.getDate());
+    };
+    
     state = {
         currentMonth: new Date(),
         selectedDate: new Date()
@@ -70,6 +83,7 @@ class Calendar extends React.Component {
 
     }
 
+    
     renderCelss() {
         const { currentMonth, selectedDate } = this.state;
         const monthStart = startOfMonth(currentMonth);
@@ -79,32 +93,72 @@ class Calendar extends React.Component {
 
         const dateFormat = "dd";
         const rows = [];
-
+        
         let days = [];
         let day = startDate;
         let formattedDate = "";
+        let num =[4, 7, 9, 15, 26];
+        let numCount = 0;
+
 
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                days.push(
-                    <div
-                        className={`col cell ${!isSameMonth(day, monthStart)
-                            ? "disabled"
-                            : isSameDay(day, selectedDate) ? "selected" : ""
-                            }`}
-                        key={day}
-                        onClick={() => this.onDateClick(toDate(cloneDay))}>
-                        <span className="number">{formattedDate}</span>
-                        <span className="bg">{formattedDate}</span>
-                    </div>
-                );
+                
+                    if(day.getDate() === num[numCount]){
+                        days.push(
+                            <div
+                                className={`col cell ${!isSameMonth(day, monthStart)
+                                    ? "disabled"
+                                    : isSameDay(day, selectedDate) ? "selected" : ""
+                                    }`}
+                                    
+                                key={day}
+                                onClick={() => this.onDateClick(toDate(cloneDay))}>
+                                    
+                                <Link to= "/Memory" className="link-btn">
+                                    <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
+                                    <span className="photo-number">{formattedDate}</span>
+                                    
+                                </Link>
+                                
+                                
+                            </div>
+                        );
+                        numCount++;
+                    }
+                    else{
+                    
+                    days.push(
+                        <div
+                            className={`col cell ${!isSameMonth(day, monthStart)
+                                ? "disabled"
+                                : isSameDay(day, selectedDate) ? "selected" : ""
+                                }`}
+                                
+                            key={day}
+                            onClick={() => this.onDateClick(toDate(cloneDay))}>
+                                
+                            <Link to={{
+                                pathname: '/MemoryWrite',
+                                
+                            }} className="link-btn">
+                                <span className="number">{formattedDate}</span>
+                                <span className="bg">{formattedDate}</span>
+                            </Link>
+                            
+                            
+                        </div>
+                    );
+                    }
+                
+                
                 day = addDays(day, 1);  //시작날부터 1씩 증가하여 day에 저장
             }
             rows.push(
                 <div className="row" key={day}>
-                    {days}
+                        {days}
                 </div>
             );
             days = [];
@@ -113,15 +167,6 @@ class Calendar extends React.Component {
         return <div className="body">{rows}</div>;
 
     }
-
-    onDateClick = day => {
-        this.setState({
-            selectedDate: day
-        });
-        // console.log(this.state.currentMonth.getFullYear()+"."+(this.state.currentMonth.getMonth()+1)+"."+this.state.selectedDate.getDate());
-        //  alert(this.state.selectedDate.getDate());
-        console.log(this.state.currentMonth.getFullYear() + "." + (this.state.currentMonth.getMonth() + 1) + "." + this.state.selectedDate.getDate());
-    };
 
     /* 다음달 */
     nextMonth = () => {
