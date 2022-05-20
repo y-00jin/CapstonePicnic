@@ -1,39 +1,69 @@
-import React from "react";
+import { Component } from "react"
 import logo from '../resoure/image/Logo.png';
 import headerLogo from '../resoure/image/spring.png';
 import '../resoure/css/Main.css';
 import { Link } from "react-router-dom";
+import Login from "./LoginContents/Login"
+import SignUp from "./LoginContents/SignUp"
+import ChangePw from "./LoginContents/ChangePw"
+
+const obj = {
+    0: <Login/>,
+    1: <SignUp />,
+    2: <ChangePw />,
+};
+  
+const arr = ["First", "Second", "Third"];
+  
+{arr.map((str, idx) => {
+              return (
+                <li key={str} onClick={() => this.clickHandler(idx)}>
+                  {str}
+                </li>
+              );
+            })}
 
 
-function Main() {
-    return (
+export default class Main extends Component {
 
-        <div className="Main">
+    state = {
+        activeId: 0,
+      };
+    
+      clickHandler = (id) => {
+        this.setState({ activeId: id });
+      };
 
-            {/* 스프링 로고 */}
-            <header className="Main-header">
-                <img src={headerLogo} className="Main-headerLogo" alt="headerLogo" />
-            </header>
+    
+    render() {
+        return (
 
-            {/* 메인 로고 */}
-            <body className="Main-body">
-                <p>' 너, 나들이 '<hr className="Main-hr" /><hr className="Main-hr" /></p>
-                <img src={logo} className="Main-bodyLogo" alt="bodyLogo" />
-            </body>
+            <div className="Main">
 
-            {/* 로그인 */}
-            <body class="text-center">
+                {/* 스프링 로고 */}
+                <header className="Main-header">
+                    <img src={headerLogo} className="Main-headerLogo" alt="headerLogo" />
+                </header>
 
-                <main className="Main-login">
-                    <ul class="nav justify-content-center">
-                        <li class="login-tab-btn">로그인　　</li>
-                        <li class="signup-tab-btn" >회원가입　　</li>
-                        <li class="chagnepw-tab-btn">비밀번호 변경</li>
-                    </ul>
-                    <form>
+                {/* 메인 로고 */}
+                <body className="Main-body">
+                    <p>' 너, 나들이 '<hr className="Main-hr" /><hr className="Main-hr" /></p>
+                    <img src={logo} className="Main-bodyLogo" alt="bodyLogo" />
+                </body>
+
+                {/* 로그인 */}
+                <body class="text-center">
+
+                    <main className="Main-login">
+                        <ul class="nav justify-content-center">
+                            <li class="login-tab-btn" onClick={() => this.clickHandler(0)}>로그인　　</li>
+                            <li class="signup-tab-btn" onClick={() => this.clickHandler(1)}>회원가입　　</li>
+                            <li class="chagnepw-tab-btn" onClick={() => this.clickHandler(2)}>비밀번호 찾기</li>
+                        </ul>
+
                         {/* <h1 class="h3 mb-3 fw-normal">Please sign in</h1> */}
 
-                        <div class="form-floating">
+                        {/* <div class="form-floating">
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
                             <label for="floatingInput">아이디</label>
                         </div>
@@ -41,7 +71,7 @@ function Main() {
                         <div class="form-floating">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
                             <label for="floatingPassword">비밀번호</label>
-                        </div>
+                        </div> */}
 
                         {/* 사용자 기억 기능 임시..폐쇄 */}
                         {/* <div class="checkbox mb-3">
@@ -51,24 +81,21 @@ function Main() {
                         </div> */}
 
                         <footer className="Main-footer">
-                            <Link to="/MainCalendar">
-                                <button className="Main-btn Main-btn-color">로그인</button>
-                            </Link>
+                            {obj[this.state.activeId]}
                         </footer>
-                    </form>
-                </main>
-            </body>
 
-            {/* 다음 버튼 */}
-            {/* <footer className="Main-footer">
+                    </main>
+                </body>
+
+                {/* 다음 버튼 */}
+                {/* <footer className="Main-footer">
                 <Link to="/Calendar">
                     <button className="Main-btn Main-btn-color">다음</button>
                 </Link>
             </footer> */}
 
-        </div>
+            </div>
 
-    );
+        );
+    }
 }
-
-export default Main;

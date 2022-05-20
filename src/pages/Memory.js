@@ -56,20 +56,20 @@ export default class Memory extends Component {
         <p/>
         <div class="input-group input-group-lg">
             <span class="input-group-text" id="basic-addon1">여행 날짜</span>
-            <input type="text" readonly class="form-control" id="date" value="2022-04-27"/>
+            <input type="text" readonly class="form-control" id="date" defaultValue={"2022-04-27"}/>
         </div>
         <p/>
 
         <div class="input-group input-group-lg">
             <span class="input-group-text" id="basic-addon1">여행 장소</span>
-            <input type="text" readonly class="form-control" id="place" value="강릉 경포해변"/>
+            <input type="text" readonly class="form-control" id="place" defaultValue={"강릉 경포해변"}/>
         </div>
         <p/>
 
         <div class="input-group input-group-lg">
             <span class="input-group-text">여행 기록</span>
-            <textarea readonly class="form-control" aria-label="record" value=
-            "바다가 예뻤다!"
+            <textarea readonly class="form-control" aria-label="record" defaultValue=
+            {"바다가 예뻤다!"}
             ></textarea>
         </div>
         <p>　</p>

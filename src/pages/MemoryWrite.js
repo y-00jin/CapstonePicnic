@@ -60,7 +60,7 @@ export default class MemoryWrite extends Component {
         <p/>
         <div class="input-group input-group-lg">
             <span class="input-group-text" id="basic-addon1">여행 날짜</span>
-            <input type="text" readonly class="form-control" id="date" value="2022-04-27"/>
+            <input type="text" readonly class="form-control" id="date" defaultValue={"2022-04-27"}/>
         </div>
         <p/>
 

@@ -1,6 +1,32 @@
 
-
-
+.link-btn{
+  color: #777;
+  
+}
+.link-btn:hover{
+  color: #777;
+}
+.photo-number{
+  position: absolute;
+  font-size: 82.5%;
+  top: .75em;
+  right: .75em;
+  font-weight: 700;
+  background-color: #ffffff;
+  border-radius: 100%;
+}
+.photo-bg{
+  opacity: 80%;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--main-color);
+  font-size: 8.3em;
+  position: absolute;
+  top: -.16em;
+  right: -.01em;
+  transition: .25s ease-out;
+  letter-spacing: -.07em;
+}
 /* 전체 영역 사이즈 조정*/
 .MC-App {
   text-align: center;
