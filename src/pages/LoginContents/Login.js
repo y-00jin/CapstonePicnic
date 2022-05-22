@@ -43,7 +43,7 @@ class Login extends Component {
                 memberList.map((el, key) => {   // 아이디 검색
                     if (el.id === id && el.password === password) {
                         // return <Link to ="/MainCalendar"></Link>
-                        alert('로그인 완료 -> 메인페이지로 이동');
+                        window.location.href = 'http://localhost:3000/MainCalendar?id='+id;
                     } else {
                         alert('사용자 정보를 확인해주세요.');
                     }
