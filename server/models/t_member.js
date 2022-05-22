@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             charset: 'utf8',    // 한국어 설정
             collate: 'utf8_general_ci', // 한국어 설정
-            tableName: "test_member", // 테이블 이름
+            tableName: "t_member", // 테이블 이름
             timestamps: false,  // 만든 시간
         }
     )
