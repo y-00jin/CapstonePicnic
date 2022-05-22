@@ -20,7 +20,10 @@ function SignUp() {
                     <label for="floatingPassword">비밀번호</label>
                 </div>
 
-
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+                    <label for="floatingPassword">비밀번호 재확인</label>
+                </div>
 
                 {/* 사용자 기억 기능 임시..폐쇄 */}
                 {/* <div class="checkbox mb-3">
