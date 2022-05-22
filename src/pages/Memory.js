@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'C:/Capstone/picnic-front/src/sass/custom.css/custom.css';
+import '../sass/custom.css/custom.css';
 import '../resoure/css/Header.css'
 import '../resoure/css/MemoryWrite.css';
 import '../resoure/css/Tab.css'

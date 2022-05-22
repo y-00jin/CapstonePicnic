@@ -19,11 +19,11 @@ function ChangePw() {
 
     return (
         <main className="Main-login">
-            <div class="form-floating">
+            <div class="signup-floating">
                 <input type="name" class="form-control" id="floatingPassword" placeholder="Password" />
                 <label for="floatingPassword">이름</label>
             </div>
-            <div class="form-floating">
+            <div class="signup-floating">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
                 <label for="floatingInput">아이디</label>
             </div>

@@ -17,8 +17,8 @@ const {
   } = require('./models');
 sequelize.query('SET NAMES utf8;')
 
-// 데이터 추가
-app.post('/api/test', (req, res) => {
+// SignUp.js -> 데이터 추가
+app.post('/api/add', (req, res) => {
     console.log(req.body);
 
     T_member.create({
@@ -34,6 +34,32 @@ app.post('/api/test', (req, res) => {
         throw err;
     })
 })
+
+// app.get('/api/data', (req, res) => {
+//     T_member.findAll()
+//      .then( result => { res.send(result) })
+//      .catch( err => { throw err })
+//  }) 
+
+
+// SignUp.js -> 데이터 조회 (id 조회)
+app.post('/api/keywordData', (req, res) => {
+    T_member.findAll({
+        where: { id : req.body.id }
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+// Login.js -> id 조회
+app.post('/api/keywordSingleData', (req, res) => {
+    T_member.findOne({
+        where: { id : req.body.id}
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
