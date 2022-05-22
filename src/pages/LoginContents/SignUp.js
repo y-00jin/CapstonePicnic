@@ -37,7 +37,7 @@ class SignUp extends Component {
 
                 if (res.data) {
                     alert('회원가입이 완료되었습니다.');
-                    return window.location.reload();
+                    return window.location.reload();    // 새로고침
                 }
             } else {
                 if(password !== password2 ){  // 비밀번호 동일 X
