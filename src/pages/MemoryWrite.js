@@ -8,7 +8,7 @@ import '../resoure/css/MemoryWrite.css';
 import '../resoure/css/Tab.css'
 
 import add from 'C:/Capstone/picnic-front/src/resoure/image/add.jpg'
-import remove from 'C:/Capstone/picnic-front/src/resoure/image/remove.png';
+// import remove from 'C:/Capstone/picnic-front/src/resoure/image/remove.png';
 
 const MemoryWrite = props => {
   const [ photoToAddList, setPhotoToAddList ] = useState([]);
@@ -37,9 +37,9 @@ const MemoryWrite = props => {
   const photoToAddPreview = () => {
       return photoToAddList.map((photo) => {
           return (        
-              <div className="photoBox" key={photo.url}>
+              <div className="add-container" key={photo.url}>
                   {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
-                  <button type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
+                  <button className="remove" type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
                   <img className="tab-phone-image" src={photo.url} />
               </div>
           )
@@ -88,13 +88,13 @@ const MemoryWrite = props => {
     <p>　</p>
 
 
-    <div id="addPost"><h4>| 추억추가</h4></div>
+    <div id="addPost"><h4>| 추억 추가</h4></div>
 
     <p/>
     
     <div class="tab-photo-layout">
       <div className="photoBox addPhoto">
-        <button className="tab-button" type="button" onClick={handleClick}><img className="tab-phone-image" alt="add" src={add} /></button>
+        <button className="add-button" type="button" onClick={handleClick}><img className="tab-phone-image" alt="add" src={add} /></button>
         <input 
           type="file" 
           accept="image/jpg, image/jpeg, image/png" 
