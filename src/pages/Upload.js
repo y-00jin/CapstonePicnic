@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, Row } from "react";
-import add from 'C:/Capstone/picnic-front/src/resoure/image/add.jpg';
+import add from '../resoure/image/add.jpg';
 // import remove from 'C:/Capstone/picnic-front/src/resoure/image/remove.png';
 
 const Upload = props => {

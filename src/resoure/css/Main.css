@@ -103,6 +103,127 @@
     background-color: white;
 }
   
+.signup-id{
+  display: flex;
+  width: 100%;
+}
+
+  /* 버튼 스타일*/
+.signup-btn{
+    position: relative;
+    border: none;
+    /* display: inline-block; */
+    /* padding: 15px 30px; */
+    border-radius: 15px;
+    font-family: 'Nanum Pen Script';
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    margin: 15px 0px 0 0px;
+    height: 60px;
+    width: 15%;
+    
+}
+
+.signup-btn-color {
+  background-color: #958477;
+  color: #ffffff;
+}
+
+.form-floating-id {
+  margin: 15px 30px 15px 30px;
+  width: 70%;
+  position: relative; }
+  .form-floating-id > .form-control,
+  .form-floating-id > .form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25; }
+  .form-floating-id > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: #343a40;
+    font-size: 25px;
+    padding: 8px;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out; }
+    @media (prefers-reduced-motion: reduce) {
+      .form-floating-id > label {
+        transition: none; } }
+  .form-floating-id > .form-control {
+    padding: 1rem 0.75rem; }
+    .form-floating-id > .form-control::placeholder {
+      color: transparent; }
+    .form-floating-id > .form-control:focus, .form-floating-id > .form-control:not(:placeholder-shown) {
+      padding-top: 1.625rem;
+      padding-bottom: 0.625rem; }
+    .form-floating-id > .form-control:-webkit-autofill {
+      padding-top: 1.625rem;
+      padding-bottom: 0.625rem; }
+  .form-floating-id > .form-select {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem; }
+  .form-floating-id > .form-control:focus ~ label,
+  .form-floating-id > .form-control:not(:placeholder-shown) ~ label,
+  .form-floating-id > .form-select ~ label {
+    opacity: 0.65;
+    transform: scale(0.6) translateY(-0.5rem) translateX(0.15rem); }
+  .form-floating-id > .form-control:-webkit-autofill ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
+
+    
+
+
+    .signup-floating {
+      margin: 15px 30px 15px 30px;
+      width: 600px;
+      position: relative; }
+      .signup-floating > .form-control,
+      .signup-floating > .form-select {
+        height: calc(3.5rem + 2px);
+        line-height: 1.25; }
+      .signup-floating > label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        color: #343a40;
+        font-size: 25px;
+        padding: 8px;
+        pointer-events: none;
+        border: 1px solid transparent;
+        transform-origin: 0 0;
+        transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out; }
+        @media (prefers-reduced-motion: reduce) {
+          .form-floating > label {
+            transition: none; } }
+      .signup-floating > .form-control {
+        padding: 1rem 0.75rem; }
+        .signup-floating > .form-control::placeholder {
+          color: transparent; }
+        .signup-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+          padding-top: 1.625rem;
+          padding-bottom: 0.625rem; }
+        .signup-floating > .form-control:-webkit-autofill {
+          padding-top: 1.625rem;
+          padding-bottom: 0.625rem; }
+      .signup-floating > .form-select {
+        padding-top: 1.625rem;
+        padding-bottom: 0.625rem; }
+      .signup-floating > .form-control:focus ~ label,
+      .signup-floating > .form-control:not(:placeholder-shown) ~ label,
+      .signup-floating > .form-select ~ label {
+        opacity: 0.65;
+        transform: scale(0.6) translateY(-0.5rem) translateX(0.15rem); }
+      .signup-floating > .form-control:-webkit-autofill ~ label {
+        opacity: 0.65;
+        transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
+    
   /* 나눔손글씨펜 폰트*/
   @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
   .nanumpenscript * {
