@@ -97,7 +97,7 @@ const MemoryWrite = props => {
         <button className="add-button" type="button" onClick={handleClick}><img className="tab-phone-image" alt="add" src={add} /></button>
         <input 
           type="file" 
-          accept="image/jpg, image/jpeg, image/png" 
+          accept="image/jpg, image/jpeg, image/png, video/*" 
           multiple 
           ref={hiddenFileInput}
           onChange={(e) => handlePhoto(e)}
@@ -110,7 +110,7 @@ const MemoryWrite = props => {
     {/* 버튼 */}
     <div className="btn-background">
     <Link to="/Memory">
-      <button className="btn btn-color">저장</button>
+      <button className="btn btn-color" onClick={savePhoto}>저장</button>
     </Link>
     <h1>　</h1>
     <Link to="/MainCalendar">
