@@ -1,12 +1,11 @@
 import React from 'react';
 import ImageGallery from 'react-image-gallery';
+// import 'http:localhost:3000/C:/Users/sharo/OneDrive/사진/캡스톤/1.jpg';
 
 const images = [
   {
-    // original: 'file:///C:/Capstone/picnic-front/src/resoure/image/1.jpg',
-    // thumbnail: 'file:///C:/Capstone/picnic-front/src/resoure/image/1.jpg',
-    original: 'https://picsum.photos/id/1018/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1018/250/150/',
+    original: 'https://i.ibb.co/pvtykb2/1.jpg',
+    thumbnail: 'https://i.ibb.co/pvtykb2/1.jpg',
   },
   {
     original: 'https://picsum.photos/id/1015/1000/600/',
