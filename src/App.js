@@ -4,8 +4,7 @@ import MainCalendar from "./pages/MainCalendar";
 import MemoryWrite from "./pages/MemoryWrite";
 import PhotoAlbum from "./pages/PhotoAlbum";
 import Memory from "./pages/Memory";
-import Upload from "./pages/Upload";
-import Details from "C:/Capstone/picnic-front/src/pages/TabContents/Details.js";
+import Details from "./pages/TabContents/Details.js";
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path= "PhotoAlbum" element={<PhotoAlbum/>}/>
         <Route path= "Memory" element={<Memory/>}/>
         <Route path= "Details" element={<Details/>}/>
-        <Route path= "Upload" element={<Upload/>}/>
       </Routes>
     </div>
     

@@ -19,6 +19,7 @@
     "nodemon": "^2.0.16",
     "path": "^0.12.7",
     "react": "^18.0.0",
+    "react-awesome-modal": "^2.0.5",
     "react-big-calendar": "^0.40.0",
     "react-bootstrap": "^2.2.3",
     "react-datepicker": "^4.7.0",
