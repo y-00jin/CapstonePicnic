@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import addMonths from "date-fns/addMonths";
 import subMonths from "date-fns/subMonths";
 import startOfWeek from "date-fns/startOfWeek";
@@ -11,9 +11,11 @@ import isSameMonth from "date-fns/isSameMonth";
 import isSameDay from "date-fns/isSameDay";
 import toDate from "date-fns/toDate";
 import { Link } from "react-router-dom";
+// import axios from 'axios';
+
 import img from "../../resoure/image/1.jpg"
 
-class Calendar extends React.Component {
+class Calendar extends Component {
 
     onDateClick = day => {
         this.setState({
@@ -28,9 +30,35 @@ class Calendar extends React.Component {
     
     state = {
         currentMonth: new Date(),
-        selectedDate: new Date()
+        selectedDate: new Date(),
+        // id:'test1',
+        // memoryList:[],
     };
 
+    // id로 데이터조회
+    // _getDate = async () => {
+    //     const { id, currentMonth } = this.state;
+    //     const res = await axios('/api/getDate', {
+    //         method: 'POST',
+    //         data: {
+    //             'id': this.state.id,
+    //             'memory_date': (this.state.selectedDate.getMonth+1)
+    //         },
+    //         headers: new Headers()
+    //     });
+    //     this.setState({
+    //         memberList: res.data
+    //     })
+    //     const { memoryList } = this.state;
+
+    //     memoryList.length !== 0 ?
+    //     memoryList.map((el, key) => {
+    //         {el.memory_date}
+    //     }) :<h1></h1>;
+
+    // }
+
+    
     renderHeader() {
         const dateFormat = "yyyy 년 MM 월";
         return (
