@@ -41,6 +41,25 @@ app.post('/api/add', (req, res) => {
 //      .catch( err => { throw err })
 //  }) 
 
+// Change.js -> 데이터 조회 (id 조회)
+app.post('/api/keywordId', (req, res) => {
+    T_member.findAll({
+        where: {[Op.and]: [{id : req.body.id },{name:req.body.name}]}
+        // where: { id : req.body.id }
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+// Change.js -> 비밀번호 변경
+// app.post('/api/keywordUpdate', (req, res) => {
+//     T_member.update({ password : req.body.password }, {
+//         where : { id : req.body.id }
+//     })
+//     .then( result => { res.send(result) })
+//     .catch( err => { throw err })
+// })
+
 
 // SignUp.js -> 데이터 조회 (id 조회)
 app.post('/api/keywordData', (req, res) => {
@@ -68,7 +87,6 @@ app.post('/api/keywordSingleData', (req, res) => {
 //     .then( result => { res.send(result) })
 //     .catch( err => { throw err })
 // })
-
 
 
 const PORT = process.env.PORT || 5000;
