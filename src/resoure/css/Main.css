@@ -1,3 +1,10 @@
+#id-check-text, #name-check-text, #pw1-check-text, #pw2-check-text{
+  margin-left: 35px;
+  text-align: left;
+  font-size: 18px;
+  color: red;
+}
+
 .pwFooter{
   padding: 12px 16px;
   text-align: right;
@@ -55,7 +62,7 @@
     display: flex;
     /* width: 600px; */
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     font-family: 'Nanum Pen Script';
   }
