@@ -16,12 +16,27 @@ class SignUp extends Component {
         }
     };
 
+
     //  데이터 추가
     _addData = async (e) => {
+
+        
         const { id, password, password2, name, checkId } = this.state;
         e.preventDefault();
         if (id === '' || password === '' || password2 === '' || name === '') {    // 정보 입력 안함
-            alert('정보를 입력해주세요');
+            document.getElementById("id-check-text").innerText = "필수 정보입니다.";
+            document.getElementById('idInput').style.borderColor = "red";
+
+            document.getElementById("pw1-check-text").innerText = "필수 정보입니다.";
+            document.getElementById('checkPw1').style.borderColor = "red";
+
+            document.getElementById("pw2-check-text").innerText = "필수 정보입니다.";
+            document.getElementById('checkPw2').style.borderColor = "red";
+            
+            document.getElementById("name-check-text").innerText = "필수 정보입니다.";
+            document.getElementById('nameInput').style.borderColor = "red";
+
+            // alert('정보를 입력해주세요');
         } else {
 
             if(password === password2 && checkId === 'false') {   // 비밀번호 동일 && 아이디 중복 체크 -> insert
@@ -41,16 +56,19 @@ class SignUp extends Component {
                 }
             } else {
                 if(password !== password2 ){  // 비밀번호 동일 X
-                    alert('비밀번호를 확인해주세요.');
+                    document.getElementById("pw2-check-text").innerText = "비밀번호가 일치하지 않습니다.";
+                    // alert('비밀번호를 확인해주세요.');
                 } 
                 else{    // 아이디 중복 확인 X
-                    alert('아이디 중복 확인을 해주세요.');
+                    document.getElementById("id-check-text").innerText = "아이디 중복 확인을 해주세요";
+                    // alert('아이디 중복 확인을 해주세요.');
                 }
             }
         }
     }
 
 
+    
 
     // componentDidMount() {
     //     this._getData();
@@ -69,7 +87,9 @@ class SignUp extends Component {
     _getKeywordData = async () => {
         const { id } = this.state;
         if (id === '') {
-            alert('아이디를 입력해주세요.');
+            document.getElementById("id-check-text").innerText = "필수 정보입니다.";
+            
+            // alert('아이디를 입력해주세요.');
         } else {
             // 검색
             const res = await axios('/api/keywordData', {
@@ -90,7 +110,8 @@ class SignUp extends Component {
                 memberList.length !== 0 ?
                     memberList.map((el, key) => {   // 아이디 검색
 
-                        alert('이미 사용중인 아이디입니다.');
+                        document.getElementById('id-check-text').innerText = "이미 사용중인 아이디입니다.";
+                        // alert('이미 사용중인 아이디입니다.');
                         document.getElementById('idInput').style.borderColor = "red";   // 테두리 색 red
                         document.getElementById('idInput').value = null;                // 입력값 비우기
                         this.setState(
@@ -107,7 +128,9 @@ class SignUp extends Component {
     // 사용 가능한 id인 경우
     checkIdFlae(){
         document.getElementById('idInput').style.borderColor = "#00f005";
-        alert('사용 가능한 아이디입니다.');
+        document.getElementById("id-check-text").innerText = "사용 가능한 아이디입니다.";
+        document.getElementById("id-check-text").style.color = "#343a40";
+        // alert('사용 가능한 아이디입니다.');
         this.setState({
             checkId:'false'
         })
@@ -128,14 +151,29 @@ class SignUp extends Component {
     }
     _nameUpdate(e) {
         this.setState({ name: e.target.value })
+        if(e.target.value === null){
+            document.getElementById("name-check-text").innerText = "필수 정보입니다.";
+            document.getElementById('nameInput').style.borderColor = "red";
+        } else{
+            document.getElementById("name-check-text").innerText = "";
+        document.getElementById('nameInput').style.borderColor = "#00f005";
+        }
+
+        
     }
 
     // 비밀번호 스타일 변경
     changePwStyle(){
         if(document.getElementById('checkPw1').value === document.getElementById('checkPw2').value){
+            document.getElementById("pw1-check-text").innerText = "";
+            document.getElementById('checkPw1').style.borderColor = "#00f005";
+            document.getElementById("pw2-check-text").innerText = "사용 가능한 비밀번호 입니다.";
+            document.getElementById("pw2-check-text").style.color = "#343a40";
             document.getElementById('checkPw2').style.borderColor = "#00f005";
+
         }else{
             document.getElementById('checkPw2').style.borderColor = "red";
+            document.getElementById("pw2-check-text").innerText = "비밀번호가 일치하지 않습니다.";
         }
     }
 
@@ -152,21 +190,33 @@ class SignUp extends Component {
                     </div>
                     <button className="signup-btn signup-btn-color" id="check" onClick={this._getKeywordData}>중복 확인</button>
                 </div>
+                <div id="id-check-text">
+                     
+                </div>
 
 
                 <div class="signup-floating">
                     <input type="password" class="form-control" id="checkPw1" placeholder="password" onChange={(e) => this._passwordUpdate(e)} />
                     <label for="floatingPassword">비밀번호</label>
                 </div>
+                <div id="pw1-check-text">
+
+                </div>
 
                 <div class="signup-floating">
                     <input type="password" class="form-control" id="checkPw2" placeholder="password2" onChange={(e) => this._password2Update(e)} />
                     <label for="floatingPassword">비밀번호 재확인</label>
                 </div>
+                <div id="pw2-check-text">
+                    
+                </div>
 
                 <div class="signup-floating">
-                    <input type="name" class="form-control" id="floatingInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
+                    <input type="name" class="form-control" id="nameInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
                     <label for="floatingInput">이름</label>
+                </div>
+                <div id="name-check-text">
+                    
                 </div>
 
                 <footer className="Main-footer">
