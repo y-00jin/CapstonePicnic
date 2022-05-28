@@ -60,6 +60,16 @@ app.post('/api/keywordSingleData', (req, res) => {
     .catch( err => { throw err })
 })
 
+// Calendar.jsx -> id, month로 일 조회
+// app.post('/api/getDate', (req, res) => {
+//     T_memory.findAll({
+//         where: {[OP.and]:[{creator_id : req.body.id}, sequelize.fn('MONTH', sequelize.col('memory_date')), req.body.currentMonth]}  
+//     })
+//     .then( result => { res.send(result) })
+//     .catch( err => { throw err })
+// })
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

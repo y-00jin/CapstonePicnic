@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../resoure/css/Main.css';
 import axios from 'axios';
+
+
 
 class Login extends Component {
 
@@ -16,13 +18,23 @@ class Login extends Component {
         }
     };
 
+    // 텍스트 및 스타일 변경
+    _check_text(checkId, inText, fontColor) {
+        document.getElementById(checkId).innerText = inText;
+        document.getElementById(checkId).style.color = fontColor;
+    }
+
+
     // 데이터 검색
     _getKeywordData = async () => {
         const { id, password } = this.state;
 
-        if (id === '' || password === '') {
-            alert('아이디 및 비밀번호를 입력해주세요.');
-        } else {
+        if (id === '') {
+            this._check_text("id-check-text", "아이디를 입력해주세요.", "red");
+        }if(password === ''){
+            this._check_text("pw-check-text", "비밀번호를 입력해주세요.", "red");
+        }
+        if(id !=='' && password !== '') {
             // 검색
             const res = await axios('/api/keywordData', {
                 method: 'POST',
@@ -35,15 +47,13 @@ class Login extends Component {
                 memberList: res.data
             })
 
-
             const { memberList } = this.state;
-
 
             memberList.length !== 0 ?
                 memberList.map((el, key) => {   // 아이디 검색
                     if (el.id === id && el.password === password) {
                         // return <Link to ="/MainCalendar"></Link>
-                        window.location.href = 'http://localhost:3000/MainCalendar?id='+id;
+                        window.location.href = 'http://localhost:3000/MainCalendar?id=' + id;
                     } else {
                         alert('사용자 정보를 확인해주세요.');
                     }
@@ -51,12 +61,24 @@ class Login extends Component {
         }
     }
 
-
+    
     _idUpdate(e) {
         this.setState({ id: e.target.value })
+        if (e.target.value.trim() === '') {
+            this._check_text("id-check-text", "아이디를 입력해주세요.", "red");    // 아이디
+            document.getElementById('inputId').value = null;
+        } else {
+            this._check_text("id-check-text", "", "black");
+        }
     }
     _passwordUpdate(e) {
         this.setState({ password: e.target.value })
+        if (e.target.value.trim() === '') {
+            this._check_text("pw-check-text", "비밀번호를 입력해주세요.", "red");    // 아이디
+            document.getElementById('inputPw').value = null;
+        } else {
+            this._check_text("pw-check-text", "", "black");
+        }
     }
 
 
@@ -69,10 +91,16 @@ class Login extends Component {
                     <input type="id" class="form-control" id="inputId" placeholder="id" onChange={(e) => this._idUpdate(e)} />
                     <label for="floatingInput">아이디</label>
                 </div>
+                <div id="id-check-text">
+
+                </div>
 
                 <div class="signup-floating">
                     <input type="password" class="form-control" id="inputPw" placeholder="Password" onChange={(e) => this._passwordUpdate(e)} />
                     <label for="floatingPassword">비밀번호</label>
+                </div>
+                <div id="pw-check-text">
+
                 </div>
 
                 {/* 사용자 기억 기능 임시..폐쇄 */}
