@@ -108,13 +108,13 @@ class SignUp extends Component {
                             checkId: 'true'
                         }
                     )
-                }) : this.checkIdFlae();
+                }) : this.checkIdFalse();
 
         }
     }
 
     // 사용 가능한 id인 경우
-    checkIdFlae() {
+    checkIdFalse() {
         this._check_text("id-check-text", "사용 가능한 아이디입니다.", "#00f005");
 
         this.setState({

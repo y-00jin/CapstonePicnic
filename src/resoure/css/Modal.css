@@ -1,3 +1,11 @@
+#new-pw1-text, #new-pw2-text{
+  margin-left: 20%;
+  text-align: left;
+  font-size: 15px;
+  color: red;
+}
+
+
 .modal-pilter {
     margin: 30px auto;
     width: 60%;
