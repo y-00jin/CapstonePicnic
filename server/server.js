@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 // 테이블 읽어오기
 const {
     T_member,
-    Sequelize: { Op }
+    T_memory,
+    Sequelize: { Op },
   } = require('./models');
 sequelize.query('SET NAMES utf8;')
 
@@ -52,13 +53,13 @@ app.post('/api/keywordId', (req, res) => {
 })
 
 // Change.js -> 비밀번호 변경
-// app.post('/api/keywordUpdate', (req, res) => {
-//     T_member.update({ password : req.body.password }, {
-//         where : { id : req.body.id }
-//     })
-//     .then( result => { res.send(result) })
-//     .catch( err => { throw err })
-// })
+app.post('/api/updatePw', (req, res) => {
+    T_member.update({ password : req.body.pw }, {
+        where : { id : req.body.id }
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
 
 
 // SignUp.js -> 데이터 조회 (id 조회)
@@ -78,6 +79,19 @@ app.post('/api/keywordSingleData', (req, res) => {
     .then( result => { res.send(result) })
     .catch( err => { throw err })
 })
+
+
+// Calendar.jsx -> id로 t_memory 테이블 memory_date 조회
+app.post('/api/getMemoryDate', (req, res) => {
+    T_memory.findAll({
+        attributes: [sequelize.fn('date_format', sequelize.col('memory_date'), '%d'), 'memory_date_formed'],
+        where: {[Op.and]: [{id : req.body.id },{name:req.body.name}]}   //// 여기부터 수정
+        // where: { id : req.body.id }
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
 
 // Calendar.jsx -> id, month로 일 조회
 // app.post('/api/getDate', (req, res) => {
