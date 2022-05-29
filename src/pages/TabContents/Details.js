@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 
 const images = [
   {
-    original: 'https://i.ibb.co/pvtykb2/1.jpg',
+    original: 'blob:http://localhost:3000/7466a828-a6f2-4587-a795-715099e9cf4e',
     thumbnail: 'https://i.ibb.co/pvtykb2/1.jpg',
   },
   {

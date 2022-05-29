@@ -8,7 +8,7 @@ import '../resoure/css/MemoryWrite.css';
 import '../resoure/css/Tab.css'
 
 import add from '../resoure/image/add.jpg'
-// import remove from 'C:/Capstone/picnic-front/src/resoure/image/remove.png';
+import axios from 'axios';
 
 const MemoryWrite = props => {
   const [ photoToAddList, setPhotoToAddList ] = useState([]);
@@ -22,20 +22,25 @@ const MemoryWrite = props => {
   const handlePhoto = (e) => {
       const temp = []
       const photoToAdd = e.target.files;
-  
+
       for (let i = 0; i < photoToAdd.length; i++) {
           temp.push({ id: photoToAdd[i].name, file: photoToAdd[i], url: URL.createObjectURL(photoToAdd[i]) })
       };
       
       setPhotoToAddList(temp.concat(photoToAddList)) //사진을 여러 번 나눠서 등록할 때, 더 나중에 등록한 사진이 더 앞 순서에 나타나도록 함
+
+    //   console.log(photoToAddList);
   };
 
   const onRemoveToAdd = (deleteUrl) => {
       setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
+
+      console.log(photoToAddList)
   }
   
   const photoToAddPreview = () => {
       return photoToAddList.map((photo) => {
+
           return (        
               <div className="add-container" key={photo.url}>
                   {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
@@ -46,11 +51,24 @@ const MemoryWrite = props => {
       })
   };
 
-  const savePhoto = () => {
-      return (
-          console.log("저장!")
-      )
-  }
+  const savePhoto = (e) => {
+
+      console.log(photoToAddList)
+      const formdata = new FormData();
+      formdata.append('uploadImage', photoToAddList[0]);
+
+      const config = {
+          Headers: {
+              'content-type': 'multiple/form-data',
+          },
+        };
+
+        axios.post('api', formdata, config);
+      }
+    //   return (
+    //       console.log("저장!")
+    //   )
+  
 
   return (
     <div class="container">
@@ -71,7 +89,8 @@ const MemoryWrite = props => {
     <p/>
     <div class="input-group input-group-lg">
         <span class="input-group-text" id="basic-addon1">여행 날짜</span>
-        <input type="text" readonly class="form-control" id="date" defaultValue={"2022-04-27"}/>
+        {/* <input type="text" readonly class="form-control" id="date" defaultValue={"2022-04-27"}/> */}
+        <input type="text" className="form-control" id="date" defaultValue={"2022-04-27"}/>
     </div>
     <p/>
 
@@ -109,9 +128,9 @@ const MemoryWrite = props => {
 
     {/* 버튼 */}
     <div className="btn-background">
-    <Link to="/Memory">
+    {/* <Link to="/Memory"> */}
       <button className="btn btn-color" onClick={savePhoto}>저장</button>
-    </Link>
+    {/* </Link> */}
     <h1>　</h1>
     <Link to="/MainCalendar">
       <button className="btn btn-color">취소</button>
