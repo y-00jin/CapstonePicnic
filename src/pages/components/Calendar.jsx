@@ -221,8 +221,22 @@ class Calendar extends Component {
 
     }
 
+
+    /* 달력 페이지가 시작됬을때 처리 */
+    calendarLoad(){
+        
+        const sessionId = window.localStorage.getItem("sessionId");
+        const getCurMonth = this.state.currentMonth.getMonth() + 1;
+        console.log( sessionId + "     " + getCurMonth);
+    }
+
+
     render() {
+        
+        this.calendarLoad();
+        
         return (
+            
 
             <div className="calendar">
                 {this.renderHeader()}
@@ -231,6 +245,8 @@ class Calendar extends Component {
             </div>
         );
     }
+
+
 }
 
 export default Calendar;

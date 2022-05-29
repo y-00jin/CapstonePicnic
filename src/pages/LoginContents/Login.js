@@ -4,7 +4,6 @@ import '../../resoure/css/Main.css';
 import axios from 'axios';
 
 
-
 class Login extends Component {
 
     constructor(props) {
@@ -53,7 +52,10 @@ class Login extends Component {
                 memberList.map((el, key) => {   // 아이디 검색
                     if (el.id === id && el.password === password) {
                         // return <Link to ="/MainCalendar"></Link>
-                        window.location.href = 'http://localhost:3000/MainCalendar?id=' + id;
+                        // const userObj = { userId : id };
+                        // window.localStorage.setItem("sessionId", JSON.stringify(userObj));
+                        window.localStorage.setItem("sessionId", id);
+                        window.location.href = 'http://localhost:3000/MainCalendar';
                     } else {
                         alert('사용자 정보를 확인해주세요.');
                     }

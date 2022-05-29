@@ -82,21 +82,29 @@ class ChangePw extends Component {
 
 
     _updatePw = async () => {
-        
-            // const res = await axios('/api/keywordUpdate', {
-            //     method: 'POST',
-            //     data: {
-            //         'id': this.state.id,
-            //         'pw': this.state.password
-            //     },
-            //     headers: new Headers()
-            // })
-            // if(res.data){
-            //     alert('비밀번호 변경이 완료되었습니다.');
-            //     return window.location.reload();
-            // }
-        
-
+        const { password, password2 } = this.state;
+        if (password !== '' && password2 !== '' && password === password2) {
+            const res = await axios('/api/updatePw', {
+                method: 'POST',
+                data: {
+                    'id': this.state.id,
+                    'pw': this.state.password
+                },
+                headers: new Headers()
+            })
+            if (res.data) {
+                this._check_text("new-pw2-text", "", "#958477");
+                alert('비밀번호 변경이 완료되었습니다.');
+                return window.location.reload();
+            }
+        } else{
+            if(password == '' || password2 == ''){
+                this._check_text("new-pw2-text", "필수 정보입니다.", "red");
+            } else{
+                this._check_text("new-pw2-text", "비밀번호가 일치하지 않습니다.", "red");
+            }
+            
+        }
     }
     // 입력 값 변경되면 저장
     _idUpdate(e) {
