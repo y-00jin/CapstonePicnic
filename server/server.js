@@ -13,8 +13,15 @@ app.use(bodyParser.json());
 // 테이블 읽어오기
 const {
     T_member,
-    T_memory,
     Sequelize: { Op },
+  } = require('./models');
+sequelize.query('SET NAMES utf8;')
+
+
+// 테이블 읽어오기
+const {
+    T_memory,
+    Sequelize: { Op2 },
   } = require('./models');
 sequelize.query('SET NAMES utf8;')
 
@@ -84,9 +91,9 @@ app.post('/api/keywordSingleData', (req, res) => {
 // Calendar.jsx -> id로 t_memory 테이블 memory_date 조회
 app.post('/api/getMemoryDate', (req, res) => {
     T_memory.findAll({
-        attributes: [sequelize.fn('date_format', sequelize.col('memory_date'), '%d'), 'memory_date_formed'],
-        where: {[Op.and]: [{id : req.body.id },{name:req.body.name}]}   //// 여기부터 수정
-        // where: { id : req.body.id }
+        // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
+        // where: {[Op2.and]: [{creator_id : req.body.sessionId },sequelize.where(sequelize.fn('month', sequelize.col(memory_date)), req.body.getCurMonth )]}   //// 여기부터 수정
+        where: { creator_id : req.body.sessionId }
     })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
