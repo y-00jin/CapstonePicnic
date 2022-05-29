@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import addMonths from "date-fns/addMonths";
 import subMonths from "date-fns/subMonths";
 import startOfWeek from "date-fns/startOfWeek";
@@ -11,20 +11,22 @@ import isSameMonth from "date-fns/isSameMonth";
 import isSameDay from "date-fns/isSameDay";
 import toDate from "date-fns/toDate";
 import { Link } from "react-router-dom";
-// import axios from 'axios';
+import axios from 'axios';
 
 import img from "../../resoure/image/1.jpg"
+import { getMonth, parseISO } from "date-fns";
 
 class Calendar extends Component {
-
+    
+   
     onDateClick = day => {
         this.setState({
             selectedDate: day
         });
-        <form action="./MemoryWrite" method="post">
+        // <form action="./MemoryWrite" method="post">
 
 
-        </form>
+        // </form>
         console.log(day.getFullYear() + "." + (day.getMonth() + 1) + "." + day.getDate());
     };
     
@@ -32,7 +34,7 @@ class Calendar extends Component {
         currentMonth: new Date(),
         selectedDate: new Date(),
         // id:'test1',
-        // memoryList:[],
+        memoryList:[],
     };
 
     // id로 데이터조회
@@ -198,10 +200,12 @@ class Calendar extends Component {
 
     /* 다음달 */
     nextMonth = () => {
-
+        
         this.setState({
             currentMonth: addMonths(this.state.currentMonth, 1)
         });
+
+        this.calendarLoad();
     };
 
     /* 이전달 */
@@ -222,19 +226,54 @@ class Calendar extends Component {
     }
 
 
+
+
+    
+   
+
     /* 달력 페이지가 시작됬을때 처리 */
-    calendarLoad(){
-        
+    calendarLoad = async () => {
+
         const sessionId = window.localStorage.getItem("sessionId");
-        const getCurMonth = this.state.currentMonth.getMonth() + 1;
+        const getCurMonth =  addMonths(this.state.currentMonth, 1).toISOString().slice(5, 7);
         console.log( sessionId + "     " + getCurMonth);
-    }
+
+        const res = await axios('/api/getMemoryDate', {
+            method: 'POST',
+            data: {
+                'sessionId': sessionId
+                // 'getCurMonth': getCurMonth
+            },
+            headers: new Headers()
+        });
+        this.setState({
+            memoryList: res.data
+        })
+        const { memoryList } = this.state;
+
+        memoryList.length !== 0 ?
+            memoryList.map((el, key) => {   // 아이디 검색
+                if(el.memory_date.slice(5,7) === getCurMonth){
+                    
+                    
+                    console.log("앙 : "+  el.memory_date.slice(8,10));
+                }else{
+                    console.log("키키킥 : " +  el.memory_date.slice(8,10));
+                }
+                
+                
+                
+            }) : console.log("못찾음");
+
+        
+    };
+
+
 
 
     render() {
         
-        this.calendarLoad();
-        
+        // this.calendarLoad();
         return (
             
 
