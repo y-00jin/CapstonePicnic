@@ -16,6 +16,8 @@ import axios from 'axios';
 import img from "../../resoure/image/1.jpg"
 import { getMonth, parseISO } from "date-fns";
 
+let test = '';
+
 class Calendar extends Component {
 
     state = {
@@ -82,7 +84,7 @@ class Calendar extends Component {
                 this.setState({
                     test: array
                 })
-            console.log("?" + this.state.test);
+            // console.log("?" + this.state.test);
 
             // return array;
 
@@ -196,10 +198,8 @@ class Calendar extends Component {
         let num = [4, 7, 9, 15, 26];
         let numCount = 0;
 
-        const test = this.state.test;
+        test = this.state.test;
         
-        
-        console.log("ㅠㅠ" + test);
        
        
         
@@ -284,6 +284,12 @@ class Calendar extends Component {
         // this.calendarLoad();
     };
 
+    print() {
+        setTimeout(function() {
+            console.log("ㅠㅠ" + test);
+        },500);
+    }
+
     /* 이전달 */
     prevMonth = () => {
         this.setState({
@@ -323,6 +329,7 @@ class Calendar extends Component {
                 {this.renderHeader()}
                 {this.renderDays()}
                 {this.renderCelss()}
+                {this.print()}
             </div>
         );
     }
