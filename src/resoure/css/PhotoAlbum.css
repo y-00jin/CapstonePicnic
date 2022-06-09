@@ -149,7 +149,7 @@
 .photo-layout{
     display: grid;
     height: outo;
-
+    /* background-color: #86b7fe; */
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }

@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from "react";
+import React, { Component, useEffect } from "react";
 import addMonths from "date-fns/addMonths";
 import subMonths from "date-fns/subMonths";
 import startOfWeek from "date-fns/startOfWeek";
@@ -17,25 +17,91 @@ import img from "../../resoure/image/1.jpg"
 import { getMonth, parseISO } from "date-fns";
 
 class Calendar extends Component {
-    
-   
+
+    state = {
+        currentMonth: new Date(),
+        selectedDate: new Date(),
+        memoryList: [],
+        check: false,
+        array: [],
+        test: []
+    };
+
+    /* 달력 페이지가 시작됬을때 처리 */
+    calendarLoad = async () => {
+        const check = this.state.check;
+
+
+
+        if (check === false) {
+            this.setState(
+                {
+                    check: true
+                }
+            )
+            const sessionId = window.localStorage.getItem("sessionId");
+            const getCurMonth = this.state.currentMonth.toISOString().slice(5, 7);
+            // const getCurMonth = addMonths(this.state.currentMonth, 1).toISOString().slice(5, 7);
+
+            const array = this.state.array;
+            console.log(sessionId + "     " + getCurMonth);
+
+            if (array.length !== null) {
+                const arrayNum = array.length;
+                for (let i = 0; i < arrayNum; i++) {
+                    array.pop();
+                }
+            }
+
+
+            const res = await axios('/api/getMemoryDate', {
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId
+                    // 'getCurMonth': getCurMonth
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                memoryList: res.data
+            })
+            const { memoryList } = this.state;
+
+
+            memoryList.length !== 0 ?
+                memoryList.map((el, key) => {   // 아이디 검색
+                    if (el.memory_date.slice(5, 7) === getCurMonth) {
+                        
+                        this.state.array.push(el.memory_date.slice(8, 10));
+                        console.log("앙 : " + el.memory_date.slice(8, 10));
+                    } else {
+                        console.log("키키킥 : " + el.memory_date.slice(8, 10));
+                    }
+
+                }) : console.log("못찾음");
+                this.setState({
+                    test: array
+                })
+            console.log("?" + this.state.test);
+
+            // return array;
+
+
+
+        }
+
+
+    };
+
     onDateClick = day => {
         this.setState({
             selectedDate: day
         });
-        // <form action="./MemoryWrite" method="post">
 
-
-        // </form>
         console.log(day.getFullYear() + "." + (day.getMonth() + 1) + "." + day.getDate());
     };
-    
-    state = {
-        currentMonth: new Date(),
-        selectedDate: new Date(),
-        // id:'test1',
-        memoryList:[],
-    };
+
+
 
     // id로 데이터조회
     // _getDate = async () => {
@@ -60,9 +126,10 @@ class Calendar extends Component {
 
     // }
 
-    
+
     renderHeader() {
         const dateFormat = "yyyy 년 MM 월";
+        this.calendarLoad();
         return (
             <div>
                 <div className="MC-header-btn header">
@@ -85,17 +152,14 @@ class Calendar extends Component {
                     </Link>
 
                 </div>
-                {/* <div className="header row flex-middle">
 
-                    
-                    
-                </div> */}
             </div>
 
         );
     }
 
     renderDays() {
+        
         // const dateFormat = "d";
         const days = [];
         const weekday = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -113,8 +177,10 @@ class Calendar extends Component {
 
     }
 
-    
+
     renderCelss() {
+
+
         const { currentMonth, selectedDate } = this.state;
         const monthStart = startOfMonth(currentMonth);
         const monthEnd = endOfMonth(monthStart);
@@ -123,72 +189,81 @@ class Calendar extends Component {
 
         const dateFormat = "dd";
         const rows = [];
-        
+
         let days = [];
         let day = startDate;
         let formattedDate = "";
-        let num =[4, 7, 9, 15, 26];
+        let num = [4, 7, 9, 15, 26];
         let numCount = 0;
 
+        const test = this.state.test;
+        
+        
+        console.log("ㅠㅠ" + test);
+       
+       
+        
 
         while (day <= endDate) {
+
             for (let i = 0; i < 7; i++) {
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
-                
-                    if(day.getDate() === num[numCount]){
-                        days.push(
-                            <div
-                                className={`col cell ${!isSameMonth(day, monthStart)
-                                    ? "disabled"
-                                    : isSameDay(day, selectedDate) ? "selected" : ""
-                                    }`}
-                                    
-                                key={day}
-                                onClick={() => this.onDateClick(toDate(cloneDay))}>
-                                    
-                                <Link to= "/Memory" className="link-btn">
-                                    <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
-                                    <span className="photo-number">{formattedDate}</span>
-                                    
-                                </Link>
-                                
-                                
-                            </div>
-                        );
-                        numCount++;
-                    }
-                    else{
-                    
+                // 사진으로 배경 설정
+                if (day.getDate() === num[numCount]) {
                     days.push(
                         <div
                             className={`col cell ${!isSameMonth(day, monthStart)
                                 ? "disabled"
                                 : isSameDay(day, selectedDate) ? "selected" : ""
                                 }`}
-                                
+
                             key={day}
                             onClick={() => this.onDateClick(toDate(cloneDay))}>
-                                
+
+                            <Link to="/Memory" className="link-btn">
+                                <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
+                                <span className="photo-number">{formattedDate}</span>
+
+                            </Link>
+
+
+                        </div>
+                    );
+                    numCount++;
+                }
+
+                else {
+
+                    days.push(
+                        <div
+                            className={`col cell ${!isSameMonth(day, monthStart)
+                                ? "disabled"
+                                : isSameDay(day, selectedDate) ? "selected" : ""
+                                }`}
+
+                            key={day}
+                            onClick={() => this.onDateClick(toDate(cloneDay))}>
+
                             <Link to={{
                                 pathname: '/MemoryWrite',
-                                
+
                             }} className="link-btn">
                                 <span className="number">{formattedDate}</span>
                                 <span className="bg">{formattedDate}</span>
                             </Link>
-                            
-                            
+
+
                         </div>
                     );
-                    }
-                
-                
+                }
+
+
                 day = addDays(day, 1);  //시작날부터 1씩 증가하여 day에 저장
             }
             rows.push(
                 <div className="row" key={day}>
-                        {days}
+                    {days}
                 </div>
             );
             days = [];
@@ -200,18 +275,20 @@ class Calendar extends Component {
 
     /* 다음달 */
     nextMonth = () => {
-        
+
         this.setState({
-            currentMonth: addMonths(this.state.currentMonth, 1)
+            currentMonth: addMonths(this.state.currentMonth, 1),
+            check: false
         });
 
-        this.calendarLoad();
+        // this.calendarLoad();
     };
 
     /* 이전달 */
     prevMonth = () => {
         this.setState({
-            currentMonth: subMonths(this.state.currentMonth, 1)
+            currentMonth: subMonths(this.state.currentMonth, 1),
+            check: false
         });
     };
 
@@ -220,7 +297,8 @@ class Calendar extends Component {
 
         this.setState({
             currentMonth: new Date(),
-            selectedDate: new Date()
+            selectedDate: new Date(),
+            check: false
         });
 
     }
@@ -228,54 +306,18 @@ class Calendar extends Component {
 
 
 
-    
-   
 
-    /* 달력 페이지가 시작됬을때 처리 */
-    calendarLoad = async () => {
 
-        const sessionId = window.localStorage.getItem("sessionId");
-        const getCurMonth =  addMonths(this.state.currentMonth, 1).toISOString().slice(5, 7);
-        console.log( sessionId + "     " + getCurMonth);
 
-        const res = await axios('/api/getMemoryDate', {
-            method: 'POST',
-            data: {
-                'sessionId': sessionId
-                // 'getCurMonth': getCurMonth
-            },
-            headers: new Headers()
-        });
-        this.setState({
-            memoryList: res.data
-        })
-        const { memoryList } = this.state;
-
-        memoryList.length !== 0 ?
-            memoryList.map((el, key) => {   // 아이디 검색
-                if(el.memory_date.slice(5,7) === getCurMonth){
-                    
-                    
-                    console.log("앙 : "+  el.memory_date.slice(8,10));
-                }else{
-                    console.log("키키킥 : " +  el.memory_date.slice(8,10));
-                }
-                
-                
-                
-            }) : console.log("못찾음");
-
-        
-    };
 
 
 
 
     render() {
-        
+
         // this.calendarLoad();
         return (
-            
+
 
             <div className="calendar">
                 {this.renderHeader()}
