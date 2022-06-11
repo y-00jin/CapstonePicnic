@@ -25,8 +25,7 @@ class PhotoAlbum extends Component {
             setStartDate: null,
             memberList: [],
             check: false,
-            memorys: [],
-            divmemorys: []
+            memorys: []
         }
     };
 
@@ -58,7 +57,7 @@ class PhotoAlbum extends Component {
             const { memoryList } = this.state;
 
             const memorys = this.state.memorys;
-            {
+            
                 memoryList.length !== 0 ?
                 memoryList.map((el, key) => {   // 아이디 검색
 
@@ -68,10 +67,25 @@ class PhotoAlbum extends Component {
 
                 }) : console.log("못찾음")
                 
-                
-            }
+           
 
-            console.log(memorys);
+                const divMemory = [];
+                for(let i=0; i<memorys.length;i++){
+                    divMemory.push(
+                        <div class="photo-layout-block">
+                                 <img className="phone-image" alt="iPhone_01" src={img1} />
+                                 <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+                        </div>
+                    )
+                    
+                }
+
+
+               
+                
+                // return <div class="photo-layout">{divMemory}</div>
+
+            console.log(divMemory);
             // this.test(memoryList);
 
             
@@ -109,6 +123,19 @@ class PhotoAlbum extends Component {
     //     return array;
     // }
 
+
+    Test(){
+        const divMemory = [];
+        for(let i=0; i<this.state.memorys.length;i++){
+            divMemory.push(
+                <div class="photo-layout-block">
+                         <img className="phone-image" alt="iPhone_01" src={img1} />
+                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+                </div>
+            )
+        }
+        return <div class="photo-layout">{divMemory}</div>
+    }
 
     // const [dateRange, setDateRange] = useState([null, null]);
     // const [startDate, endDate] = dateRange;
@@ -169,8 +196,10 @@ class PhotoAlbum extends Component {
 
                 <div id="memory-title"><h4>| 추억여행</h4></div>
 
+                {this.Test}
 
-                <div class="photo-layout">
+
+                <div class="photo-layout" id="photo-layout-id">
                     
                 {/* {
                     this.memoryLoad()
