@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../sass/custom.css/custom.css';
@@ -7,64 +6,63 @@ import '../resoure/css/Header.css'
 import '../resoure/css/MemoryWrite.css';
 import '../resoure/css/Tab.css'
 
-import add from '../resoure/image/add.jpg'
-import axios from 'axios';
+import FileUpload from './components/FileUpload.js';
 
 const MemoryWrite = props => {
-  const [ photoToAddList, setPhotoToAddList ] = useState([]);
+  // const [ photoToAddList, setPhotoToAddList ] = useState([]);
 
-  const hiddenFileInput = React.useRef(null);
+  // const hiddenFileInput = React.useRef(null);
 
-  const handleClick = event => {
-      hiddenFileInput.current.click();
-  };
+  // const handleClick = event => {
+  //     hiddenFileInput.current.click();
+  // };
 
-  const handlePhoto = (e) => {
-      const temp = []
-      const photoToAdd = e.target.files;
+  // const handlePhoto = (e) => {
+  //     const temp = []
+  //     const photoToAdd = e.target.files;
 
-      for (let i = 0; i < photoToAdd.length; i++) {
-          temp.push({ id: photoToAdd[i].name, file: photoToAdd[i], url: URL.createObjectURL(photoToAdd[i]) })
-      };
+  //     for (let i = 0; i < photoToAdd.length; i++) {
+  //         temp.push({ id: photoToAdd[i].name, file: photoToAdd[i], url: URL.createObjectURL(photoToAdd[i]) })
+  //     };
       
-      setPhotoToAddList(temp.concat(photoToAddList)) //사진을 여러 번 나눠서 등록할 때, 더 나중에 등록한 사진이 더 앞 순서에 나타나도록 함
+  //     setPhotoToAddList(temp.concat(photoToAddList)) //사진을 여러 번 나눠서 등록할 때, 더 나중에 등록한 사진이 더 앞 순서에 나타나도록 함
 
-    //   console.log(photoToAddList);
-  };
+  //   //   console.log(photoToAddList);
+  // };
 
-  const onRemoveToAdd = (deleteUrl) => {
-      setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
+  // const onRemoveToAdd = (deleteUrl) => {
+  //     setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
 
-      console.log(photoToAddList)
-  }
+  //     console.log(photoToAddList)
+  // }
   
-  const photoToAddPreview = () => {
-      return photoToAddList.map((photo) => {
+  // const photoToAddPreview = () => {
+  //     return photoToAddList.map((photo) => {
 
-          return (        
-              <div className="add-container" key={photo.url}>
-                  {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
-                  <button className="remove" type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
-                  <img className="tab-phone-image" src={photo.url} />
-              </div>
-          )
-      })
-  };
+  //         return (        
+  //             <div className="add-container" key={photo.url}>
+  //                 {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
+  //                 <button className="remove" type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
+  //                 <img className="tab-phone-image" src={photo.url} />
+  //             </div>
+  //         )
+  //     })
+  // };
 
-  const savePhoto = (e) => {
+  // const savePhoto = (e) => {
 
-      console.log(photoToAddList)
-      const formdata = new FormData();
-      formdata.append('uploadImage', photoToAddList[0]);
+  //     console.log(photoToAddList)
+  //     const formdata = new FormData();
+  //     formdata.append('uploadImage', photoToAddList[0]);
 
-      const config = {
-          Headers: {
-              'content-type': 'multiple/form-data',
-          },
-        };
+  //     const config = {
+  //         Headers: {
+  //             'content-type': 'multiple/form-data',
+  //         },
+  //       };
 
-        axios.post('api', formdata, config);
-      }
+  //       axios.post('api', formdata, config);
+  //     }
     //   return (
     //       console.log("저장!")
     //   )
@@ -110,32 +108,7 @@ const MemoryWrite = props => {
     <div id="addPost"><h4>| 추억 추가</h4></div>
 
     <p/>
-    
-    <div class="tab-photo-layout">
-      <div className="photoBox addPhoto">
-        <button className="add-button" type="button" onClick={handleClick}><img className="tab-phone-image" alt="add" src={add} /></button>
-        <input 
-          type="file" 
-          accept="image/jpg, image/jpeg, image/png, video/*" 
-          multiple 
-          ref={hiddenFileInput}
-          onChange={(e) => handlePhoto(e)}
-          style={{display: 'none'}} 
-        />
-      </div>
-      { photoToAddPreview() }
-    </div>
-
-    {/* 버튼 */}
-    <div className="btn-background">
-    {/* <Link to="/Memory"> */}
-      <button className="btn btn-color" onClick={savePhoto}>저장</button>
-    {/* </Link> */}
-    <h1>　</h1>
-    <Link to="/MainCalendar">
-      <button className="btn btn-color">취소</button>
-    </Link>
-    </div>
+    <FileUpload />
     </div>
   );
 }
