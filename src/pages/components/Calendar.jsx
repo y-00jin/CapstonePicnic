@@ -75,9 +75,9 @@ class Calendar extends Component {
                     if (el.memory_date.slice(5, 7) === getCurMonth) {
                         
                         this.state.array.push(el.memory_date.slice(8, 10));
-                        console.log("앙 : " + el.memory_date.slice(8, 10));
+                        console.log(getCurMonth +"월에 저장된 추억 날짜 : " + el.memory_date.slice(8, 10));
                     } else {
-                        console.log("키키킥 : " + el.memory_date.slice(8, 10));
+                        console.log(getCurMonth +"월에 저장 되지 않은 추억 날짜 : " + el.memory_date.slice(8, 10));
                     }
 
                 }) : console.log("못찾음");
