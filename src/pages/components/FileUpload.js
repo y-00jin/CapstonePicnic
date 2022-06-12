@@ -36,21 +36,12 @@ const FileUpload = () => {
       console.log(files)
       setPhotoToAddList(temp.concat(photoToAddList)) //사진을 여러 번 나눠서 등록할 때, 더 나중에 등록한 사진이 더 앞 순서에 나타나도록 함
       setFile(files.concat(file))
-    //   setFile(photoToAdd[0]);
-    //   setFilename(photoToAdd[0].name);
-    //   setFile(photoToAdd[1]);
-    //   setFilename(photoToAdd[1].name);
-    //   setFile(photoToAdd[2]);
-    //   setFilename(photoToAdd[2].name);
 
     //   console.log(photoToAddList);
   };
 
   const onRemoveToAdd = (deleteUrl) => {
       setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
-
-    //   setFile('');
-    //   setFilename('');
 
       console.log(photoToAddList)
   }
@@ -69,28 +60,21 @@ const FileUpload = () => {
   };
 
   const goReplace = () => {
-    // alert(12)
     window.location.href = "http://localhost:3000/Memory"
     }
 
-  const savePhoto = () => {
-    // render("/Memory");
-    // if (photoToAddCheck === null) {
-    //     console.log(photoToAddCheck)
-    //     alert('사진을 추가해주세요!')
-    // }
-    //   console.log(photoToAddList)
-    //   const formdata = new FormData();
-    //   formdata.append('uploadImage', photoToAddList[0]);
+  const saveMemory = () => {
+    if(localStorage.getItem('date') && localStorage.getItem('place') && localStorage.getItem('record')){
+        const date = localStorage.getItem('date')
+        const place = localStorage.getItem('place')
+        const record = localStorage.getItem('record')
+        const sessionId = window.localStorage.getItem("sessionId");
 
-    //   const config = {
-    //       Headers: {
-    //           'content-type': 'multiple/form-data',
-    //       },
-    //     };
-
-    //     axios.post('api', formdata, config);
+        console.log(date + " / " + place + " / " + record + " / " + sessionId)
+      } else {
+        console.log('없음')
       }
+  }
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -108,11 +92,13 @@ const FileUpload = () => {
         },
       });
 
-      console.log(res.data);
+    //   console.log(res.data);
 
       setUploadedFile(res.data);
 
       setMessage('추억 저장!');
+      saveMemory()
+    //   goReplace()
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('서버에 문제가 생겼습니다');
@@ -120,8 +106,6 @@ const FileUpload = () => {
         setMessage(err.response.data.msg);
       }
     }
-
-    goReplace()
     };
 
   return (
@@ -149,12 +133,8 @@ const FileUpload = () => {
         {/* 버튼 */}
         <div className="btn-background">
             {/* <Link to="/Memory"> */}
-                <button className="btn btn-color" type="submit">저장</button>
+                <button className="btn btn-color" type="submit" id="save">저장</button>
             {/* </Link> */}
-            <h1>　</h1>
-            {/* <Link to="/MainCalendar">
-                <button className="btn btn-color">취소</button>
-            </Link> */}
         </div>
         </form>
     </div>
