@@ -100,7 +100,15 @@ class Calendar extends Component {
             selectedDate: day
         });
 
-        console.log(day.getFullYear() + "." + (day.getMonth() + 1) + "." + day.getDate());
+        var year = day.getFullYear();
+        var month = day.getMonth()+1;
+        var day = day.getDate();
+
+        var date = year+"-"+(("00"+month.toString()).slice(-2))+"-"+(("00"+day.toString()).slice(-2)); // 2022-06-13 포맷으로 출력
+        // var date = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate());
+        console.log(date);
+
+        localStorage.setItem('date', date);
     };
 
 

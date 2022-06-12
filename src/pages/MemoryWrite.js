@@ -8,65 +8,13 @@ import '../resoure/css/Tab.css'
 
 import FileUpload from './components/FileUpload.js';
 
-const MemoryWrite = props => {
-  // const [ photoToAddList, setPhotoToAddList ] = useState([]);
+const MemoryWrite = () => {
 
-  // const hiddenFileInput = React.useRef(null);
+  var date = ''
 
-  // const handleClick = event => {
-  //     hiddenFileInput.current.click();
-  // };
-
-  // const handlePhoto = (e) => {
-  //     const temp = []
-  //     const photoToAdd = e.target.files;
-
-  //     for (let i = 0; i < photoToAdd.length; i++) {
-  //         temp.push({ id: photoToAdd[i].name, file: photoToAdd[i], url: URL.createObjectURL(photoToAdd[i]) })
-  //     };
-      
-  //     setPhotoToAddList(temp.concat(photoToAddList)) //사진을 여러 번 나눠서 등록할 때, 더 나중에 등록한 사진이 더 앞 순서에 나타나도록 함
-
-  //   //   console.log(photoToAddList);
-  // };
-
-  // const onRemoveToAdd = (deleteUrl) => {
-  //     setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
-
-  //     console.log(photoToAddList)
-  // }
-  
-  // const photoToAddPreview = () => {
-  //     return photoToAddList.map((photo) => {
-
-  //         return (        
-  //             <div className="add-container" key={photo.url}>
-  //                 {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
-  //                 <button className="remove" type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
-  //                 <img className="tab-phone-image" src={photo.url} />
-  //             </div>
-  //         )
-  //     })
-  // };
-
-  // const savePhoto = (e) => {
-
-  //     console.log(photoToAddList)
-  //     const formdata = new FormData();
-  //     formdata.append('uploadImage', photoToAddList[0]);
-
-  //     const config = {
-  //         Headers: {
-  //             'content-type': 'multiple/form-data',
-  //         },
-  //       };
-
-  //       axios.post('api', formdata, config);
-  //     }
-    //   return (
-    //       console.log("저장!")
-    //   )
-  
+  if(localStorage.getItem('date')){
+    date = localStorage.getItem('date')
+  }
 
   return (
     <div class="container">
@@ -87,20 +35,19 @@ const MemoryWrite = props => {
     <p/>
     <div class="input-group input-group-lg">
         <span class="input-group-text" id="basic-addon1">여행 날짜</span>
-        {/* <input type="text" readonly class="form-control" id="date" defaultValue={"2022-04-27"}/> */}
-        <input type="text" className="form-control" id="date" defaultValue={"2022-04-27"}/>
+        <input type="text" readonly class="form-control" id="date" value={date}/>
     </div>
     <p/>
 
     <div class="input-group input-group-lg">
         <span class="input-group-text" id="basic-addon1">여행 장소</span>
-        <input type="text" className="form-control" placeholder=" " aria-label="place" aria-describedby="basic-addon1"/>
+        <input type="text" className="form-control" aria-label="place" aria-describedby="basic-addon1" id="place"/>
     </div>
     <p/>
 
     <div class="input-group input-group-lg">
         <span class="input-group-text">여행 기록</span>
-        <textarea class="form-control" aria-label="record"></textarea>
+        <textarea class="form-control" aria-label="record" id="record"></textarea>
     </div>
     <p>　</p>
 
@@ -109,6 +56,7 @@ const MemoryWrite = props => {
 
     <p/>
     <FileUpload />
+    <script src = './components/GetValues.js'></script>
     </div>
   );
 }
