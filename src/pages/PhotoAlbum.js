@@ -21,18 +21,22 @@ class PhotoAlbum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startDate: null,
-            setStartDate: null,
+            date1: null,
+            date2:null,
+            setDate1: null,
+            setDate2: null,
             memberList: [],
             check: false,
             memorys: []
         }
-    };
 
+        
+    };
 
     /* 달력 페이지가 시작됬을때 처리 */
     memoryLoad = async () => {
         const check = this.state.check;
+        let memorylen = 0;
 
 
         if (check === false) {
@@ -57,38 +61,37 @@ class PhotoAlbum extends Component {
             const { memoryList } = this.state;
 
             const memorys = this.state.memorys;
-            
-                memoryList.length !== 0 ?
+
+            memoryList.length !== 0 ?
                 memoryList.map((el, key) => {   // 아이디 검색
 
                     console.log("날짜 : " + el.memory_date.slice(0, 10));
 
                     memorys.push(el.memory_date.slice(0, 10));
 
+
                 }) : console.log("못찾음")
-                
-           
 
-                const divMemory = [];
-                for(let i=0; i<memorys.length;i++){
-                    divMemory.push(
-                        <div class="photo-layout-block">
-                                 <img className="phone-image" alt="iPhone_01" src={img1} />
-                                 <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-                        </div>
-                    )
-                    
-                }
+            this.memorylen = memorys.length;
 
+            // const divMemory = [];
+            // for(let i=0; i<memorys.length;i++){
+            //     console.log('g');
+            //     divMemory.push(
+            //         <div class="photo-layout-block">
+            //                  <img className="phone-image" alt="iPhone_01" src={img1} />
+            //                  <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+            //         </div>
+            //     )
 
-               
-                
-                // return <div class="photo-layout">{divMemory}</div>
+            // }
 
-            console.log(divMemory);
+            console.log(" memorylen : " + memorylen);
+
+            // return memorylen;
             // this.test(memoryList);
 
-            
+
             // console.log("ddd"+this.state.memorys);
             // var array = [];
             // for(let i =0; i <memorys.length;i++){
@@ -104,46 +107,64 @@ class PhotoAlbum extends Component {
 
     };
 
-    // test(e){
-        // console.log("잉 :" + e)
-    //     console.log("잉 : " + this.state.memorys);
-    //     console.log("test 시작");
-
-        
-    //     let array = [];
-    //     for(let i = 0; i< this.state.memorys.length;i++){
-    //         array.push(
-    //             <div class="photo-layout-block">
-    //                     <img className="phone-image" alt="iPhone_01" src={img1} />
-    //                     <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-    //             </div>
-    //         )
-    //     }
-        
-    //     return array;
-    // }
 
 
-    Test(){
+    Test() {
+
+        // let len = this.memoryLoad();
+
+
+        // const promise1 = new Promise((resolve, reject) => {
+        //     resolve(this.memoryLoad());
+        //   });
+
+        //   promise1.then((value) => {
+
+        //     console.log("value : " + value);
+        //     const divMemory = [];
+        //     for(let i=0; i<value;i++){
+        //         divMemory.push(
+        //             <div class="photo-layout-block">
+        //                      <img className="phone-image" alt="iPhone_01" src={img1} />
+        //                      <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+        //             </div>
+        //         )
+        //     }
+
+
+        //     return <div class="photo-layout">{divMemory}</div>;
+
+
+        //     // expected output: "Success!"
+        //   });
+
+
+        this.memoryLoad();
+
+        console.log("state " + this.state.memorys.length);
         const divMemory = [];
-        for(let i=0; i<this.state.memorys.length;i++){
+        for (let i = 0; i < 3; i++) {
             divMemory.push(
                 <div class="photo-layout-block">
-                         <img className="phone-image" alt="iPhone_01" src={img1} />
-                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
+                    <img className="phone-image" alt="iPhone_01" src={img1} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
                 </div>
             )
         }
-        return <div class="photo-layout">{divMemory}</div>
+
+        return <div class="photo-layout">{divMemory}</div>;
+        // console.log("len : " + len);
+
+
     }
 
     // const [dateRange, setDateRange] = useState([null, null]);
     // const [startDate, endDate] = dateRange;
 
     render() {
-        {this.memoryLoad()}
+
         return (
-            
+
             <div className="container">
 
 
@@ -163,20 +184,23 @@ class PhotoAlbum extends Component {
 
                 {/* 검색 할 날짜 선택*/}
                 <div class="date-pilter">
-                    <div class="pilter-text item">여행 날짜</div>
+                    <div class="pilter-text item">여행 날짜
+                    </div>
+                    
                     <div class="item">
-                        <DatePicker className="datepicker-st"
+                        
+                        <DatePicker className="datepicker-st-1"
                             locale={ko}
                             dateFormat="yyyy년 MM월 dd일"
 
-                            selected={this.state.startDate}
+                            selected={this.state.date1}
                             // selectsRange={true}
                             // startDate={startDate}
                             // endDate={endDate}
 
                             onChange={(update) => {
                                 this.setState({
-                                    startDate: update
+                                    date1: update
                                 })
                                 // setDateRange(update);
                             }}
@@ -186,6 +210,30 @@ class PhotoAlbum extends Component {
                         // placeholderText=""
                         />
                     </div>
+                        
+                    <div class="item">
+                        <DatePicker className="datepicker-st"
+                            locale={ko}
+                            dateFormat="yyyy년 MM월 dd일"
+
+                            selected={this.state.date2}
+                            // selectsRange={true}
+                            // startDate={startDate}
+                            // endDate={endDate}
+
+                            onChange={(update) => {
+                                this.setState({
+                                    date2: update
+                                })
+                                // setDateRange(update);
+                            }}
+
+                            withPortal
+                            isClearable={true}
+                        // placeholderText=""
+                        />
+                    </div>
+
                 </div>
 
                 <div class="place-pilter">
@@ -196,17 +244,14 @@ class PhotoAlbum extends Component {
 
                 <div id="memory-title"><h4>| 추억여행</h4></div>
 
-                {this.Test}
 
 
-                <div class="photo-layout" id="photo-layout-id">
-                    
-                {/* {
-                    this.memoryLoad()
-                } */}
+                {/* <div class="photo-layout" id="photo-layout-id"> */}
+
+                {this.Test()}
 
 
-                    {/* <div class="photo-layout-block">
+                {/* <div class="photo-layout-block">
                         <img className="phone-image" alt="iPhone_01" src={img1} />
                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
                     </div>
@@ -230,7 +275,7 @@ class PhotoAlbum extends Component {
                         <img className="phone-image" alt="iPhone_06" src={img6} />
                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-6">2022.05.03 뉴욕</button></Link></div> */}
 
-                </div>
+            {/* </div> */}
 
 
             </div>

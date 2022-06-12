@@ -35,6 +35,9 @@
 .item:nth-child(2) {
     flex-grow: 2;
 }
+.item:nth-child(3) {
+    flex-grow: 2;
+}
 
 /* 데이터피커 스타일*/
 .datepicker-st {
@@ -44,6 +47,20 @@
     box-sizing: border-box;
     padding: 8px 15px;
     border-radius: 0.3rem;
+    border-color: lightGray;
+    border: 1px solid lightGray;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -6px;
+}
+
+/* 데이터피커 스타일*/
+.datepicker-st-1 {
+    /* display: flex; */
+    font-size: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 15px;
     border-color: lightGray;
     border: 1px solid lightGray;
     border-top-left-radius: 0;
