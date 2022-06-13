@@ -185,10 +185,10 @@ class SignUp extends Component {
         return (
             <main className="Main-login">
 
-                <div class="signup-id">
-                    <div class="form-floating-id">
-                        <input type="id" class="form-control" id="idInput" placeholder="id" onChange={(e) => this._idUpdate(e)} />
-                        <label for="floatingInput">아이디</label>
+                <div className="signup-id">
+                    <div className="form-floating-id">
+                        <input type="id" className="form-control" id="idInput" placeholder="id" onChange={(e) => this._idUpdate(e)} />
+                        <label htmlFor="floatingInput">아이디</label>
                     </div>
                     <button className="signup-btn signup-btn-color" id="check" onClick={this._getKeywordData}>중복 확인</button>
                 </div>
@@ -197,25 +197,25 @@ class SignUp extends Component {
                 </div>
 
 
-                <div class="signup-floating">
-                    <input type="password" class="form-control" id="checkPw1" placeholder="password" onChange={(e) => this._passwordUpdate(e)} />
-                    <label for="floatingPassword">비밀번호</label>
+                <div className="signup-floating">
+                    <input type="password" className="form-control" id="checkPw1" placeholder="password" onChange={(e) => this._passwordUpdate(e)} />
+                    <label htmlFor="floatingPassword">비밀번호</label>
                 </div>
                 <div id="pw1-check-text">
 
                 </div>
 
-                <div class="signup-floating">
-                    <input type="password" class="form-control" id="checkPw2" placeholder="password2" onChange={(e) => this._password2Update(e)} />
-                    <label for="floatingPassword">비밀번호 재확인</label>
+                <div className="signup-floating">
+                    <input type="password" className="form-control" id="checkPw2" placeholder="password2" onChange={(e) => this._password2Update(e)} />
+                    <label htmlFor="floatingPassword">비밀번호 재확인</label>
                 </div>
                 <div id="pw2-check-text">
 
                 </div>
 
-                <div class="signup-floating">
-                    <input type="name" class="form-control" id="nameInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
-                    <label for="floatingInput">이름</label>
+                <div className="signup-floating">
+                    <input type="name" className="form-control" id="nameInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
+                    <label htmlFor="floatingInput">이름</label>
                 </div>
                 <div id="name-check-text">
 

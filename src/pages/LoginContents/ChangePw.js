@@ -165,16 +165,16 @@ class ChangePw extends Component {
     render() {
         return (
             <main className="Main-login">
-                <div class="signup-floating">
-                    <input type="id" class="form-control" id="idInput" placeholder="id" onChange={(e) => this._idUpdate(e)} />
-                    <label for="floatingInput">아이디</label>
+                <div className="signup-floating">
+                    <input type="id" className="form-control" id="idInput" placeholder="id" onChange={(e) => this._idUpdate(e)} />
+                    <label htmlFor="floatingInput">아이디</label>
                 </div>
                 <div id="id-check-text">
 
                 </div>
-                <div class="signup-floating">
-                    <input type="name" class="form-control" id="nameInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
-                    <label for="floatingPassword">이름</label>
+                <div className="signup-floating">
+                    <input type="name" className="form-control" id="nameInput" placeholder="name" onChange={(e) => this._nameUpdate(e)} />
+                    <label htmlFor="floatingPassword">이름</label>
                 </div>
                 <div id="name-check-text">
 
@@ -196,16 +196,16 @@ class ChangePw extends Component {
                         <button className='Main-btn Main-btn-color' onClick={this._keywordIdName}>비밀번호 찾기</button>
                         <Modal open={this.state.modalOpen} close={this.closeModal} header="비밀번호 재설정">
 
-                            <div class="modal-pilter">
-                                <input type="password" class="form-control" id="checkPw1" placeholder="password" onChange={(e) => this._passwordUpdate(e)} />
-                                <label for="floatingPassword">새 비밀번호</label>
+                            <div className="modal-pilter">
+                                <input type="password" className="form-control" id="checkPw1" placeholder="password" onChange={(e) => this._passwordUpdate(e)} />
+                                <label htmlFor="floatingPassword">새 비밀번호</label>
                             </div>
                             <div id="new-pw1-text">
 
                             </div>
-                            <div class="modal-pilter">
-                                <input type="password" class="form-control" id="checkPw2" placeholder="password" onChange={(e) => this._password2Update(e)} />
-                                <label for="floatingPassword">새 비밀번호 확인</label>
+                            <div className="modal-pilter">
+                                <input type="password" className="form-control" id="checkPw2" placeholder="password" onChange={(e) => this._password2Update(e)} />
+                                <label htmlFor="floatingPassword">새 비밀번호 확인</label>
                             </div>
                             <div id="new-pw2-text">
 
