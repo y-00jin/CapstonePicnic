@@ -9,153 +9,9 @@
 }
 
 
-/* body {
-
-    color: var(--text-color);
-    background: var(--bg-color);
-
-} */
-
-
-/* 날짜 필터 레이아웃*/
-.date-pilter {
-    margin: 0 auto;         /* 가운데 정렬 */
-    padding-left: 3%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    width: 70%;
-    justify-content: center;    /* 가로축을 기준으로 좌우 정렬 */
-}
-
-/* 날짜 필터의 div-item 각 요소 크기 지정*/
-.item:nth-child(1) {
-    flex-grow: 0;
-}
-.item:nth-child(2) {
-    flex-grow: 2;
-}
-.item:nth-child(3) {
-    flex-grow: 2;
-}
-
-/* 데이터피커 스타일*/
-.datepicker-st {
-    /* display: flex; */
-    font-size: 1.25rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 15px;
-    border-radius: 0.3rem;
-    border-color: lightGray;
-    border: 1px solid lightGray;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -6px;
-}
-
-/* 데이터피커 스타일*/
-.datepicker-st-1 {
-    /* display: flex; */
-    font-size: 1.25rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 15px;
-    border-color: lightGray;
-    border: 1px solid lightGray;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -6px;
-}
-
-
-
-/* 날짜 필터 텍스트 스타일 지정*/
-.pilter-text {
-
-    align-items: center;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--bs-gray-800);
-    text-align: center;
-    white-space: nowrap;
-    background-color: #FFF6BD;
-    border: 1px solid lightgray;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    border-radius: 0.3rem;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-
-/* 장소 필터 레이아웃*/
-.place-pilter {
-    margin: 0 auto;
-    /* background-color: aqua; */
-    padding-left: 3%;
-    padding-bottom: 20px;
-    display: flex;
-    width: 70%;
-    /* justify-content: left; */
-}
-
-/* 장소 필터 input-text 스타일*/
-.place-text {
-    width: 73%;
-    padding: 0.375rem 0.75rem;
-    font-size:  1.25rem;;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    appearance: none;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -1px;
-}
-
-.place-text:focus, .datepicker-st:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(127, 111, 99, 0.30);
-}
-
-/* 검색 버튼 스타일*/
-.btn-search{
-    margin-left: 10px;
-    border: none;
-    display: inline-block;
-    height: 50px;
-    width: 100px;
-    border-radius: 0.5rem;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    transition: 0.25s;
-    font-size: 15px;
-}
-
-.btn-search-color {
-  background-color: #958477;
-  color: #ffffff;
-}
-/* .btn-search:hover {
-  letter-spacing: 2px;
-  transform: scale(1.2);
-  cursor: pointer;
-} */
-
 
 /* 추억여행 타이틀*/
-#memory-title{
+#memory-title {
     padding-top: 10px;
     margin: 0 auto;
     width: 80%;
@@ -163,7 +19,7 @@
 }
 
 /* 사진 레이아웃 지정(그리드) */
-.photo-layout{
+.photo-layout {
     display: grid;
     height: outo;
     /* background-color: #86b7fe; */
@@ -172,7 +28,7 @@
 }
 
 /* 사진 + 날짜(장소) 버튼 */
-.photo-layout-block{
+.photo-layout-block {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -181,15 +37,111 @@
 }
 
 /* 이미지 크기 지정 */
-.phone-image{
-    width:100%;
+.phone-image {
+    width: 100%;
 }
 
-.photo-btn{
-    background-color:transparent;
+.photo-btn {
+    background-color: transparent;
     border: 0;
     font-size: 25px;
 }
+
+.div-search {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    padding: 10px 10px;
+    width: 70%;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 3rem;
+    /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
+
+}
+
+
+.search-floating {
+    width: 25%;
+    position: relative;
+}
+
+.search-floating>.search-st {
+    font-size: 18px;
+    border: none;
+    height: calc(2.5rem);
+    padding: 1rem 0.75rem;
+    margin-top: 10px;
+}
+
+.search-floating>.search-st:focus {
+    border-color: #ffffff;
+    outline: 0;
+    /* border:none; */
+}
+
+.search-floating>label {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    color: #343a40;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.search-datapicker {
+    width: 30%;
+    position: relative;
+}
+
+.search-datapicker>label {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    color: #343a40;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.datapicker-style {
+    
+    font-size: 18px;
+    border: none;
+    height: calc(2.5rem);
+    padding: 1rem 0.75rem;
+    margin-top: 10px;
+
+}
+
+.datapicker-style:focus {
+    border-color: #ffffff;
+    outline: 0;
+    /* border:none; */
+}
+
+.div-search-btn{
+
+    position: relative;
+
+    
+}
+.search-btn{
+    width:calc(3rem);
+    height: calc(3rem);
+    border-radius: 3rem;
+    border: none;
+    background-color: #958477;
+}
+
+.search-image{
+    width: 50%;
+    height: 40%;
+}
+
+
 
 
 /* 나눔손글씨펜 폰트*/

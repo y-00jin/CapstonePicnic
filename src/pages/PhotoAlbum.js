@@ -13,6 +13,8 @@ import img3 from '../resoure/image/3.jpg';
 import img4 from '../resoure/image/4.jpg';
 import img5 from '../resoure/image/5.jpg';
 import img6 from '../resoure/image/6.jpg';
+import searchImg from '../resoure/image/search.png';
+
 import axios from 'axios';
 
 class PhotoAlbum extends Component {
@@ -21,16 +23,14 @@ class PhotoAlbum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date1: null,
-            date2:null,
-            setDate1: null,
-            setDate2: null,
+            dateStart: null,
+            dateEnd: null,
             memberList: [],
             check: false,
             memorys: []
         }
 
-        
+
     };
 
     /* 달력 페이지가 시작됬을때 처리 */
@@ -182,65 +182,77 @@ class PhotoAlbum extends Component {
                 </div>
                 <hr className="hr" />
 
-                {/* 검색 할 날짜 선택*/}
-                <div class="date-pilter">
-                    <div class="pilter-text item">여행 날짜
+                <div className="div-search">
+                    <div className="search-floating">
+
+                        <input type="place" class="search-st" id="nameInput" placeholder="검색할 장소 입력" />
+                        <label for="search-st-label">장소</label>
                     </div>
-                    
-                    <div class="item">
-                        
-                        <DatePicker className="datepicker-st-1"
-                            locale={ko}
-                            dateFormat="yyyy년 MM월 dd일"
 
-                            selected={this.state.date1}
-                            // selectsRange={true}
-                            // startDate={startDate}
-                            // endDate={endDate}
+                    <div className="search-datapicker">
+                        <DatePicker className="datapicker-style"
+                        locale={ko}
+                        dateFormat="yyyy년 MM월 dd일"
 
-                            onChange={(update) => {
-                                this.setState({
-                                    date1: update
-                                })
-                                // setDateRange(update);
-                            }}
+                        selected={this.state.dateStart}
 
-                            withPortal
-                            isClearable={true}
-                        // placeholderText=""
-                        />
+                        selectsStart
+
+
+                        onChange={(update) => {
+                            this.setState({
+                                dateStart: update
+                            })
+                            // setDateRange(update);
+                        }}
+
+                        startDate={this.state.dateStart}
+                        endDate={this.state.dateEnd}
+
+                        withPortal
+                        isClearable={true}
+                        placeholderText="xxxx년 xx월 xx일"
+                    />
+
+                    <label for="datepicker-label">시작</label>
                     </div>
-                        
-                    <div class="item">
-                        <DatePicker className="datepicker-st"
-                            locale={ko}
-                            dateFormat="yyyy년 MM월 dd일"
 
-                            selected={this.state.date2}
-                            // selectsRange={true}
-                            // startDate={startDate}
-                            // endDate={endDate}
 
-                            onChange={(update) => {
-                                this.setState({
-                                    date2: update
-                                })
-                                // setDateRange(update);
-                            }}
+                    <div className="search-datapicker">
+                        <DatePicker className="datapicker-style"
+                        locale={ko}
+                        dateFormat="yyyy년 MM월 dd일"
 
-                            withPortal
-                            isClearable={true}
-                        // placeholderText=""
-                        />
+                        selected={this.state.dateEnd}
+                        selectsEnd
+
+                        onChange={(update) => {
+                            this.setState({
+                                dateEnd: update
+                            })
+                            // setDateRange(update);
+                        }}
+
+                        startDate={this.state.dateStart}
+                        endDate={this.state.dateEnd}
+                        minDate={this.state.dateStart}
+                        withPortal
+                        isClearable={true}
+                        placeholderText="xxxx년 xx월 xx일"
+                    />
+
+                    <label for="datepicker-label">끝</label>
+                    </div>
+
+                    <div className="div-search-btn">
+
+                        <button className="search-btn" id="search-btn">
+                            <img className="search-image" alt="search" src={searchImg} />
+                        </button>
                     </div>
 
                 </div>
 
-                <div class="place-pilter">
-                    <span class="pilter-text">여행 장소</span>
-                    <input type="text" className="place-text" id="place" />
-                    <button className="btn-search btn-search-color" id="btn-search">검색</button>
-                </div>
 
                 <div id="memory-title"><h4>| 추억여행</h4></div>
 
@@ -275,7 +287,7 @@ class PhotoAlbum extends Component {
                         <img className="phone-image" alt="iPhone_06" src={img6} />
                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-6">2022.05.03 뉴욕</button></Link></div> */}
 
-            {/* </div> */}
+                {/* </div> */}
 
 
             </div>
