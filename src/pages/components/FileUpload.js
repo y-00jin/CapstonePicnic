@@ -13,9 +13,10 @@ const FileUpload = () => {
   const [uploadedFile, setUploadedFile] = useState([]);
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
-
+  const [ memoryIdx, setMemoryIdx ] = useState({})
   const [ photoToAddList, setPhotoToAddList ] = useState([]);
 
+  let memory_idx = ''
   let photoToAdd = [];
   let files = [];
   const hiddenFileInput = React.useRef(null);
@@ -41,29 +42,85 @@ const FileUpload = () => {
     //   console.log(photoToAddList);
   };
 
-  const onRemoveToAdd = (deleteUrl) => {
+  const onRemoveToAdd = ( deleteUrl ) => {
       setPhotoToAddList(photoToAddList.filter(photo => photo.url !== deleteUrl))
-
+      console.log(deleteUrl)
       console.log(photoToAddList)
   }
   
+  const onRemoveToAdd2 = ( deleteName ) => {
+    fileToAdd()
+    setFile(file.filter(fileList => fileList.name !== deleteName))
+  }
+
   const photoToAddPreview = () => {
       return photoToAddList.map((photo) => {
 
           return (        
               <div className="add-container" key={photo.url}>
                   {/* <button className="photoBoxDelete" type="button" onClick={()=>onRemoveToAdd(photo.url)}><img src={remove} /></button> */}
-                  <button className="remove" type="button" onClick={()=>onRemoveToAdd(photo.url)}>❌</button>
+                  <button className="remove" type="button" onClick={() => {
+                    onRemoveToAdd(photo.url);
+                    onRemoveToAdd2(photo.id);
+                  }}>❌</button>
                   <img className="tab-phone-image" src={photo.url} />
               </div>
           )
       })
   };
 
+  const fileToAdd = () => {
+    return file.map((fileList) => {
+      return fileList.name;
+    })
+  }
+
   const goReplace = () => {
     window.location.href = "http://localhost:3000/Memory"
     }
 
+  const saveFile = async() => {
+    const date = localStorage.getItem('date')
+    const sessionId = window.localStorage.getItem("sessionId");
+
+    // memory_idx 받기
+    const res = await axios('/api/findMemoryIdx', {
+      method: 'POST',
+      data: {
+          'search_memory_date': date,
+          'creator_id': sessionId
+      },
+      headers: new Headers()
+    });
+
+    setMemoryIdx(res.data)
+    
+    if(memoryIdx !== null) {
+      memory_idx = ''
+      // while(memory_idx === '') {
+        memory_idx = memoryIdx[0].memory_idx
+        console.log(memoryIdx[0].memory_idx)
+      // }
+    } else {
+      console.log('없음')
+    }
+
+    // 추억 저장(사진)
+    for(let i = 0; i < file.length; i++) {
+      const res2 = await axios('/api/fileUpload', {
+        method: 'POST',
+        data: {
+            'original_name': file[i].name,
+            'memory_idx': memory_idx + 1,
+            'file_seq': i + 1,
+            'creator_id': sessionId,
+            'memory_date': date,
+        },
+        headers: new Headers()
+      });
+    }
+  }
+  
   const saveMemory = async() => {
 
     GetValues()
@@ -76,28 +133,20 @@ const FileUpload = () => {
 
         console.log(date + " / " + place + " / " + record + " / " + sessionId)
 
+        // 추억 저장(텍스트)
         const res = await axios('/api/memoryWrite', {
           method: 'POST',
           data: {
               'title': place,
               'contents': record,
               'memory_date': date,
-              'creator_id': sessionId
+              'creator_id': sessionId,
+              'search_memory_date': date,
           },
           headers: new Headers()
         })
-
-        // const res2 = await axios('/api/file', {
-        //   method: 'POST',
-        //   data: {
-        //       'original_file_name': place,
-        //       'contents': record,
-        //       'memory_date': date,
-        //       'creator_id': sessionId
-        //   },
-        //   headers: new Headers()
-        // })
-
+    
+        saveFile()
       } else {
         console.log('없음')
       }
@@ -127,7 +176,7 @@ const FileUpload = () => {
 
       setMessage('추억 저장!');
       saveMemory()
-      goReplace()
+      // goReplace()
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('서버에 문제가 생겼습니다');

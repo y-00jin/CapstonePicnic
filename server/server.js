@@ -6,6 +6,9 @@ const path = require('path');
 const sequelize = require('./models').sequelize;
 const bodyParser = require('body-parser');
 
+let filename = [];
+let filepath = '';
+
 sequelize.sync();
 
 app.use(express.json());
@@ -17,16 +20,20 @@ app.use(bodyParser.json());
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, __dirname + "/../src/uploads");
+      filepath = __dirname + "/../src/uploads";
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname));
+      const newFileName = Date.now() + path.extname(file.originalname)
+      cb(null, newFileName);
+      filename.push(newFileName);
+      console.log( "파일 이름 배열" + filename)
     },
   });
   
   var upload = multer({ storage: storage });
   
   var uploadMultiple = upload.array('memory')
-  
+
   app.post('/api/upload', uploadMultiple, function (req, res, next) {
 
       if (req.files.length === 0) {
@@ -64,6 +71,7 @@ var storage = multer.diskStorage({
 const {
     T_member,
     T_memory,
+    T_file,
     Sequelize: { Op }
   } = require('./models');
 sequelize.query('SET NAMES utf8;')
@@ -192,6 +200,8 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
         })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
+
+    
 })
 
 // Calendar.jsx -> id, month로 일 조회
@@ -203,7 +213,18 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
 //     .catch( err => { throw err })
 // })
 
-// MemoryWrite.js -> 데이터 추가
+// memory_idx 조회
+app.post('/api/findMemoryIdx', (req, res) => {
+    console.log(req.body.search_memory_date)
+    T_memory.findAll({
+        where: {[Op.and]: [{search_memory_date : req.body.search_memory_date},{creator_id : req.body.creator_id}]}
+    })
+    .then( result => { res.send(result) })
+    .then(console.log(result => { res.send(result) }))
+    .catch( err => { throw err })
+})
+
+// FileUpload.js -> 텍스트 추가
 app.post('/api/memoryWrite', (req, res) => {
     console.log(req.body);
 
@@ -212,6 +233,41 @@ app.post('/api/memoryWrite', (req, res) => {
         contents: req.body.contents,
         memory_date : req.body.memory_date,
         creator_id : req.body.creator_id,
+        search_memory_date : req.body.search_memory_date,
+    })
+    .then( result => {
+        res.send(result)
+    })
+    .catch( err => {
+        console.log(err)
+        throw err;
+    })
+})
+
+// FileUpload.js -> 사진 추가
+app.post('/api/fileUpload', (req, res) => {
+
+    // const newName = () => multer.diskStorage({
+    //     filename: function (req, file, cb) {
+    //       cb(null, Date.now() + path.extname(req.body.original_name));
+    //       filename = Date.now() + path.extname(req.body.original_name);
+    //     },
+    // });
+    
+    let i = req.body.file_seq;
+    let newFilename = filename[i-1]
+
+    console.log(newFilename);
+
+    console.log(req.body);
+
+    T_file.create({
+        memory_idx: req.body.memory_idx,
+        file_seq: req.body.file_seq,
+        file_name: newFilename,
+        file_path : filepath,
+        creator_id : req.body.creator_id,
+        memory_date : req.body.memory_date,
     })
     .then( result => {
         res.send(result)
