@@ -38,7 +38,7 @@ export default class Main extends Component {
     render() {
         return (
 
-            <div className="Main">
+            <>
 
                 {/* 스프링 로고 */}
                 <header className="Main-header">
@@ -47,18 +47,20 @@ export default class Main extends Component {
 
                 {/* 메인 로고 */}
                 <body className="Main-body">
-                    <p>' 너, 나들이 '<hr className="Main-hr" /><hr className="Main-hr" /></p>
+                    ' 너, 나들이 '
+                    <hr className="Main-hr" />
+                    <hr className="Main-hr" />
                     <img src={logo} className="Main-bodyLogo" alt="bodyLogo" />
                 </body>
 
                 {/* 로그인 */}
-                <body class="text-center">
+                <body className="text-center">
 
                     <main className="Main-login">
-                        <ul class="nav justify-content-center">
-                            <li class="login-tab-btn" onClick={() => this.clickHandler(0)}>로그인　　</li>
-                            <li class="signup-tab-btn" onClick={() => this.clickHandler(1)}>회원가입　　</li>
-                            <li class="chagnepw-tab-btn" onClick={() => this.clickHandler(2)}>비밀번호 찾기</li>
+                        <ul className="nav justify-content-center">
+                            <li className="login-tab-btn" onClick={() => this.clickHandler(0)}>로그인　　</li>
+                            <li className="signup-tab-btn" onClick={() => this.clickHandler(1)}>회원가입　　</li>
+                            <li className="chagnepw-tab-btn" onClick={() => this.clickHandler(2)}>비밀번호 찾기</li>
                         </ul>
 
                         {/* <h1 class="h3 mb-3 fw-normal">Please sign in</h1> */}
@@ -94,7 +96,7 @@ export default class Main extends Component {
                 </Link>
             </footer> */}
 
-            </div>
+            </>
 
         );
     }

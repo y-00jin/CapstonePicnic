@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 // const fileUpload = require('express-fileupload');
 const multer = require("multer");
-const path = require('path')
+const path = require('path');
 
 const sequelize = require('./models').sequelize;
 const bodyParser = require('body-parser');
@@ -134,21 +134,39 @@ app.post('/api/keywordData', (req, res) => {
 })
 
 // Login.js -> id 조회
-app.post('/api/keywordSingleData', (req, res) => {
-    T_member.findOne({
-        where: { id : req.body.id}
-    })
-    .then( result => { res.send(result) })
-    .catch( err => { throw err })
-})
+// app.post('/api/keywordSingleData', (req, res) => {
+//     T_member.findOne({
+//         where: { id : req.body.id}
+//     })
+//     .then( result => { res.send(result) })
+//     .catch( err => { throw err })
+// })
 
 
-// Calendar.jsx -> id로 t_memory 테이블 memory_date 조회
+// Calendar.jsx & PhotoAlbum -> id로 t_memory 테이블 memory_date 조회
 app.post('/api/getMemoryDate', (req, res) => {
     T_memory.findAll({
         // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
         // where: {[Op2.and]: [{creator_id : req.body.sessionId },sequelize.where(sequelize.fn('month', sequelize.col(memory_date)), req.body.getCurMonth )]}   //// 여기부터 수정
         where: { creator_id : req.body.sessionId }
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+// PhotoAlbum.js -> id, searchPlace, dateStart, dateEnd로 t_memory테이블 조회
+app.post('/api/getMemorySearch', (req, res) => {
+    T_memory.findAll({
+        // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
+        // where: {[Op2.and]: [{creator_id : req.body.sessionId },{[Op2.or]:[
+        //         {title:req.body.searchPlace},
+        //         {[Op2.betwwen]:[req.body.dateStart, req.body.startEnd] }]
+        
+        // }]}
+
+        where: {[Op2.and]: [{creator_id : req.body.sessionId },{title:req.body.searchPlace}]}
+    
+        // where: { creator_id : req.body.sessionId }
     })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
