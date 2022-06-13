@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
             creator_id:{
                 type: DataTypes.STRING(50),
                 allowNull: false
+            },
+            search_memory_date:{
+                type: DataTypes.STRING(50),
+                allowNull: false
             }
         },
         {
