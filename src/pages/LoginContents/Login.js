@@ -14,7 +14,7 @@ class Login extends Component {
             checkId: ''
 
         }
-    };
+    };z
 
         // 데이터 검색
         _getKeywordData = async () => {

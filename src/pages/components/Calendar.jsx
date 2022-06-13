@@ -16,7 +16,6 @@ import axios from 'axios';
 import img from "../../resoure/image/1.jpg"
 import { getMonth, parseISO } from "date-fns";
 
-let test = '';
 
 class Calendar extends Component {
 
@@ -25,8 +24,7 @@ class Calendar extends Component {
         selectedDate: new Date(),
         memoryList: [],
         check: false,
-        array: [],
-        test: []
+        array: []
     };
 
     /* 달력 페이지가 시작됬을때 처리 */
@@ -56,6 +54,8 @@ class Calendar extends Component {
             }
 
 
+           
+
             const res = await axios('/api/getMemoryDate', {
                 method: 'POST',
                 data: {
@@ -73,26 +73,16 @@ class Calendar extends Component {
             memoryList.length !== 0 ?
                 memoryList.map((el, key) => {   // 아이디 검색
                     if (el.memory_date.slice(5, 7) === getCurMonth) {
-                        
+
                         this.state.array.push(el.memory_date.slice(8, 10));
-                        console.log(getCurMonth +"월에 저장된 추억 날짜 : " + el.memory_date.slice(8, 10));
+                        console.log(getCurMonth + "월에 저장된 추억 날짜 : " + el.memory_date.slice(8, 10));
                     } else {
-                        console.log(getCurMonth +"월에 저장 되지 않은 추억 날짜 : " + el.memory_date.slice(8, 10));
+                        console.log(getCurMonth + "월에 저장 되지 않은 추억 날짜 : " + el.memory_date.slice(8, 10));
                     }
 
                 }) : console.log("못찾음");
-                this.setState({
-                    test: array
-                })
-            // console.log("?" + this.state.test);
-
-            // return array;
-
-
 
         }
-
-
     };
 
     onDateClick = day => {
@@ -101,12 +91,12 @@ class Calendar extends Component {
         });
 
         var year = day.getFullYear();
-        var month = day.getMonth()+1;
+        var month = day.getMonth() + 1;
         var day = day.getDate();
 
-        var date = year+"-"+(("00"+month.toString()).slice(-2))+"-"+(("00"+day.toString()).slice(-2)); // 2022-06-13 포맷으로 출력
+        var date = year + "-" + (("00" + month.toString()).slice(-2)) + "-" + (("00" + day.toString()).slice(-2)); // 2022-06-13 포맷으로 출력
         // var date = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate());
-        console.log(date);
+        console.log("date : " + date);
 
         localStorage.setItem('date', date);
     };
@@ -139,7 +129,7 @@ class Calendar extends Component {
 
     renderHeader() {
         const dateFormat = "yyyy 년 MM 월";
-        this.calendarLoad();
+        // this.calendarLoad();
         return (
             <div>
                 <div className="MC-header-btn header">
@@ -169,7 +159,7 @@ class Calendar extends Component {
     }
 
     renderDays() {
-        
+
         // const dateFormat = "d";
         const days = [];
         const weekday = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -190,7 +180,11 @@ class Calendar extends Component {
 
     renderCelss() {
 
-
+        // const sessionArray = window.localStorage.getItem("sessionArray");
+        // console.log("ARRAY"+sessionArray);
+        
+     
+        const rows = [];
         const { currentMonth, selectedDate } = this.state;
         const monthStart = startOfMonth(currentMonth);
         const monthEnd = endOfMonth(monthStart);
@@ -198,7 +192,7 @@ class Calendar extends Component {
         const endDate = endOfWeek(monthEnd);
 
         const dateFormat = "dd";
-        const rows = [];
+
 
         let days = [];
         let day = startDate;
@@ -206,17 +200,18 @@ class Calendar extends Component {
         let num = [4, 7, 9, 15, 26];
         let numCount = 0;
 
-        test = this.state.test;
-        
-       
-       
-        
+
+
+        // console.log(props[numCount]);
 
         while (day <= endDate) {
 
             for (let i = 0; i < 7; i++) {
+
                 formattedDate = format(day, dateFormat);
                 const cloneDay = day;
+                // console.log("dd" + day.getDate() + " ddd" + props[numCount]);
+
                 // 사진으로 배경 설정
                 if (day.getDate() === num[numCount]) {
                     days.push(
@@ -242,7 +237,6 @@ class Calendar extends Component {
                 }
 
                 else {
-
                     days.push(
                         <div
                             className={`col cell ${!isSameMonth(day, monthStart)
@@ -269,6 +263,7 @@ class Calendar extends Component {
 
                 day = addDays(day, 1);  //시작날부터 1씩 증가하여 day에 저장
             }
+            
             rows.push(
                 <div className="row" key={day}>
                     {days}
@@ -292,11 +287,7 @@ class Calendar extends Component {
         // this.calendarLoad();
     };
 
-    print() {
-        setTimeout(function() {
-            console.log("ㅠㅠ" + test);
-        },500);
-    }
+
 
     /* 이전달 */
     prevMonth = () => {
@@ -336,8 +327,8 @@ class Calendar extends Component {
             <div className="calendar">
                 {this.renderHeader()}
                 {this.renderDays()}
+                {/* {this.state.rows} */}
                 {this.renderCelss()}
-                {this.print()}
             </div>
         );
     }
