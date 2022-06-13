@@ -12,16 +12,24 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
-            original_file_name: {
+            file_seq:{
+                type:DataTypes.INTEGER,
+                allowNull: false
+            },
+            file_name: {
                 type: DataTypes.STRING(255),
                 allowNull: false
             },
-            stored_file_path: {
+            file_path: {
                 type: DataTypes.STRING(500),
                 allowNull: false
             },
             creator_id:{
                 type: DataTypes.STRING(50),
+                allowNull: false
+            },
+            memory_date:{
+                type: DataTypes.DATE,
                 allowNull: false
             }
         },

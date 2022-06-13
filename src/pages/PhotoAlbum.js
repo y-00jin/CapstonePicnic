@@ -210,20 +210,66 @@ class PhotoAlbum extends Component {
         let dateStart = this.state.dateStart;
         let dateEnd = this.state.dateEnd;
 
-        const res = await axios('/api/getMemorySearch', {
+        // 모든 필드가 비어있으면 id로 추억 전체 검색
+        if(searchPlace === '' && dateStart === null && dateEnd === null){
+            const res = await axios('/api/getMemoryDate', {
             method: 'POST',
             data: {
                 'sessionId': sessionId,
-                'searchPlace': searchPlace,
-                'dateStart' : dateStart,
-                'dateEnd' : dateEnd
-
             },
             headers: new Headers()
         });
         this.setState({
             searchList: res.data
         })
+        }
+
+        if(searchPlace === '' && dateStart !== null && dateEnd !== null){
+            const res = await axios('/api/getMemorySearchNoTitle', {
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId,
+                    'dateStart': dateStart,
+                    'dateEnd': dateEnd
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                searchList: res.data
+            })
+        }
+
+        if(searchPlace !== null && dateStart === null && dateEnd === null){
+            const res = await axios('/api/getMemorySearchNoDate', {
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId,
+                    'searchPlace': searchPlace
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                searchList: res.data
+            })
+        }
+
+        if(searchPlace !== null && dateStart !== null && dateEnd !== null){
+            const res = await axios('/api/getMemorySearch', {
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId,
+                    'searchPlace': searchPlace,
+                    'dateStart': dateStart,
+                    'dateEnd': dateEnd
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                searchList: res.data
+            })
+        }
+        
+        
         const { searchList } = this.state;
 
         // const memorys = this.state.memorys;
@@ -327,7 +373,7 @@ class PhotoAlbum extends Component {
 
                     <div className="div-search-btn">
 
-                        <button className="search-btn" id="search-btn" onClick={this.searchMemoryLoad}>
+                        <button className="search-btn" id="search-btn" onClick={this.search}>
                         {/* <button className="search-btn" id="search-btn"> */}
                             <img className="search-image" alt="search" src={searchImg} />
                         </button>

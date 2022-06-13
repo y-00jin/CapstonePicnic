@@ -158,22 +158,45 @@ app.post('/api/getMemoryDate', (req, res) => {
 // PhotoAlbum.js -> id, searchPlace, dateStart, dateEnd로 t_memory테이블 조회
 app.post('/api/getMemorySearch', (req, res) => {
     T_memory.findAll({
-        // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
-        // where: {[Op2.and]: [{creator_id : req.body.sessionId },{[Op2.or]:[
-        //         {title:req.body.searchPlace},
-        //         {[Op2.betwwen]:[req.body.dateStart, req.body.startEnd] }]
-        
-        // }]}
-
+               
         where: {[Op.and]: [{creator_id : req.body.sessionId },
-            {title:req.body.searchPlace}]
+            {title:{[Op.like] : '%' + req.body.searchPlace + '%'}},
+            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]}
+            
     
         // where: { creator_id : req.body.sessionId }
- } })
+        })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
 })
 
+// PhotoAlbum.js -> id, searchPlace, dateStart, dateEnd로 t_memory테이블 조회
+app.post('/api/getMemorySearchNoTitle', (req, res) => {
+    T_memory.findAll({
+               
+        where: {[Op.and]: [{creator_id : req.body.sessionId },
+            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]}
+            
+    
+        // where: { creator_id : req.body.sessionId }
+        })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+// PhotoAlbum.js -> id, searchPlace, dateStart, dateEnd로 t_memory테이블 조회
+app.post('/api/getMemorySearchNoDate', (req, res) => {
+    T_memory.findAll({
+               
+        where: {[Op.and]: [{creator_id : req.body.sessionId },
+            {title:{[Op.like] : '%' + req.body.searchPlace + '%'}}
+            ]}
+    
+        // where: { creator_id : req.body.sessionId }
+        })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
 
 // Calendar.jsx -> id, month로 일 조회
 // app.post('/api/getDate', (req, res) => {

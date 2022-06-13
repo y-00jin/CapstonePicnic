@@ -98,7 +98,7 @@ const FileUpload = () => {
 
       setMessage('추억 저장!');
       saveMemory()
-    //   goReplace()
+      goReplace()
     } catch (err) {
       if (err.response.status === 500) {
         setMessage('서버에 문제가 생겼습니다');
