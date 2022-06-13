@@ -68,17 +68,18 @@ var storage = multer.diskStorage({
 // 테이블 읽어오기
 const {
     T_member,
-    Sequelize: { Op },
+    T_memory,
+    Sequelize: { Op }
   } = require('./models');
 sequelize.query('SET NAMES utf8;')
 
 
 // 테이블 읽어오기
-const {
-    T_memory,
-    Sequelize: { Op2 },
-  } = require('./models');
-sequelize.query('SET NAMES utf8;')
+// const {
+//     T_memory,
+//     Sequelize1: { Op2 },
+//   } = require('./models');
+// sequelize1.query('SET NAMES utf8;')
 
 // SignUp.js -> 데이터 추가
 app.post('/api/add', (req, res) => {
@@ -164,10 +165,11 @@ app.post('/api/getMemorySearch', (req, res) => {
         
         // }]}
 
-        where: {[Op2.and]: [{creator_id : req.body.sessionId },{title:req.body.searchPlace}]}
+        where: {[Op.and]: [{creator_id : req.body.sessionId },
+            {title:req.body.searchPlace}]
     
         // where: { creator_id : req.body.sessionId }
-    })
+ } })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
 })

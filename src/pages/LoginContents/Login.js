@@ -41,13 +41,14 @@ class Login extends Component {
                 this.setState({
                     memberList: res.data
                 })
-    
+                console.log("a");
                 const { memberList } = this.state;
     
-                memberList.length !== 0 ?
-                    memberList.map((el, key) => {   // 아이디 검색
-                        console.log("3");
-                        if (el.id === id && el.password === password) {
+                console.log("b");
+
+                memberList.length !== 0 ?memberList.map((el, key) => {   // 아이디 검색
+                    console.log("3");
+                    if (el.id === id && el.password === password) {
                             console.log("1");
                             // return <Link to ="/MainCalendar"></Link>
                             // const userObj = { userId : id };
@@ -55,9 +56,9 @@ class Login extends Component {
                             window.localStorage.setItem("sessionId", id);
                             window.location.href = 'http://localhost:3000/MainCalendar';
                         } else {
-                            alert('사용자 정보를 확인해주세요.');
+                            alert('사용자 정보를 확인해주세요1.');
                         }
-                    }) : alert('사용자 정보를 확인해주세요.');
+                    }) : alert('사용자 정보를 확인해주세요2.');
             }
         }
 

@@ -214,11 +214,10 @@ class PhotoAlbum extends Component {
             method: 'POST',
             data: {
                 'sessionId': sessionId,
-                'searchPlace': searchPlace
-                // 'dateStart' : dateStart,
-                // 'dateEnd' : dateEnd
+                'searchPlace': searchPlace,
+                'dateStart' : dateStart,
+                'dateEnd' : dateEnd
 
-                // 'getCurMonth': getCurMonth
             },
             headers: new Headers()
         });
@@ -328,8 +327,8 @@ class PhotoAlbum extends Component {
 
                     <div className="div-search-btn">
 
-                        {/* <button className="search-btn" id="search-btn" onClick={this.searchMemoryLoad}> */}
-                        <button className="search-btn" id="search-btn">
+                        <button className="search-btn" id="search-btn" onClick={this.searchMemoryLoad}>
+                        {/* <button className="search-btn" id="search-btn"> */}
                             <img className="search-image" alt="search" src={searchImg} />
                         </button>
                     </div>
