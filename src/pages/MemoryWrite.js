@@ -8,6 +8,16 @@ import '../resoure/css/Tab.css'
 
 import FileUpload from './components/FileUpload.js';
 
+// const GetValues = () => {
+
+//   const inputPlace = document.getElementById('place');
+//   console.log(inputPlace + "입니다")
+//   localStorage.setItem('place', inputPlace.value)
+
+//   const inputRecord = document.getElementById('record');
+//   localStorage.setItem('record', inputRecord.value)
+// }
+
 const MemoryWrite = () => {
 
   var date = ''
@@ -56,7 +66,6 @@ const MemoryWrite = () => {
 
     <p/>
     <FileUpload />
-    <script src = './components/GetValues.js'></script>
     </div>
   );
 }

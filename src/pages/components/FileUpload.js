@@ -5,6 +5,7 @@ import Progress from './Progress';
 import Message from './Message';
 
 import add from '../../resoure/image/add.jpg'
+import GetValues from './GetValues.js';
 
 const FileUpload = () => {
   const [file, setFile] = useState([]);
@@ -63,7 +64,10 @@ const FileUpload = () => {
     window.location.href = "http://localhost:3000/Memory"
     }
 
-  const saveMemory = () => {
+  const saveMemory = async() => {
+
+    GetValues()
+
     if(localStorage.getItem('date') && localStorage.getItem('place') && localStorage.getItem('record')){
         const date = localStorage.getItem('date')
         const place = localStorage.getItem('place')
@@ -71,9 +75,34 @@ const FileUpload = () => {
         const sessionId = window.localStorage.getItem("sessionId");
 
         console.log(date + " / " + place + " / " + record + " / " + sessionId)
+
+        const res = await axios('/api/memoryWrite', {
+          method: 'POST',
+          data: {
+              'title': place,
+              'contents': record,
+              'memory_date': date,
+              'creator_id': sessionId
+          },
+          headers: new Headers()
+        })
+
+        // const res2 = await axios('/api/file', {
+        //   method: 'POST',
+        //   data: {
+        //       'original_file_name': place,
+        //       'contents': record,
+        //       'memory_date': date,
+        //       'creator_id': sessionId
+        //   },
+        //   headers: new Headers()
+        // })
+
       } else {
         console.log('없음')
       }
+
+      
   }
 
   const onSubmit = async e => {
