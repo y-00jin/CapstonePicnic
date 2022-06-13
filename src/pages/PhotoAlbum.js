@@ -29,19 +29,73 @@ class PhotoAlbum extends Component {
             memberList: [],
             searchList: [],
             check: false,
-            memorys: []
+            memoryDates: [],
+            memoryTitles: [],
+            divMemory: []
         }
 
 
     };
 
-    /* 달력 페이지가 시작됬을때 처리 */
+
+    divMemoryLoad = (props, props2) => {
+
+        // const divMemory = this.state.divMemory;
+        const divMemory = this.state.divMemory;
+
+        if (divMemory.length !== null) {
+            const divMemoryNum = divMemory.length;
+            for (let i = 0; i < divMemoryNum; i++) {
+                divMemory.pop();
+            }
+        }
+        // this.memoryLoad();
+
+        // const memoryDates = props;
+        console.log("memoryDates : " + props + props2);
+
+        for (let i = 0; i < props.length; i++) {
+            divMemory.push(
+                <div class="photo-layout-block" key={i}>
+                    <img className="phone-image" alt="iPhone_01" src={img1} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">{props[i]} {props2[i]}</button> </Link>
+                </div>
+            )
+        }
+
+        console.log("완료");
+
+        return <div class="photo-layout"><divMemory/></div>;
+        
+
+    }
+
+
+    /* 시작됬을때 데이터 검색 및 처리 */
     memoryLoad = async () => {
         const check = this.state.check;
-        let memorylen = 0;
-
 
         if (check === false) {
+
+
+            const memoryDates = this.state.memoryDates;
+
+            if (memoryDates.length !== null) {
+                const memoryDatesNum = memoryDates.length;
+                for (let i = 0; i < memoryDatesNum; i++) {
+                    memoryDates.pop();
+                }
+            }
+
+            const memoryTitles = this.state.memoryTitles;
+            if (memoryTitles.length !== null) {
+                const memoryTitlesNum = memoryTitles.length;
+                for (let i = 0; i < memoryTitlesNum; i++) {
+                    memoryTitles.pop();
+                }
+            }
+
+
             const sessionId = window.localStorage.getItem("sessionId");
 
             console.log("아이디 " + sessionId);
@@ -59,172 +113,75 @@ class PhotoAlbum extends Component {
                 headers: new Headers()
             });
             this.setState({
-                memoryList: res.data
+                searchList: res.data
             })
-            const { memoryList } = this.state;
 
-            const memorys = this.state.memorys;
+            const { searchList } = this.state;
+            searchList.length !== 0 ?
+                searchList.map((el, key) => {   // 아이디 검색
 
-            memoryList.length !== 0 ?
-                memoryList.map((el, key) => {   // 아이디 검색
-
-                    console.log("날짜 : " + el.memory_date.slice(0, 10));
-
-                    memorys.push(el.memory_date.slice(0, 10));
+                    console.log(el.memory_date.slice(0, 10) + ", " + el.title);
 
 
-                }) : console.log("못찾음")
+                    // console.log("날짜 : " + el.memory_date.slice(0, 10));
 
-            this.memorylen = memorys.length;
+                    memoryDates.push(el.memory_date.slice(0, 10));
+                    memoryTitles.push(el.title);
 
-            // const divMemory = [];
-            // for(let i=0; i<memorys.length;i++){
-            //     console.log('g');
-            //     divMemory.push(
-            //         <div class="photo-layout-block">
-            //                  <img className="phone-image" alt="iPhone_01" src={img1} />
-            //                  <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-            //         </div>
-            //     )
-
-            // }
-
-            console.log(" memorylen : " + memorylen);
-
-            // return memorylen;
-            // this.test(memoryList);
+                }) : console.log("없음")
 
 
-            // console.log("ddd"+this.state.memorys);
-            // var array = [];
-            // for(let i =0; i <memorys.length;i++){
-            //     array.push(
-            //         <div class="photo-layout-block">
-            //             <img className="phone-image" alt="iPhone_01" src={img1} />
-            //             <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-            //         </div>
-            //     )
-            // }
-            // return array;
+            this.divMemoryLoad(memoryDates, memoryTitles);
+
         }
 
     };
 
-    Test1 = (props) => {
-
-        this.memoryLoad();
-
-        const memorys = this.state.memorys;
-        console.log("memorys : " + this.memorys);
-
-        const divMemory = [];
-        for (let i = 0; i < memorys.length; i++) {
-            divMemory.push(
-                <div class="photo-layout-block">
-                    <img className="phone-image" alt="iPhone_01" src={img1} />
-                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-                </div>
-            )
-        }
-
-
-        return <div class="photo-layout">{divMemory}</div>;
-
-
-
-    }
-
-    // Test() {
-
-    // let len = this.memoryLoad();
-
-
-    // const promise1 = new Promise((resolve, reject) => {
-    //     resolve(this.memoryLoad());
-    //   });
-
-    //   promise1.then((value) => {
-
-    //     console.log("value : " + value);
-    //     const divMemory = [];
-    //     for(let i=0; i<value;i++){
-    //         divMemory.push(
-    //             <div class="photo-layout-block">
-    //                      <img className="phone-image" alt="iPhone_01" src={img1} />
-    //                      <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-    //             </div>
-    //         )
-    //     }
-
-
-    //     return <div class="photo-layout">{divMemory}</div>;
-
-
-    //     // expected output: "Success!"
-    //   });
-
-
-    // this.memoryLoad();
-
-    // console.log("state " + this.state.memorys.length);
-    // const divMemory = [];
-    // for (let i = 0; i < 3; i++) {
-    //     divMemory.push(
-    //         <div className="photo-layout-block">
-    //             <img className="phone-image" alt="iPhone_01" src={img1} />
-    //             <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
-    //         </div>
-    //     )
-    // }
-    // return <div className="photo-layout">{divMemory}</div>;
-    // console.log("len : " + len);
-    // }
-
-    // const [dateRange, setDateRange] = useState([null, null]);
-    // const [startDate, endDate] = dateRange;
-
     search = (props) => {
-
-        // let searchPlace = document.getElementById('searchPlace').value;
-        // let dateFormat = "yyyy-MM-dd";
-        // const dateStart = format(this.state.dateStart, dateFormat);
-        // const dateEnd = format(this.state.dateEnd, dateFormat);
-
-
-        // console.log("searchPlace : " + searchPlace + "" + format(dateStart, dateFormat) + format(dateEnd, dateFormat));
-
         this.searchMemoryLoad();
     }
 
     searchMemoryLoad = async () => {
 
-        // const sessionId = this.state.sessionId;
+        const memoryDates = this.state.memoryDates;
+
+        if (memoryDates.length !== null) {
+            const memoryDatesNum = memoryDates.length;
+            for (let i = 0; i < memoryDatesNum; i++) {
+                memoryDates.pop();
+            }
+        }
+
+        const memoryTitles = this.state.memoryTitles;
+        if (memoryTitles.length !== null) {
+            const memoryTitlesNum = memoryTitles.length;
+            for (let i = 0; i < memoryTitlesNum; i++) {
+                memoryTitles.pop();
+            }
+        }
+
         const sessionId = window.localStorage.getItem("sessionId");
         const searchPlace = document.getElementById('searchPlace').value;
-        
-        console.log("sessionId : " + sessionId + "searchPlace : " + searchPlace);
-        
-        let dateFormat = "yyyy-MM-dd";
-        // let dateStart = format(this.state.dateStart, dateFormat);
-        // let dateEnd = format(this.state.dateEnd, dateFormat);
+
         let dateStart = this.state.dateStart;
         let dateEnd = this.state.dateEnd;
 
         // 모든 필드가 비어있으면 id로 추억 전체 검색
-        if(searchPlace === '' && dateStart === null && dateEnd === null){
+        if (searchPlace === '' && dateStart === null && dateEnd === null) {
             const res = await axios('/api/getMemoryDate', {
-            method: 'POST',
-            data: {
-                'sessionId': sessionId,
-            },
-            headers: new Headers()
-        });
-        this.setState({
-            searchList: res.data
-        })
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId,
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                searchList: res.data
+            })
         }
 
-        if(searchPlace === '' && dateStart !== null && dateEnd !== null){
+        // 날짜로만 검색
+        if (searchPlace === '' && dateStart !== null && dateEnd !== null) {
             const res = await axios('/api/getMemorySearchNoTitle', {
                 method: 'POST',
                 data: {
@@ -239,7 +196,8 @@ class PhotoAlbum extends Component {
             })
         }
 
-        if(searchPlace !== null && dateStart === null && dateEnd === null){
+        // 장소로만 검색
+        if (searchPlace !== null && dateStart === null && dateEnd === null) {
             const res = await axios('/api/getMemorySearchNoDate', {
                 method: 'POST',
                 data: {
@@ -253,7 +211,8 @@ class PhotoAlbum extends Component {
             })
         }
 
-        if(searchPlace !== null && dateStart !== null && dateEnd !== null){
+        // 장소 & 날짜로 검색
+        if (searchPlace !== null && dateStart !== null && dateEnd !== null) {
             const res = await axios('/api/getMemorySearch', {
                 method: 'POST',
                 data: {
@@ -268,34 +227,35 @@ class PhotoAlbum extends Component {
                 searchList: res.data
             })
         }
-        
-        
-        const { searchList } = this.state;
 
-        // const memorys = this.state.memorys;
+        if ((dateStart !== null && dateEnd === null) || (dateStart === null && dateEnd !== null)) {
+            alert('시작 날짜와 끝 날짜를 모두 채워주세요');
+        }
+        else {
+            const { searchList } = this.state;
 
-        searchList.length !== 0 ?
-            searchList.map((el, key) => {   // 아이디 검색
+            searchList.length !== 0 ?
+                searchList.map((el, key) => {   // 아이디 검색
 
-                console.log(el.memory_date.slice(0, 10));
+                    console.log(el.memory_date.slice(0, 10) + ", " + el.title);
+                    memoryDates.push(el.memory_date.slice(0, 10));
+                    memoryTitles.push(el.title);
 
-                // console.log("날짜 : " + el.memory_date.slice(0, 10));
+                }) : console.log("없음")
 
-                // memorys.push(el.memory_date.slice(0, 10));
+        }
 
-
-            }) : console.log("없음")
-
+        this.divMemoryLoad(memoryDates, memoryTitles);
     };
 
 
+
     render() {
+        this.memoryLoad();
+        
         return (
 
             <div className="container">
-
-
-
 
                 {/* 상단 타이틀*/}
                 <p />
@@ -320,12 +280,8 @@ class PhotoAlbum extends Component {
                         <DatePicker className="datapicker-style"
                             locale={ko}
                             dateFormat="yyyy년 MM월 dd일"
-
                             selected={this.state.dateStart}
-
                             selectsStart
-
-
                             onChange={(update) => {
                                 this.setState({
                                     dateStart: update
@@ -349,10 +305,8 @@ class PhotoAlbum extends Component {
                         <DatePicker className="datapicker-style"
                             locale={ko}
                             dateFormat="yyyy년 MM월 dd일"
-
                             selected={this.state.dateEnd}
                             selectsEnd
-
                             onChange={(update) => {
                                 this.setState({
                                     dateEnd: update
@@ -374,7 +328,7 @@ class PhotoAlbum extends Component {
                     <div className="div-search-btn">
 
                         <button className="search-btn" id="search-btn" onClick={this.search}>
-                        {/* <button className="search-btn" id="search-btn"> */}
+                            {/* <button className="search-btn" id="search-btn"> */}
                             <img className="search-image" alt="search" src={searchImg} />
                         </button>
                     </div>
@@ -384,14 +338,11 @@ class PhotoAlbum extends Component {
 
                 <div id="memory-title"><h4>| 추억여행</h4></div>
 
-                {/* {this.Test1()} */}
-
+                
                 <div className="photo-layout" id="photo-layout-id">
+                    {this.state.divMemory}
 
-                    {/* {this.Test()} */}
-
-
-                    <div className="photo-layout-block">
+                    {/* <div className="photo-layout-block">
                         <img className="phone-image" alt="iPhone_01" src={img1} />
                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">2022.01.03 강릉</button> </Link>
                     </div>
@@ -413,7 +364,7 @@ class PhotoAlbum extends Component {
                         <Link to="/Memory"><button className="photo-btn" id="photo-btn-5">2022.04.20 속초</button></Link></div>
                     <div className="photo-layout-block">
                         <img className="phone-image" alt="iPhone_06" src={img6} />
-                        <Link to="/Memory"><button className="photo-btn" id="photo-btn-6">2022.05.03 뉴욕</button></Link></div>
+                        <Link to="/Memory"><button className="photo-btn" id="photo-btn-6">2022.05.03 뉴욕</button></Link></div> */}
 
                 </div>
 

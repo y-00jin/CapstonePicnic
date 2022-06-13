@@ -144,7 +144,8 @@ app.post('/api/getMemoryDate', (req, res) => {
     T_memory.findAll({
         // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
         // where: {[Op2.and]: [{creator_id : req.body.sessionId },sequelize.where(sequelize.fn('month', sequelize.col(memory_date)), req.body.getCurMonth )]}   //// 여기부터 수정
-        where: { creator_id : req.body.sessionId }
+        where: { creator_id : req.body.sessionId },
+        order:[['memory_date', 'ASC']]
     })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
