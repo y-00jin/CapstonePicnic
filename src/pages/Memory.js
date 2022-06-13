@@ -7,15 +7,6 @@ import '../resoure/css/Header.css'
 import '../resoure/css/MemoryWrite.css';
 import '../resoure/css/Tab.css'
 import Post from './TabContents/Post';
-import Photo from './TabContents/Photo';
-import Video from './TabContents/Video';
-
-
-const obj = {
-    0: <Post/>,
-    1: <Photo />,
-    2: <Video />,
-};
   
 const arr = ["First", "Second", "Third"];
   
@@ -76,7 +67,9 @@ export default class Memory extends Component {
 
    
         {/* 탭 버튼 활성화 */}
-        <div className="wrapper">
+        <div id="addPost"><h4>| 추억 사진</h4></div>
+        <Post/>
+        {/* <div className="wrapper">
           <ul class="nav justify-content-center">
             <li class="memory-button" onClick={() => this.clickHandler(0)}>게시물　　</li>
             <li class="memory-button" onClick={() => this.clickHandler(1)}>사진　　</li>
@@ -84,7 +77,7 @@ export default class Memory extends Component {
           </ul>
           <p/>
           <div className="contents">{obj[this.state.activeId]}</div>
-        </div>
+        </div> */}
 
         {/* 버튼 */}
         <div className="btn-background">

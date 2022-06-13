@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-// const fileUpload = require('express-fileupload');
 const multer = require("multer");
 const path = require('path');
 
@@ -27,10 +26,6 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage });
   
   var uploadMultiple = upload.array('memory')
-  
-  app.get("/Memory", (req, res) => {
-    
-  });
   
   app.post('/api/upload', uploadMultiple, function (req, res, next) {
 
@@ -207,6 +202,24 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
 //     .catch( err => { throw err })
 // })
 
+// MemoryWrite.js -> 데이터 추가
+app.post('/api/memoryWrite', (req, res) => {
+    console.log(req.body);
+
+    T_memory.create({
+        title: req.body.title,
+        contents: req.body.contents,
+        memory_date : req.body.memory_date,
+        creator_id : req.body.creator_id,
+    })
+    .then( result => {
+        res.send(result)
+    })
+    .catch( err => {
+        console.log(err)
+        throw err;
+    })
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
