@@ -26,7 +26,6 @@ class Login extends Component {
                 this._check_text("pw-check-text", "비밀번호를 입력해주세요.", "red");
             }
             if(id !=='' && password !== '') {
-                console.log("1");
                 // 검색
                 const res = await axios('/api/keywordData', {
                     method: 'POST',
@@ -36,20 +35,13 @@ class Login extends Component {
                     headers: new Headers()
                 });
     
-                console.log("2");
-    
                 this.setState({
                     memberList: res.data
                 })
-                console.log("a");
                 const { memberList } = this.state;
     
-                console.log("b");
-
                 memberList.length !== 0 ?memberList.map((el, key) => {   // 아이디 검색
-                    console.log("3");
                     if (el.id === id && el.password === password) {
-                            console.log("1");
                             // return <Link to ="/MainCalendar"></Link>
                             // const userObj = { userId : id };
                             // window.localStorage.setItem("sessionId", JSON.stringify(userObj));
