@@ -213,7 +213,7 @@ app.post('/api/memoryWrite', (req, res) => {
         search_memory_date : req.body.search_memory_date,
     })
     .then( result => {
-        res.json({ msg: '추억 저장!' , result: result})
+        res.send(result)
     }).catch( err => {
         console.log(err)
         throw err;
@@ -246,7 +246,7 @@ app.post('/api/fileUpload', (req, res) => {
         memory_date : req.body.memory_date,
     })
     .then( result => {
-        res.send(result)
+        res.json({ msg: '추억 저장!' , result: result})
     })
     .catch( err => {
         console.log(err)

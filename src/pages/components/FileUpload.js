@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import Progress from './Progress';
 import Message from './Message';
@@ -15,6 +14,7 @@ const FileUpload = () => {
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [ memoryIdx, setMemoryIdx ] = useState({})
   const [ photoToAddList, setPhotoToAddList ] = useState([]);
+  const [ count, setCount ] = useState(1);
 
   let memory_idx = ''
   let photoToAdd = [];
@@ -77,7 +77,7 @@ const FileUpload = () => {
 
   const goReplace = () => {
     window.location.href = "http://localhost:3000/Memory"
-    }
+  }
 
   const saveFile = async() => {
     const date = localStorage.getItem('date')
@@ -106,19 +106,23 @@ const FileUpload = () => {
     }
 
     // 추억 저장(사진)
-    for(let i = 0; i < file.length; i++) {
-      const res2 = await axios('/api/fileUpload', {
-        method: 'POST',
-        data: {
-            'original_name': file[i].name,
-            'memory_idx': memory_idx + 1,
-            'file_seq': i + 1,
-            'creator_id': sessionId,
-            'memory_date': date,
-        },
-        headers: new Headers()
-      });
-    }
+      for(let i = 0; i < file.length; i++) {
+        const res2 = await axios('/api/fileUpload', {
+          method: 'POST',
+          data: {
+              'original_name': file[i].name,
+              'memory_idx': memory_idx,
+              'file_seq': i + 1,
+              'creator_id': sessionId,
+              'memory_date': date,
+          },
+          headers: new Headers()
+        });
+      }
+
+      setMessage('추억 저장!')
+
+      setTimeout(() => goReplace(), 1000);
   }
   
   const saveMemory = async() => {
@@ -145,46 +149,64 @@ const FileUpload = () => {
           },
           headers: new Headers()
         })
-    
-        saveFile()
       } else {
         console.log('없음')
       }
-
-      
   }
 
   const onSubmit = async e => {
-    e.preventDefault();
+    console.log("1." + count)
+    if( count === 1 ) {
+      console.log("첫번째 클릭")
+      e.preventDefault();
 
-    console.log(file)
+      console.log(file)
 
-    for (let i = 0; i < file.length; i++) {
+      for (let i = 0; i < file.length; i++) {
         formData.append('memory', file[i]);
-    }
-
-    try {
-      const res = await axios.post('/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-      });
-
-    //   console.log(res.data);
-
-      setUploadedFile(res.data);
-
-      setMessage('추억 저장!');
-      saveMemory()
-      // goReplace()
-    } catch (err) {
-      if (err.response.status === 500) {
-        setMessage('서버에 문제가 생겼습니다');
-      } else {
-        setMessage(err.response.data.msg);
       }
-    }
-    };
+
+      try {
+        const res = await axios.post('/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        });
+
+      //   console.log(res.data);
+
+        setUploadedFile(res.data);
+        saveMemory()
+        const date = localStorage.getItem('date')
+        const sessionId = window.localStorage.getItem("sessionId");
+
+        // memory_idx 받기
+        const res1 = await axios('/api/findMemoryIdx', {
+          method: 'POST',
+          data: {
+            'search_memory_date': date,
+            'creator_id': sessionId
+          },
+          headers: new Headers()
+        });
+
+        setMemoryIdx(res1.data)
+        setCount(2);
+        console.log(count)
+      } catch (err) {
+        if (err.response.status === 500) {
+          setMessage('서버에 문제가 생겼습니다');
+        } else {
+          setMessage(err.response.data.msg);
+        }
+      }
+    } else if( count === 2 ) {
+      console.log("두번째 클릭")
+      saveFile()
+      setCount(0)
+      console.log(count)
+      // goReplace()
+    }};
 
   return (
     <div>
@@ -211,7 +233,7 @@ const FileUpload = () => {
         {/* 버튼 */}
         <div className="btn-background">
             {/* <Link to="/Memory"> */}
-                <button className="btn btn-color" type="submit" id="save">저장</button>
+                <button className="btn btn-color" type="button" id="save" onClick={onSubmit}>저장</button>
             {/* </Link> */}
         </div>
         </form>
