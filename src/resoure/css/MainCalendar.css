@@ -6,27 +6,7 @@
 .link-btn:hover{
   color: #777;
 }
-.photo-number{
-  position: absolute;
-  font-size: 82.5%;
-  top: .75em;
-  right: .75em;
-  font-weight: 700;
-  background-color: #ffffff;
-  border-radius: 100%;
-}
-.photo-bg{
-  opacity: 80%;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--main-color);
-  font-size: 8.3em;
-  position: absolute;
-  top: -.16em;
-  right: -.01em;
-  transition: .25s ease-out;
-  letter-spacing: -.07em;
-}
+
 /* 전체 영역 사이즈 조정*/
 .MC-App {
   text-align: center;
@@ -245,9 +225,11 @@
 }
 
 .calendar .body .selected {
-  border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #958477 0%, #fffbd2 40%);
-  border-image-slice: 1;
+  /* border-left: 2  0px solid transparent; */
+  background-color: var(--bg-color);
+/* 
+  border-image: linear-gradient(45deg, #fffbd2 0%, #fffbd2 80%);
+  border-image-slice: 1; */
 }
 
 .calendar .body .row {
@@ -294,6 +276,7 @@
   opacity: 0.07;
   transition: .5s ease-in;
 }
+
 
 .calendar .body .col {
   flex-grow: 0;
