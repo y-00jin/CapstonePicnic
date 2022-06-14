@@ -84,7 +84,7 @@ const FileUpload = () => {
     const sessionId = window.localStorage.getItem("sessionId");
 
     // memory_idx 받기
-    const res = await axios('/api/findMemoryIdx', {
+    const res = await axios('/api/searchMemory', {
       method: 'POST',
       data: {
           'search_memory_date': date,
@@ -181,7 +181,7 @@ const FileUpload = () => {
         const sessionId = window.localStorage.getItem("sessionId");
 
         // memory_idx 받기
-        const res1 = await axios('/api/findMemoryIdx', {
+        const res1 = await axios('/api/searchMemory', {
           method: 'POST',
           data: {
             'search_memory_date': date,
