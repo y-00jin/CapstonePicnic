@@ -184,11 +184,6 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
       filepath = "C:/Capstone/picnic-front/src/uploads";
     },
     filename: function (req, file, cb) {
-      if(filename !== null) {
-        for(let i=0; i < filename.length; i++) {
-            filename.pop()
-        }
-      }
       const newFileName = Date.now() + path.extname(file.originalname)
       cb(null, newFileName);
       filename.push(newFileName);
@@ -283,6 +278,9 @@ app.post('/api/fileUpload', (req, res) => {
     let i = req.body.file_seq;
     let newFilename = filename[i-1]
 
+    if(filename[i] === null) {
+        filename=[]
+    }
     console.log(newFilename);
 
     console.log(req.body);
@@ -296,6 +294,9 @@ app.post('/api/fileUpload', (req, res) => {
         memory_date : req.body.memory_date,
     })
     .then( result => {
+        // if(filename !== null) {
+        //    filename.pop()
+        // }
         res.json({ msg: '추억 저장!' , result: result})
     })
     .catch( err => {
