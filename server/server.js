@@ -236,7 +236,6 @@ app.post('/api/memoryWrite', (req, res) => {
     })
 })
 
-
 // t_file 조회
 app.post('/api/getFile', (req, res) => {
     T_file.findAll({
@@ -260,6 +259,18 @@ app.post('/api/getFile2', (req, res) => {
             {memory_idx: req.body.memory_idx}
             ]},
         order:[['memory_date', 'DESC']]
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+// t_file 조회 -> Memory.js
+app.post('/api/getFileAtMemory', (req, res) => {
+    T_file.findAll({
+
+        where: {[Op.and]: [{creator_id : req.body.sessionId },{memory_idx: req.body.memory_idx}
+            ]},
+        order:[['memory_date', 'ASC']]
     })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
