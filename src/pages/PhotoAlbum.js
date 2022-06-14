@@ -31,18 +31,22 @@ class PhotoAlbum extends Component {
             check: false,
             memoryDates: [],
             memoryTitles: [],
-            divMemory: []
+            memoryIdx:[],
+            divMemory: [],
+            fileArray:[],
+            fileList:[]
         }
 
 
     };
 
 
-    divMemoryLoad = (props, props2) => {
+    divMemoryLoad = (propMemoryDate, propMemoryTitle, propFile) => {
+
+        console.log("file:" + propFile);
 
         // const divMemory = this.state.divMemory;
         const divMemory = this.state.divMemory;
-
         if (divMemory.length !== null) {
             const divMemoryNum = divMemory.length;
             for (let i = 0; i < divMemoryNum; i++) {
@@ -52,13 +56,16 @@ class PhotoAlbum extends Component {
         // this.memoryLoad();
 
         // const memoryDates = props;
-        console.log("memoryDates : " + props + props2);
+        console.log("memoryDates : " + propMemoryDate + propMemoryTitle);
 
-        for (let i = 0; i < props.length; i++) {
+        for (let i = 0; i < propMemoryDate.length; i++) {
+
+            const file = require("C:/Capstone/picnic-front/src/uploads/"+propFile[i]);
+
             divMemory.push(
                 <div class="photo-layout-block" key={i}>
-                    <img className="phone-image" alt="iPhone_01" src={img1} />
-                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">{props[i]} {props2[i]}</button> </Link>
+                    <img className="phone-image" alt="iPhone_01" src={file} />
+                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">{propMemoryDate[i]} {propMemoryTitle[i]}</button> </Link>
                 </div>
             )
         }
@@ -96,6 +103,22 @@ class PhotoAlbum extends Component {
             }
 
 
+            const fileArray = this.state.fileArray;
+            if (fileArray.length !== null) {
+                const fileArrayNum = fileArray.length;
+                for (let i = 0; i < fileArrayNum; i++) {
+                    fileArray.pop();
+                }
+            }
+
+            const memoryIdx = this.state.memoryIdx;
+        if (memoryIdx.length !== null) {
+            const memoryIdxNum = memoryIdx.length;
+            for (let i = 0; i < memoryIdxNum; i++) {
+                memoryIdx.pop();
+            }
+        }
+
             const sessionId = window.localStorage.getItem("sessionId");
 
             console.log("아이디 " + sessionId);
@@ -104,7 +127,8 @@ class PhotoAlbum extends Component {
                     check: true
                 }
             )
-            const res = await axios('/api/getMemoryDate', {
+
+            const res = await axios('/api/getMemoryDate2', {
                 method: 'POST',
                 data: {
                     'sessionId': sessionId
@@ -124,14 +148,39 @@ class PhotoAlbum extends Component {
 
 
                     // console.log("날짜 : " + el.memory_date.slice(0, 10));
-
+                    memoryIdx.push(el.memory_idx);
                     memoryDates.push(el.memory_date.slice(0, 10));
                     memoryTitles.push(el.title);
 
                 }) : console.log("없음")
 
 
-            this.divMemoryLoad(memoryDates, memoryTitles);
+
+
+                for(let i=0;i<this.state.memoryDates.length;i++){
+
+                    const res = await axios('/api/getFile2', {
+                        method: 'POST',
+                        data: {
+                            'sessionId': sessionId,
+                            'memory_idx': this.state.memoryIdx[i]
+                            // 'getCurMonth': getCurMonth
+                        },
+                        headers: new Headers()
+                    });
+                    this.setState({
+                        fileList: res.data
+                    })
+                    const { fileList } = this.state;
+        
+                    fileList.length !== 0 ?
+                    fileList.map((el, key) => {   // 아이디 검색
+                        fileArray.push(el.file_name);
+                    }) : console.log("못찾음");
+                }
+
+
+            this.divMemoryLoad(memoryDates, memoryTitles, fileArray);
 
         }
 
@@ -144,7 +193,6 @@ class PhotoAlbum extends Component {
     searchMemoryLoad = async () => {
 
         const memoryDates = this.state.memoryDates;
-
         if (memoryDates.length !== null) {
             const memoryDatesNum = memoryDates.length;
             for (let i = 0; i < memoryDatesNum; i++) {
@@ -160,6 +208,23 @@ class PhotoAlbum extends Component {
             }
         }
 
+        const memoryIdx = this.state.memoryIdx;
+        if (memoryIdx.length !== null) {
+            const memoryIdxNum = memoryIdx.length;
+            for (let i = 0; i < memoryIdxNum; i++) {
+                memoryIdx.pop();
+            }
+        }
+
+        const fileArray = this.state.fileArray;
+            if (fileArray.length !== null) {
+                const fileArrayNum = fileArray.length;
+                for (let i = 0; i < fileArrayNum; i++) {
+                    fileArray.pop();
+                }
+            }
+        
+
         const sessionId = window.localStorage.getItem("sessionId");
         const searchPlace = document.getElementById('searchPlace').value;
 
@@ -168,7 +233,7 @@ class PhotoAlbum extends Component {
 
         // 모든 필드가 비어있으면 id로 추억 전체 검색
         if (searchPlace === '' && dateStart === null && dateEnd === null) {
-            const res = await axios('/api/getMemoryDate', {
+            const res = await axios('/api/getMemoryDate2', {
                 method: 'POST',
                 data: {
                     'sessionId': sessionId,
@@ -238,6 +303,7 @@ class PhotoAlbum extends Component {
                 searchList.map((el, key) => {   // 아이디 검색
 
                     console.log(el.memory_date.slice(0, 10) + ", " + el.title);
+                    memoryIdx.push(el.memory_idx);
                     memoryDates.push(el.memory_date.slice(0, 10));
                     memoryTitles.push(el.title);
 
@@ -245,7 +311,34 @@ class PhotoAlbum extends Component {
 
         }
 
-        this.divMemoryLoad(memoryDates, memoryTitles);
+
+        for(let i=0;i<this.state.memoryDates.length;i++){
+
+            const res = await axios('/api/getFile2', {
+                method: 'POST',
+                data: {
+                    'sessionId': sessionId,
+                    'memory_idx': this.state.memoryIdx[i]
+                    // 'getCurMonth': getCurMonth
+                },
+                headers: new Headers()
+            });
+            this.setState({
+                fileList: res.data
+            })
+            const { fileList } = this.state;
+
+            fileList.length !== 0 ?
+            fileList.map((el, key) => {   // 아이디 검색
+                fileArray.push(el.file_name);
+            }) : console.log("못찾음");
+        }
+
+
+
+
+
+        this.divMemoryLoad(memoryDates, memoryTitles, fileArray);
     };
 
 
