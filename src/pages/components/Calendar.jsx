@@ -143,15 +143,26 @@ class Calendar extends Component {
                 
                 const file = require("C:/Capstone/picnic-front/src/uploads/"+fileStr);
                 
-                let setBg = document.getElementById(this.state.memory_date[i]);
+                
 
-                // setBg.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
+                let setBg = document.getElementById(""+this.state.memory_date[i]);
+                
                 setBg.style.backgroundImage = "url('" + file + "')";
                 setBg.style.backgroundSize = "140px";
                 setBg.style.backgroundPositionX = 'center';
                 setBg.style.backgroundPositionY = 'center';
                 setBg.style.backgroundorigin = "padding-box";
                 setBg.style.backgroundRepeat = "no-repeat"
+
+
+                // setBg.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
+                
+
+                // let setClass = document.getElementsByClassName("disabled");
+                // for(let i=0;i<setClass.length;i++){
+                //     setClass[i].style.background = '#ffffff' ;
+                //     setClass[i].style.backgroundImage = 'none' ;
+                // }
 
             }
         }
@@ -282,34 +293,17 @@ class Calendar extends Component {
                 const cloneDay = day;
                 // console.log("dd" + day.getDate() + " ddd" + props[numCount]);
 
-                // 사진으로 배경 설정
-                // if (day.getDate() === num[numCount]) {
-                //     days.push(
-                //         <div
-                //             className={`col cell ${!isSameMonth(day, monthStart)
-                //                 ? "disabled"
-                //                 : isSameDay(day, selectedDate) ? "selected" : ""
-                //                 }`}
-                //             key={day}
-                //             onClick={() => this.onDateClick(toDate(cloneDay))}>
-                //             <Link to="/Memory" className="link-btn">
-                //                 <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
-                //                 <span className="photo-number">{formattedDate}</span>
-                //             </Link>
-
-
-                //         </div>
-                //     );
-                //     numCount++;
-                // }
-                // else {
+               
                 days.push(
                     <div
                         className={`col cell ${!isSameMonth(day, monthStart)
                             ? "disabled"
                             : isSameDay(day, selectedDate) ? "selected" : ""
                             }`}
-                        id={formattedDate}
+                        id={`${!isSameMonth(day, monthStart)
+                            ? "disabled"
+                            : ""
+                            }${formattedDate}`}
                         key={day}
                         onClick={() => this.onDateClick(toDate(cloneDay))}>
 
@@ -319,7 +313,6 @@ class Calendar extends Component {
                         {/* </Link> */}
                     </div>
                 );
-                // }
                 day = addDays(day, 1);  //시작날부터 1씩 증가하여 day에 저장
             }
 

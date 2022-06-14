@@ -52,3 +52,13 @@
     border: 0ch;
     background-color: white;
 }
+
+#btnPhoto{
+  background-color:transparent;
+
+  border: 0;
+  outline: 0;
+  font-size: 22px;
+  padding-bottom: 10px;
+
+}
