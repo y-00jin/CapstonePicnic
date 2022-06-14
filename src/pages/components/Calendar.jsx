@@ -23,12 +23,15 @@ class Calendar extends Component {
         currentMonth: new Date(),
         selectedDate: new Date(),
         memoryList: [],
+        fileList:[],
         check: false,
         array: [],
-        array2: []
+        memoryIdx: [],
+        fileArray: []
+        
     };
 
- /* 달력 페이지가 시작됬을때 처리 */
+    /* 달력 페이지가 시작됬을때 처리 */
     calendarLoad = async () => {
         const check = this.state.check;
 
@@ -44,7 +47,7 @@ class Calendar extends Component {
             const getCurMonth = this.state.currentMonth.toISOString().slice(5, 7);
             // const getCurMonth = addMonths(this.state.currentMonth, 1).toISOString().slice(5, 7);
 
-           const array = this.state.array;
+            const array = this.state.array;
             console.log(sessionId + "     " + getCurMonth);
             if (array.length !== null) {
                 const arrayNum = array.length;
@@ -72,45 +75,70 @@ class Calendar extends Component {
 
 
 
- memoryList.length !== 0 ?
+            memoryList.length !== 0 ?
                 memoryList.map((el, key) => {   // 아이디 검색
                     if (el.memory_date.slice(5, 7) === getCurMonth) {
                         this.state.array.push(el.memory_date.slice(8, 10));
+                        this.state.memoryIdx.push(el.memory_idx);
+                        
                         console.log(getCurMonth + "월에 저장된 추억 날짜 : " + el.memory_date.slice(8, 10));
                     } else {
                         console.log(getCurMonth + "월에 저장 되지 않은 추억 날짜 : " + el.memory_date.slice(8, 10));
                     }
                 }) : console.log("못찾음");
 
-           console.log(this.state.array);
-            // for (let i = 0; i < this.state.array.length; i++) {
-            //     if (this.state.array[i].slice(0, 1) === "0") {
-            //         console.log("dd");
-            //         this.state.array2.push(array[i].slice(1,2));
-                    
-            //     }
-            //     if (this.state.array[i].slice(0, 1) !== "0") {
-            //         this.state.array2.push(array[i])
-                    
-            //     }
-            // }
-            // console.log("array2 : " + this.state.array2);
+            console.log("memoryidx"+this.state.memoryIdx);
+            console.log("arr"+this.state.array);
 
-            const file = require("../../resoure/image/1.jpg");
-            console.log(file);
 
-           for(let i=0;i<this.state.array.length;i++){
-                let test = document.getElementById(this.state.array[i]);
-                // test.style.background = '#FAF4C0';
-                // test.style.height = '100px'
-                // test.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
-                test.style.backgroundImage = "url('" + file + "')" ;
-                test.style.backgroundSize = "130px";
-                test.style.backgroundPositionX = 'center';
-                test.style.backgroundPositionY = 'center';
-                test.style.backgroundorigin = "padding-box";
-                test.style.backgroundRepeat = "no-repeat"
-           
+
+            for(let i=0;i<this.state.array.length;i++){
+
+                const res = await axios('/api/getFile', {
+                    method: 'POST',
+                    data: {
+                        'sessionId': sessionId,
+                        'memory_idx': this.state.memoryIdx[i]
+                        // 'getCurMonth': getCurMonth
+                    },
+                    headers: new Headers()
+                });
+                this.setState({
+                    fileList: res.data
+                })
+                const { fileList } = this.state;
+
+                fileList.length !== 0 ?
+                fileList.map((el, key) => {   // 아이디 검색
+                    this.state.fileArray.push(el.file_name);
+                }) : console.log("못찾음");
+
+            }
+
+            // console.log(this.state.fileArray[0].toString());            
+
+            // 
+            // console.log(file);
+
+            for (let i = 0; i < this.state.array.length; i++) {
+
+               
+
+                const fileStr = this.state.fileArray[i];
+                console.log(fileStr);
+                
+                const file = require("C:/Capstone/picnic-front/src/uploads/"+fileStr);
+                
+                let setBg = document.getElementById(this.state.array[i]);
+
+                // setBg.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
+                setBg.style.backgroundImage = "url('" + file + "')";
+                setBg.style.backgroundSize = "130px";
+                setBg.style.backgroundPositionX = 'center';
+                setBg.style.backgroundPositionY = 'center';
+                setBg.style.backgroundorigin = "padding-box";
+                setBg.style.backgroundRepeat = "no-repeat"
+
             }
         }
     };
@@ -126,16 +154,16 @@ class Calendar extends Component {
         // var date = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate());
         // console.log("date : " + date);
         localStorage.setItem('date', date);
-        
+
         let dayId = document.getElementById(("00" + day.toString()).slice(-2));
-        
-        
-        console.log("잉"+dayId.style.backgroundImage);
 
 
-        if(dayId.style.backgroundImage === ""){
+        console.log("잉" + dayId.style.backgroundImage);
+
+
+        if (dayId.style.backgroundImage === "") {
             window.location.href = 'http://localhost:3000/MemoryWrite';
-        }else{
+        } else {
             window.location.href = 'http://localhost:3000/Memory';
         }
     };
@@ -192,11 +220,11 @@ class Calendar extends Component {
                     </Link>
                 </div>
 
-           </div>
+            </div>
         );
     }
 
-   renderDays() {
+    renderDays() {
         // const dateFormat = "d";
         const days = [];
         const weekday = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -232,7 +260,7 @@ class Calendar extends Component {
         let formattedDate = "";
         let num = [4, 7, 9, 15, 26];
         let numCount = 0;
-        
+
         // console.log(props[numCount]);
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
@@ -271,9 +299,9 @@ class Calendar extends Component {
                         key={day}
                         onClick={() => this.onDateClick(toDate(cloneDay))}>
 
-                       {/* <Link to={ ? '/MemoryWrite' : '/Memory'} className="link-btn"> */}
-                            <span className="number">{formattedDate}</span>
-                            {/* <span className="bg">{formattedDate}</span> */}
+                        {/* <Link to={ ? '/MemoryWrite' : '/Memory'} className="link-btn"> */}
+                        <span className="number">{formattedDate}</span>
+                        {/* <span className="bg">{formattedDate}</span> */}
                         {/* </Link> */}
                     </div>
                 );
@@ -302,7 +330,7 @@ class Calendar extends Component {
     };
 
 
-   /* 이전달 */
+    /* 이전달 */
     prevMonth = () => {
         this.setState({
             currentMonth: subMonths(this.state.currentMonth, 1),
