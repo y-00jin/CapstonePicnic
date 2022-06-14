@@ -220,6 +220,22 @@ app.post('/api/memoryWrite', (req, res) => {
     })
 })
 
+
+// t_file 조회
+app.post('/api/getFile', (req, res) => {
+    T_file.findAll({
+
+        where: {[Op.and]: [{creator_id : req.body.sessionId },
+            {file_seq:{[Op.like] : '1'}},
+            {memory_idx: req.body.memory_idx}
+            ]},
+        order:[['memory_date', 'ASC']]
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
+
 // FileUpload.js -> 사진 추가
 app.post('/api/fileUpload', (req, res) => {
 
