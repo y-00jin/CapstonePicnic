@@ -184,6 +184,11 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
       filepath = "C:/Capstone/picnic-front/src/uploads";
     },
     filename: function (req, file, cb) {
+      if(filename !== null) {
+        for(let i=0; i < filename.length; i++) {
+            filename.pop()
+        }
+      }
       const newFileName = Date.now() + path.extname(file.originalname)
       cb(null, newFileName);
       filename.push(newFileName);
@@ -207,8 +212,8 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
       }
   })
   
-// memory_idx 조회
-app.post('/api/findMemoryIdx', (req, res) => {
+// t_memory 조회
+app.post('/api/searchMemory', (req, res) => {
     console.log(req.body.search_memory_date)
     T_memory.findAll({
         where: {[Op.and]: [{search_memory_date : req.body.search_memory_date},{creator_id : req.body.creator_id}]}
