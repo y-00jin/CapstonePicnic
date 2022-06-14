@@ -275,14 +275,9 @@ app.post('/api/fileUpload', (req, res) => {
     //     },
     // });
     
-    let i = req.body.file_seq;
-    let newFilename = filename[i-1]
+    let newFilename = filename[0]
 
-    if(filename[i] === null) {
-        filename=[]
-    }
     console.log(newFilename);
-
     console.log(req.body);
 
     T_file.create({
@@ -294,9 +289,9 @@ app.post('/api/fileUpload', (req, res) => {
         memory_date : req.body.memory_date,
     })
     .then( result => {
-        // if(filename !== null) {
-        //    filename.pop()
-        // }
+        if(filename !== null) {
+           filename.shift()
+        }
         res.json({ msg: '추억 저장!' , result: result})
     })
     .catch( err => {
