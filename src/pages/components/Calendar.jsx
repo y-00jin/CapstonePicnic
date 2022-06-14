@@ -24,7 +24,8 @@ class Calendar extends Component {
         selectedDate: new Date(),
         memoryList: [],
         check: false,
-        array: []
+        array: [],
+        array2: []
     };
 
     /* 달력 페이지가 시작됬을때 처리 */
@@ -54,7 +55,7 @@ class Calendar extends Component {
             }
 
 
-           
+
 
             const res = await axios('/api/getMemoryDate', {
                 method: 'POST',
@@ -82,6 +83,37 @@ class Calendar extends Component {
 
                 }) : console.log("못찾음");
 
+            console.log(this.state.array);
+            // for (let i = 0; i < this.state.array.length; i++) {
+
+            //     if (this.state.array[i].slice(0, 1) === "0") {
+            //         console.log("dd");
+            //         this.state.array2.push(array[i].slice(1,2));
+                    
+            //     }
+            //     if (this.state.array[i].slice(0, 1) !== "0") {
+            //         this.state.array2.push(array[i])
+                    
+
+            //     }
+
+            // }
+            // console.log("array2 : " + this.state.array2);
+
+            for(let i=0;i<this.state.array.length;i++){
+
+                let test = document.getElementById(this.state.array[i]);
+                // test.style.background = '#FAF4C0';
+                // test.style.height = '100px'
+                test.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
+                test.style.backgroundSize = "60px";
+                test.style.backgroundPositionX = 'center';
+                test.style.backgroundPositionY = 'center';
+                test.style.backgroundorigin = "padding-box";
+                test.style.backgroundRepeat = "no-repeat"
+
+           
+            }
         }
     };
 
@@ -96,9 +128,22 @@ class Calendar extends Component {
 
         var date = year + "-" + (("00" + month.toString()).slice(-2)) + "-" + (("00" + day.toString()).slice(-2)); // 2022-06-13 포맷으로 출력
         // var date = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate());
-        console.log("date : " + date);
+        // console.log("date : " + date);
 
         localStorage.setItem('date', date);
+        
+        let dayId = document.getElementById(("00" + day.toString()).slice(-2));
+        
+        
+        console.log("잉"+dayId.style.backgroundImage);
+        
+        
+        if(dayId.style.backgroundImage === ""){
+            window.location.href = 'http://localhost:3000/MemoryWrite';
+        }else{
+            window.location.href = 'http://localhost:3000/Memory';
+        }
+
     };
 
 
@@ -182,8 +227,8 @@ class Calendar extends Component {
 
         // const sessionArray = window.localStorage.getItem("sessionArray");
         // console.log("ARRAY"+sessionArray);
-        
-     
+
+
         const rows = [];
         const { currentMonth, selectedDate } = this.state;
         const monthStart = startOfMonth(currentMonth);
@@ -199,9 +244,7 @@ class Calendar extends Component {
         let formattedDate = "";
         let num = [4, 7, 9, 15, 26];
         let numCount = 0;
-
-
-
+        
         // console.log(props[numCount]);
 
         while (day <= endDate) {
@@ -213,57 +256,56 @@ class Calendar extends Component {
                 // console.log("dd" + day.getDate() + " ddd" + props[numCount]);
 
                 // 사진으로 배경 설정
-                if (day.getDate() === num[numCount]) {
-                    days.push(
-                        <div
-                            className={`col cell ${!isSameMonth(day, monthStart)
-                                ? "disabled"
-                                : isSameDay(day, selectedDate) ? "selected" : ""
-                                }`}
+                // if (day.getDate() === num[numCount]) {
+                //     days.push(
+                //         <div
+                //             className={`col cell ${!isSameMonth(day, monthStart)
+                //                 ? "disabled"
+                //                 : isSameDay(day, selectedDate) ? "selected" : ""
+                //                 }`}
 
-                            key={day}
-                            onClick={() => this.onDateClick(toDate(cloneDay))}>
+                //             key={day}
+                //             onClick={() => this.onDateClick(toDate(cloneDay))}>
 
-                            <Link to="/Memory" className="link-btn">
-                                <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
-                                <span className="photo-number">{formattedDate}</span>
+                //             <Link to="/Memory" className="link-btn">
+                //                 <span className="photo-bg"><img className="phone-image" alt="iPhone_01" src={img} /></span>
+                //                 <span className="photo-number">{formattedDate}</span>
 
-                            </Link>
-
-
-                        </div>
-                    );
-                    numCount++;
-                }
-
-                else {
-                    days.push(
-                        <div
-                            className={`col cell ${!isSameMonth(day, monthStart)
-                                ? "disabled"
-                                : isSameDay(day, selectedDate) ? "selected" : ""
-                                }`}
-
-                            key={day}
-                            onClick={() => this.onDateClick(toDate(cloneDay))}>
-
-                            <Link to={{
-                                pathname: '/MemoryWrite',
-
-                            }} className="link-btn">
-                                <span className="number">{formattedDate}</span>
-                                <span className="bg">{formattedDate}</span>
-                            </Link>
+                //             </Link>
 
 
-                        </div>
-                    );
-                }
+                //         </div>
+                //     );
+                //     numCount++;
+                // }
+
+                // else {
+                days.push(
+                    <div
+                        className={`col cell ${!isSameMonth(day, monthStart)
+                            ? "disabled"
+                            : isSameDay(day, selectedDate) ? "selected" : ""
+                            }`}
+                        id={formattedDate}
+
+                        key={day}
+                        onClick={() => this.onDateClick(toDate(cloneDay))}>
+                        
+
+                        {/* <Link to={ ? '/MemoryWrite' : '/Memory'} className="link-btn"> */}
+                            <span className="number">{formattedDate}</span>
+                            <span className="bg">{formattedDate}</span>
+                        {/* </Link> */}
+
+
+                    </div>
+                );
+                // }
 
 
                 day = addDays(day, 1);  //시작날부터 1씩 증가하여 day에 저장
             }
-            
+
             rows.push(
                 <div className="row" key={day}>
                     {days}
@@ -320,14 +362,13 @@ class Calendar extends Component {
 
     render() {
 
-        // this.calendarLoad();
+        this.calendarLoad();
         return (
 
 
             <div className="calendar">
                 {this.renderHeader()}
                 {this.renderDays()}
-                {/* {this.state.rows} */}
                 {this.renderCelss()}
             </div>
         );
