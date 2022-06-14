@@ -25,7 +25,7 @@ class Calendar extends Component {
         memoryList: [],
         fileList:[],
         check: false,
-        array: [],
+        memory_date: [],
         memoryIdx: [],
         fileArray: []
         
@@ -47,15 +47,29 @@ class Calendar extends Component {
             const getCurMonth = this.state.currentMonth.toISOString().slice(5, 7);
             // const getCurMonth = addMonths(this.state.currentMonth, 1).toISOString().slice(5, 7);
 
-            const array = this.state.array;
-            console.log(sessionId + "     " + getCurMonth);
-            if (array.length !== null) {
-                const arrayNum = array.length;
+            const memory_date = this.state.memory_date;
+            if (memory_date.length !== null) {
+                const arrayNum = memory_date.length;
                 for (let i = 0; i < arrayNum; i++) {
-                    array.pop();
+                    memory_date.pop();
                 }
             }
 
+            const memoryIdx = this.state.memoryIdx;
+            if (memoryIdx.length !== null) {
+                const arrayNum = memoryIdx.length;
+                for (let i = 0; i < arrayNum; i++) {
+                    memoryIdx.pop();
+                }
+            }
+
+            const fileArray = this.state.fileArray;
+            if (fileArray.length !== null) {
+                const arrayNum = fileArray.length;
+                for (let i = 0; i < arrayNum; i++) {
+                    fileArray.pop();
+                }
+            }
 
 
 
@@ -78,7 +92,7 @@ class Calendar extends Component {
             memoryList.length !== 0 ?
                 memoryList.map((el, key) => {   // 아이디 검색
                     if (el.memory_date.slice(5, 7) === getCurMonth) {
-                        this.state.array.push(el.memory_date.slice(8, 10));
+                        this.state.memory_date.push(el.memory_date.slice(8, 10));
                         this.state.memoryIdx.push(el.memory_idx);
                         
                         console.log(getCurMonth + "월에 저장된 추억 날짜 : " + el.memory_date.slice(8, 10));
@@ -88,11 +102,11 @@ class Calendar extends Component {
                 }) : console.log("못찾음");
 
             console.log("memoryidx"+this.state.memoryIdx);
-            console.log("arr"+this.state.array);
+            console.log("arr"+this.state.memory_date);
 
 
 
-            for(let i=0;i<this.state.array.length;i++){
+            for(let i=0;i<this.state.memory_date.length;i++){
 
                 const res = await axios('/api/getFile', {
                     method: 'POST',
@@ -120,7 +134,7 @@ class Calendar extends Component {
             // 
             // console.log(file);
 
-            for (let i = 0; i < this.state.array.length; i++) {
+            for (let i = 0; i < this.state.memory_date.length; i++) {
 
                
 
@@ -129,11 +143,11 @@ class Calendar extends Component {
                 
                 const file = require("C:/Capstone/picnic-front/src/uploads/"+fileStr);
                 
-                let setBg = document.getElementById(this.state.array[i]);
+                let setBg = document.getElementById(this.state.memory_date[i]);
 
                 // setBg.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/7625/7625438.png')" ;
                 setBg.style.backgroundImage = "url('" + file + "')";
-                setBg.style.backgroundSize = "130px";
+                setBg.style.backgroundSize = "140px";
                 setBg.style.backgroundPositionX = 'center';
                 setBg.style.backgroundPositionY = 'center';
                 setBg.style.backgroundorigin = "padding-box";

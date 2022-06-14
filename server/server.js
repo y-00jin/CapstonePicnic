@@ -107,13 +107,27 @@ app.post('/api/getMemoryDate', (req, res) => {
     .catch( err => { throw err })
 })
 
+// Calendar.jsx & PhotoAlbum -> id로 t_memory 테이블 memory_date 조회
+app.post('/api/getMemoryDate2', (req, res) => {
+    T_memory.findAll({
+        // attributes: [sequelize.fn('DATE_FORMAT', sequelize.col('memory_date'), '%d')],
+        // where: {[Op2.and]: [{creator_id : req.body.sessionId },sequelize.where(sequelize.fn('month', sequelize.col(memory_date)), req.body.getCurMonth )]}   //// 여기부터 수정
+        where: { creator_id : req.body.sessionId },
+        order:[['memory_date', 'DESC']]
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
+
 // PhotoAlbum.js -> id, searchPlace, dateStart, dateEnd로 t_memory테이블 조회
 app.post('/api/getMemorySearch', (req, res) => {
     T_memory.findAll({
                
         where: {[Op.and]: [{creator_id : req.body.sessionId },
             {title:{[Op.like] : '%' + req.body.searchPlace + '%'}},
-            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]}
+            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]},
+        
+            order:[['memory_date', 'DESC']]
             
     
         // where: { creator_id : req.body.sessionId }
@@ -127,7 +141,8 @@ app.post('/api/getMemorySearchNoTitle', (req, res) => {
     T_memory.findAll({
                
         where: {[Op.and]: [{creator_id : req.body.sessionId },
-            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]}
+            {memory_date:{[Op.between]: [req.body.dateStart, req.body.dateEnd]}}]},
+            order:[['memory_date', 'DESC']]
             
     
         // where: { creator_id : req.body.sessionId }
@@ -142,7 +157,8 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
                
         where: {[Op.and]: [{creator_id : req.body.sessionId },
             {title:{[Op.like] : '%' + req.body.searchPlace + '%'}}
-            ]}
+            ]},
+            order:[['memory_date', 'DESC']]
     
         // where: { creator_id : req.body.sessionId }
         })
@@ -235,6 +251,19 @@ app.post('/api/getFile', (req, res) => {
     .catch( err => { throw err })
 })
 
+// t_file 조회
+app.post('/api/getFile2', (req, res) => {
+    T_file.findAll({
+
+        where: {[Op.and]: [{creator_id : req.body.sessionId },
+            {file_seq:{[Op.like] : '1'}},
+            {memory_idx: req.body.memory_idx}
+            ]},
+        order:[['memory_date', 'DESC']]
+    })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
 
 // FileUpload.js -> 사진 추가
 app.post('/api/fileUpload', (req, res) => {
