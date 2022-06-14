@@ -14,58 +14,6 @@ sequelize.sync();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(fileUpload());
-
-// 파일 업로드
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, __dirname + "/../src/uploads");
-      filepath = __dirname + "/../src/uploads";
-    },
-    filename: function (req, file, cb) {
-      const newFileName = Date.now() + path.extname(file.originalname)
-      cb(null, newFileName);
-      filename.push(newFileName);
-      console.log( "파일 이름 배열" + filename)
-    },
-  });
-  
-  var upload = multer({ storage: storage });
-  
-  var uploadMultiple = upload.array('memory')
-
-  app.post('/api/upload', uploadMultiple, function (req, res, next) {
-
-      if (req.files.length === 0) {
-              return res.status(400).json({ msg: '파일을 하나 이상 업로드 해주세요' });
-      } else if(req.files){
-          console.log(req.files)
-          console.log("files uploaded")
-
-          return res.status(200).json({ msg: '추억 저장!' });
-      }
-      
-  })
-
-// app.post('/api/upload', (req, res) => {
-//     if (req.files === null) {
-//       return res.status(400).json({ msg: '파일을 하나 이상 업로드 해주세요' });
-//     }
-  
-//     const file = req.files.file;
-//     const newFileName = new Date().valueOf() + file.name;
-
-//     console.log(newFileName);
-    
-//     file.mv(__dirname + '/../src/uploads/' + newFileName, err => {
-//       if (err) {
-//         console.error(err);
-//         return res.status(500).send(err);
-//       }
-      
-//       res.json({ fileName: newFileName, filePath: '/uploads/' + newFileName });
-//     });
-//   });
 
 // 테이블 읽어오기
 const {
@@ -213,6 +161,36 @@ app.post('/api/getMemorySearchNoDate', (req, res) => {
 //     .catch( err => { throw err })
 // })
 
+// 파일 업로드
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "C:/Capstone/picnic-front/src/uploads");
+      filepath = "C:/Capstone/picnic-front/src/uploads";
+    },
+    filename: function (req, file, cb) {
+      const newFileName = Date.now() + path.extname(file.originalname)
+      cb(null, newFileName);
+      filename.push(newFileName);
+      console.log( "파일 이름 배열" + filename)
+    },
+  });
+  
+  var upload = multer({ storage: storage });
+  
+  var uploadMultiple = upload.array('memory')
+
+  app.post('/api/upload', uploadMultiple, function (req, res, next) {
+
+      if (req.files.length === 0) {
+              return res.status(400).json({ msg: '파일을 하나 이상 업로드 해주세요' });
+      } else if(req.files){
+          console.log(req.files)
+          console.log("files uploaded")
+
+          return res.status(200).send();
+      }
+  })
+  
 // memory_idx 조회
 app.post('/api/findMemoryIdx', (req, res) => {
     console.log(req.body.search_memory_date)
@@ -220,7 +198,6 @@ app.post('/api/findMemoryIdx', (req, res) => {
         where: {[Op.and]: [{search_memory_date : req.body.search_memory_date},{creator_id : req.body.creator_id}]}
     })
     .then( result => { res.send(result) })
-    .then(console.log(result => { res.send(result) }))
     .catch( err => { throw err })
 })
 
@@ -236,9 +213,8 @@ app.post('/api/memoryWrite', (req, res) => {
         search_memory_date : req.body.search_memory_date,
     })
     .then( result => {
-        res.send(result)
-    })
-    .catch( err => {
+        res.json({ msg: '추억 저장!' , result: result})
+    }).catch( err => {
         console.log(err)
         throw err;
     })
@@ -265,7 +241,7 @@ app.post('/api/fileUpload', (req, res) => {
         memory_idx: req.body.memory_idx,
         file_seq: req.body.file_seq,
         file_name: newFilename,
-        file_path : filepath,
+        file_path : filepath + "/" + newFilename,
         creator_id : req.body.creator_id,
         memory_date : req.body.memory_date,
     })
