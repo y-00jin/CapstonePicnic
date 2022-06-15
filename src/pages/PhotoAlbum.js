@@ -72,6 +72,7 @@ class PhotoAlbum extends Component {
 
         console.log("완료");
 
+        console.log(this.state.divMemory)
         return <div class="photo-layout"><divMemory/></div>;
         
 
