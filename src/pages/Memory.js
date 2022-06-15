@@ -74,9 +74,9 @@ class Memory extends Component {
 
         divMemory.push(
           <div>
-            <Link to="/Details">
+            {/* <Link to="/Details"> */}
               <button className="tab-button" type="button" onClick={() => {window.localStorage.setItem('fileArray', props ); console.log(window.localStorage.getItem('fileArray'));}}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button>
-            </Link>
+            {/* </Link> */}
           </div>
 
           // <button className="tab-button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} ></img></button>
