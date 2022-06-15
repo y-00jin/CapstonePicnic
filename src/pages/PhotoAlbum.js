@@ -65,19 +65,26 @@ class PhotoAlbum extends Component {
             divMemory.push(
                 <div class="photo-layout-block" key={i}>
                     <img className="phone-image" alt="iPhone_01" src={file} />
-                    <Link to="/Memory"><button className="photo-btn" id="photo-btn-1">{propMemoryDate[i]} {propMemoryTitle[i]}</button> </Link>
+                    <Link to="/Memory"><button className="photo-btn" id={propMemoryDate[i]} onClick={()=>{window.localStorage.setItem('date', propMemoryDate[i] ); console.log(window.localStorage.getItem('date'));}}>{propMemoryDate[i]} {propMemoryTitle[i]}</button></Link>
                 </div>
             )
         }
 
         console.log("완료");
 
-        console.log(this.state.divMemory)
+        // console.log(this.state.divMemory)
         return <div class="photo-layout"><divMemory/></div>;
         
 
     }
 
+
+    saveMemory= () =>{
+    
+
+       console.log(document.getElementById(this.id));
+
+    }
 
     /* 시작됬을때 데이터 검색 및 처리 */
     memoryLoad = async () => {
