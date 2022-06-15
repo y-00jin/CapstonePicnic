@@ -48,9 +48,9 @@ class Login extends Component {
                             window.localStorage.setItem("sessionId", id);
                             window.location.href = 'http://localhost:3000/MainCalendar';
                         } else {
-                            alert('사용자 정보를 확인해주세요1.');
+                            alert('사용자 정보를 확인해주세요.');
                         }
-                    }) : alert('사용자 정보를 확인해주세요2.');
+                    }) : alert('사용자 정보를 확인해주세요.');
             }
         }
 
