@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const multer = require("multer");
 const path = require('path');
+const fs = require("fs");
 
 const sequelize = require('./models').sequelize;
 const bodyParser = require('body-parser');
@@ -306,9 +307,22 @@ app.post('/api/fileUpload', (req, res) => {
         res.json({ msg: '추억 저장!' , result: result})
     })
     .catch( err => {
+        if(filename !== null) {
+            filename.shift()
+         }
         console.log(err)
         throw err;
     })
+})
+
+// 추억 삭제
+app.post('/api/memoryDelete', (req, res) => {
+    T_memory.destroy({
+        where : {[Op.and]: [{creator_id : req.body.sessionId },{memory_idx: req.body.memory_idx}]}
+    })
+    .then( res.sendStatus(200),
+            )
+    .catch( err => { throw err })
 })
 
 const PORT = process.env.PORT || 5000;
