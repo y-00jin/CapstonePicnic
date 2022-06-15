@@ -322,14 +322,15 @@ class Memory extends Component {
         <div className="tab-photo-layout">
           
 
-          {/* <React.Fragment> */}
+          <React.Fragment>
 
           {this.state.divMemory}
           {/* <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button> */}
           {/* <ModalDetails open={this.state.modalOpen} close={this.closeModal}>
+          
               <ImageGallery items={images} />
-            </ModalDetails>
-          </React.Fragment> */}
+            </ModalDetails>*/}
+          </React.Fragment> 
         </div>
 
         {/* 버튼 */}
