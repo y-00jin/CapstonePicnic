@@ -96,6 +96,7 @@ const FileUpload = () => {
     setMemoryIdx(res.data)
     
     if(memoryIdx !== null) {
+      console.log("dd" + memoryIdx[0].memory_idx);
       memory_idx = '';
       // while(memory_idx === '') {
         memory_idx = memoryIdx[0].memory_idx;

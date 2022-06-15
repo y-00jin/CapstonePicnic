@@ -10,8 +10,8 @@ import Post from './TabContents/Post';
 import ModalDetails from "./TabContents/ModalDetails";
 import ImageGallery from 'react-image-gallery';
 
-let file;
-let photoArray = [];
+// let file;
+// let photoArray = [];
 const images = [
   {
     original: 'https://i.ibb.co/pvtykb2/1.jpg',
@@ -29,24 +29,78 @@ const images = [
 
 class Memory extends Component {
 
-  state = {
-    date: localStorage.getItem('date'),
-    sessionId: localStorage.getItem('sessionId'),
-    memoryIdx: '',
-    place: '',
-    record: '',
-    check: false,
-    check2: false,
-    fileList: [],
-    fileArray: [],
-    modalOpen: false,
-    memoryList: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+      date: localStorage.getItem('date'),
+      sessionId: localStorage.getItem('sessionId'),
+      memoryIdx: "",
+      place: "",
+      record: "",
+      check: false,
+      check2: false,
+      fileList: [],
+      fileArray: [],
+      modalOpen: false,
+      memoryList: [],
+      divMemory: []
+
+    }
   };
 
 
-  searchMemory = async () => {
+  putButton = (props) => {
 
-    if (this.state.check === false) {
+    if (props === null) {
+
+    }
+
+    else {
+
+      const divMemory = this.state.divMemory;
+      if (divMemory.length !== null) {
+        const divMemoryNum = divMemory.length;
+        for (let i = 0; i < divMemoryNum; i++) {
+          divMemory.pop();
+        }
+      }
+      console.log('풋버튼' + props);
+
+
+      for (let i = 0; i < props.length; i++) {
+
+        const file = require("C:/Capstone/picnic-front/src/uploads/" + props[i])
+
+        divMemory.push(
+          <div>
+            <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button>
+          </div>
+
+          // <button className="tab-button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} ></img></button>
+        )
+
+        // console.log("C:/Capstone/picnic-front/src/uploads/" + this.state.fileArray[i])
+      }
+      console.log(this.state.divMemory[0]);
+
+      return <divMemory />;
+
+    }
+
+
+    // console.log("완료");
+
+    // console.log(this.state.divMemory[0]);
+
+  }
+
+
+  /*시작 */
+  searchMemory = async () => {
+    const check = this.state.check;
+
+    if (check === false) {
 
 
       const fileArray = this.state.fileArray;
@@ -69,7 +123,7 @@ class Memory extends Component {
           'creator_id': this.state.sessionId
         },
         headers: new Headers()
-      });
+      })
 
       this.setState({
         memoryList: res.data
@@ -130,58 +184,78 @@ class Memory extends Component {
         }) : console.log("못찾음");
 
 
-      // this.putButton(fileArray);
+      this.putButton(fileArray);
 
 
     }
   }
 
-  getMemoryIdx = () => {
-    this.setState({ memoryIdx: this.state.results[0].memory_idx })
-    console.log('memoryIdx는 ' + this.state.memoryIdx)
-  }
+  // getMemoryIdx = () => {
+  //   this.setState({ memoryIdx: this.state.results[0].memory_idx })
+  //   console.log('memoryIdx는 ' + this.state.memoryIdx)
+  // }
 
-  getPlace = () => {
-    this.setState({ place: this.state.results[0].title })
-  }
+  // getPlace = () => {
+  //   this.setState({ place: this.state.results[0].title })
+  // }
 
-  getRecord = () => {
-    this.setState({ record: this.state.results[0].contents })
+  // getRecord = () => {
+  //   this.setState({ record: this.state.results[0].contents })
+  // }
+
+  search = (props) => {
+    this.getFile();
+
   }
 
   getFile = async () => {
-    if (this.state.check2 === false && this.state.memoryIdx !== '') {
-      console.log('이것도 된다!')
-      this.setState({ check2: true })
 
-      const res = await axios('/api/getFileAtMemory', {
-        method: 'POST',
-        data: {
-          'sessionId': this.state.sessionId,
-          'memory_idx': this.state.memoryIdx
-        },
-        headers: new Headers()
-      })
-      this.setState({
-        fileList: res.data
-      })
-
-      const { fileList } = this.state;
-
-      if (fileList.length !== 0) {
-        fileList.map((el, key) => {   // 아이디 검색
-          this.state.fileArray.push(el.file_name);
-        })
-        console.log("d" + this.state.fileArray);
-        // localStorage.setItem("fileArray", this.state.fileArray);
-        photoArray = this.state.fileArray;
-      } else {
-        console.log("못찾음");
+    const fileArray = this.state.fileArray;
+    if (fileArray.length !== null) {
+      const fileArrayNum = fileArray.length;
+      for (let i = 0; i < fileArrayNum; i++) {
+        fileArray.pop();
       }
     }
 
-    this.putButton(this.state.fileArray);
 
+    // if (this.state.check2 === false && this.state.memoryIdx !== '') {
+    console.log('이것도 된다!')
+    // this.setState({ check2: true })
+
+    const res = await axios('/api/getFileAtMemory', {
+      method: 'POST',
+      data: {
+        'sessionId': this.state.sessionId,
+        'memory_idx': this.state.memoryIdx
+      },
+      headers: new Headers()
+    })
+    this.setState({
+      fileList: res.data
+    })
+
+    const { fileList } = this.state;
+
+    fileList.length !== 0 ?
+      fileList.map((el, key) => {   // 아이디 검색
+        fileArray.push(el.file_name);
+      }) : console.log("못찾음")
+
+
+    // if (fileList.length !== 0) {
+    //   fileList.map((el, key) => {   // 아이디 검색
+    //     fileArray.push(el.file_name);
+    //   })
+    //   console.log("d" + this.state.fileArray);
+    //   // localStorage.setItem("fileArray", this.state.fileArray);
+    //   // photoArray = this.state.fileArray;
+    // } else {
+    //   console.log("못찾음");
+    // }
+    // }
+
+    this.putButton(fileArray);
   }
 
   openModal = () => {
@@ -196,26 +270,13 @@ class Memory extends Component {
     // console.log(url1)
   }
 
-  putButton() {
-    // console.log('풋버튼' + this.state.fileArray);
-
-    for (let i = 0; i < this.state.fileArray.length; i++) {
-
-      file = require("C:/Capstone/picnic-front/src/uploads/" + this.state.fileArray[i])
-      // console.log("C:/Capstone/picnic-front/src/uploads/" + this.state.fileArray[i])
-    }
-
-    // console.log("완료");
-
-  }
 
 
-  search = (props) => {
-    this.getFile();
-  }
+
+
   render() {
     this.searchMemory();
-    this.getFile();
+    // this.getFile();
     // this.putButton();
 
     return (
@@ -252,17 +313,24 @@ class Memory extends Component {
         </div>
         <p>　</p>
 
-        <button id="btnPhoto" onClick={this.search}><h4>| 추억 사진</h4></button>
-        <div className="tab-photo-layout">
 
+        <div>
+          <button className="btnPhoto" id="btnPhoto" onClick={this.search}><h4>| 추억 사진</h4></button>
+        </div>
+
+
+        <div className="tab-photo-layout">
+          
 
           <React.Fragment>
 
-            <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button>
-            <ModalDetails open={this.state.modalOpen} close={this.closeModal}>
+          {this.state.divMemory}
+          {/* <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button> */}
+          {/* <ModalDetails open={this.state.modalOpen} close={this.closeModal}>
+          
               <ImageGallery items={images} />
-            </ModalDetails>
-          </React.Fragment>
+            </ModalDetails>*/}
+          </React.Fragment> 
         </div>
 
         {/* 버튼 */}
@@ -279,8 +347,11 @@ class Memory extends Component {
             <button className="btn btn-color">취소</button>
           </Link>
         </div>
+
       </div>
-    )
+
+
+    );
   }
 }
 export default Memory;
