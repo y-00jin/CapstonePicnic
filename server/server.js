@@ -320,8 +320,7 @@ app.post('/api/memoryDelete', (req, res) => {
     T_memory.destroy({
         where : {[Op.and]: [{creator_id : req.body.sessionId },{memory_idx: req.body.memory_idx}]}
     })
-    .then( res.sendStatus(200),
-            )
+    .then( res.sendStatus(200))
     .catch( err => { throw err })
 })
 

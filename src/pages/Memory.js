@@ -270,9 +270,16 @@ class Memory extends Component {
     // console.log(url1)
   }
 
-
-
-
+  memoryDelete = async() => {
+    const res = await axios('/api/memoryDelete', {
+      method : 'POST',
+      data: {
+        'sessionId': this.state.sessionId,
+        'memory_idx': this.state.memoryIdx
+      },
+      headers: new Headers()
+    })
+  }
 
   render() {
     this.searchMemory();
@@ -327,7 +334,6 @@ class Memory extends Component {
           {this.state.divMemory}
           {/* <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button> */}
           {/* <ModalDetails open={this.state.modalOpen} close={this.closeModal}>
-          
               <ImageGallery items={images} />
             </ModalDetails>*/}
           </React.Fragment> 
@@ -340,7 +346,7 @@ class Memory extends Component {
           </Link>
           <h1>　</h1>
           <Link to="/MainCalendar">
-            <button className="btn btn-color">삭제</button>
+            <button className="btn btn-color" onClick={this.memoryDelete}>삭제</button>
           </Link>
           <h1>　</h1>
           <Link to="/MainCalendar">
