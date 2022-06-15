@@ -74,7 +74,9 @@ class Memory extends Component {
 
         divMemory.push(
           <div>
-            <button className="tab-button" type="button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button>
+            <Link to="/Details">
+              <button className="tab-button" type="button" onClick={() => {window.localStorage.setItem('fileArray', props ); console.log(window.localStorage.getItem('fileArray'));}}><img className="tab-phone-image" alt="iPhone_01" src={file} /></button>
+            </Link>
           </div>
 
           // <button className="tab-button" onClick={this.openDetails}><img className="tab-phone-image" alt="iPhone_01" src={file} ></img></button>
@@ -281,6 +283,26 @@ class Memory extends Component {
     })
   }
 
+  memoryUpdate = async() => {
+
+    this.setState({
+      place: document.getElementById('place').value,
+      record: document.getElementById('record').value
+
+    })
+
+    console.log("th" + this.state.place );
+    const res = await axios('/api/memoryUpdate', {
+      method : 'POST',
+      data : {
+      'title': this.state.place,
+      'contents': this.state.record,
+      'search_memory_date': this.state.date,
+      'creator_id': this.state.sessionId },
+      headers: new Headers()
+    })
+  }
+
   render() {
     this.searchMemory();
     // this.getFile();
@@ -310,13 +332,13 @@ class Memory extends Component {
 
         <div class="input-group input-group-lg">
           <span class="input-group-text" id="basic-addon1">여행 장소</span>
-          <input type="text" readonly class="form-control" id="place" value={this.state.place} />
+          <input type="text" class="form-control" id="place" defaultValue={this.state.place} />
         </div>
         <p />
 
         <div class="input-group input-group-lg">
           <span class="input-group-text">여행 기록</span>
-          <textarea readonly class="form-control" aria-label="record" value={this.state.record}></textarea>
+          <textarea class="form-control" aria-label="record" id="record" defaultValue={this.state.record}></textarea>
         </div>
         <p>　</p>
 
@@ -341,9 +363,9 @@ class Memory extends Component {
 
         {/* 버튼 */}
         <div className="btn-background">
-          <Link to="/MemoryWrite">
-            <button className="btn btn-color">수정</button>
-          </Link>
+          {/* <Link to="/MainCalendar">
+            <button className="btn btn-color" onClick={() => {this.setState({record: document.getElementById('record').value, contents:document.getElementById('contents').value }); this.memoryUpdate()}}>수정</button>
+          </Link> */}
           <h1>　</h1>
           <Link to="/MainCalendar">
             <button className="btn btn-color" onClick={this.memoryDelete}>삭제</button>

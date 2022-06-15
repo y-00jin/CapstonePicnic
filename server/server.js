@@ -324,6 +324,17 @@ app.post('/api/memoryDelete', (req, res) => {
     .catch( err => { throw err })
 })
 
+// app.post('/api/memoryUpdate', (req, res) => {
+//     T_memory.update({ contents : req.body.contents }, {
+//         where: { [Op.and]: [{ creator_id : req.body.creator_id }, { search_memory_date : req.body.search_memory_date }] }
+//     })
+//     T_memory.update({ title : req.body.title }, {
+//         where: { [Op.and]: [{ creator_id : req.body.creator_id }, { search_memory_date : req.body.search_memory_date }] }
+//     })
+//     .then( result => { res.send(result) })
+//     .catch( err => { throw err })
+// })
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server On : http://localhost:${PORT}/`);
