@@ -16,7 +16,7 @@ function App() {
         <Route path= "MemoryWrite" element={<MemoryWrite/>}/>
         <Route path= "PhotoAlbum" element={<PhotoAlbum/>}/>
         <Route path= "Memory" element={<Memory/>}/>
-        <Route path= "Details" element={<Details/>}/>
+        {/* <Route path= "Details" element={<Details/>}/> */}
       </Routes>
     </div>
     
