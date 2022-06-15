@@ -96,8 +96,8 @@ class PhotoAlbum extends Component {
             const memoryDates = this.state.memoryDates;
 
             if (memoryDates.length !== null) {
-                const memoryDatesNum = memoryDates.length;
-                for (let i = 0; i < memoryDatesNum; i++) {
+                // const memoryDatesNum = memoryDates.length;
+                for (let i = 0; i < memoryDates.length; i++) {
                     memoryDates.pop();
                 }
             }
