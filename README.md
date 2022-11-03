@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# 너, 나들이
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 📑 프로젝트 개요
+- 사용자가 여행 일정을 간편하게 관리하고 여행을 다니며 자신의 추억을 기록 및 저장하는 하이브리드 반응형 웹
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+### 💻 프로젝트 구성 및 기능
+- 메뉴 구조
+![image](https://user-images.githubusercontent.com/81798918/199839204-7fd897c2-41e9-4fd2-9ee9-be07e65759d7.png)
+<br/>
 
-### `npm start`
+- 데이터베이스 설계 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840024-13704ac5-2596-468a-87f5-c45dc712a782.png )
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 👀 Language & Tools
 
-### `npm run build`
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=ffffff"/>  <!-- 자바스크립트-->
+<img src="https://img.shields.io/badge/HTML-E34F26?style=flat&logo=HTML5&logoColor=ffffff"/>             <!-- HTML -->
+<img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=CSS3&logoColor=ffffff"/>               <!-- CSS -->
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=ffffff"/>            <!-- React-->
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=ffffff"/>        <!-- Node.js -->
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=ffffff"/>            <!-- MySQL-->
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=ffffff"/>                           <!-- GitHub-->
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual Studio Code&logoColor=ffffff"/>   <!-- VSCode-->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `npm run eject`
+### 🍀 Result
+- 초기화면(로그인)<br/>
+![image](https://user-images.githubusercontent.com/81798918/199840194-a6a32cde-d4ab-45ab-bfce-e28a5b8a47d3.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 회원가입 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840225-57f9d69d-fc13-42c5-8237-109ffaf2977a.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 비밀번호 찾기 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840311-1c94ec99-c543-4291-8a75-86284e784b83.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 비밀번호 찾기 상세 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840348-3edfc2d3-d0a5-44a7-a539-2c8393e6e36b.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 메인 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840392-85ea7a73-07fa-42f7-8363-63c16c595100.png)
 
-## Learn More
+- 추억 쓰기<br/>
+![image](https://user-images.githubusercontent.com/81798918/199840452-d696d24e-81fd-481c-909f-10d9dc7badfb.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 추억 쓰기 (데이터 입력) <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840523-8d9422e6-c701-404e-b68c-4a78cde3d137.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 추억 보기 <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840553-650708a3-a869-4980-90e1-554878e2c34a.png)
 
-### Code Splitting
+- 사진첩 (데이터 전체 보기) <br/>
+![image](https://user-images.githubusercontent.com/81798918/199840594-1045d926-f58b-4950-b699-e0b4bcdbe9a4.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
