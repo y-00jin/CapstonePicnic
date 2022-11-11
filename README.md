@@ -34,7 +34,6 @@
 ### 👀 Language & Tools
 
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=ffffff"/>  <!-- 자바스크립트-->
-<img src="https://img.shields.io/badge/HTML-E34F26?style=flat&logo=HTML5&logoColor=ffffff"/>             <!-- HTML -->
 <img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=CSS3&logoColor=ffffff"/>               <!-- CSS -->
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=ffffff"/>            <!-- React-->
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=ffffff"/>        <!-- Node.js -->
